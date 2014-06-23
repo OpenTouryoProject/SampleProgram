@@ -1,0 +1,11 @@
+﻿<Window x:Class="Trigger.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <StackPanel>
+        <Button Height="23" Name="button1" Click="button1_Click">DataTriggerWindow</Button>
+        <Button Height="23" Name="button2" Click="button2_Click">PropertyTriggerWindow</Button>
+        <Button Height="23" Name="button3" Click="button3_Click">Property Trigger for IsSelected in a DataTemplate for ListBox</Button>
+        
+    </StackPanel>
+</Window>

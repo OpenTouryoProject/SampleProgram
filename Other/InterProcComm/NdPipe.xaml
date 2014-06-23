@@ -1,0 +1,43 @@
+﻿<Window x:Class="InterProcComm.NdPipe"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="NdPipe" Height="500" Width="300"
+    Closing="Window_Closing">
+    <StackPanel>
+        <Label Height="23" HorizontalAlignment="Left">名前付パイプの特徴</Label>
+        <Label Height="23" HorizontalAlignment="Left">・ コネクション型、双方向通信</Label>
+        <Label Height="23" HorizontalAlignment="Left">・ 共有メモリ＋ストリームのアーキテクチャ</Label>
+        <Label Height="23" HorizontalAlignment="Left">・ 同期呼び出しの実装が容易</Label>
+        <Label Height="23" HorizontalAlignment="Left">・ 指定した数の同一名前付パイプをオープン可能</Label>
+        <Label Height="23" HorizontalAlignment="Left">　 （サーバ スレッドを予め上げておく必要がある）</Label>
+        <TabControl Name="tabControl1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="サーバ" Name="tabItem1">
+                <StackPanel>
+                    <Label Height="23" HorizontalAlignment="Center" >名前付パイプは、サーバ ストリームの複数起動が可能</Label>
+                    <Button Height="23" Name="button1" Click="button1_Click">サーバ（リスナ）を起動する。</Button>
+                    <Button Height="23" Name="button2" Click="button2_Click">サーバ（リスナ）を停止する。</Button>
+                    <TextBox Height="250" Name="textBox1" IsReadOnly="True"
+                             AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="クライアント" Name="tabItem2">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Height="23" Width="70">送信回数：</Label>
+                        <TextBox Height="23" Name="textBox2" Width="190" Text="5"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Height="23" Width="70">メッセージ：</Label>
+                        <TextBox Height="23" Name="textBox3" Width="190" Text="① ② ③ ④ ⑤" />
+                    </StackPanel>
+                    <Button Height="23" Name="button3" Click="button3_Click">
+                        クライアントを起動する（複数起動可能）。
+                    </Button>
+                    <TextBox Height="250" Name="textBox4" IsReadOnly="True" 
+                             AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        
+    </StackPanel>
+</Window>

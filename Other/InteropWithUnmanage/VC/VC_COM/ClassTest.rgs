@@ -1,0 +1,26 @@
+HKCR
+{
+	VC_COM.ClassTest.1 = s 'ClassTest Class'
+	{
+		CLSID = s '{35D055A8-7DA7-4868-979F-2F86F8B92B7E}'
+	}
+	VC_COM.ClassTest = s 'ClassTest Class'
+	{
+		CLSID = s '{35D055A8-7DA7-4868-979F-2F86F8B92B7E}'
+		CurVer = s 'VC_COM.ClassTest.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {35D055A8-7DA7-4868-979F-2F86F8B92B7E} = s 'ClassTest Class'
+		{
+			ProgID = s 'VC_COM.ClassTest.1'
+			VersionIndependentProgID = s 'VC_COM.ClassTest'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{67F392A3-01AD-48D7-AC4F-56F0DC41807B}'
+		}
+	}
+}

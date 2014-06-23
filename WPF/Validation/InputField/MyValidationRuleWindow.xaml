@@ -1,0 +1,65 @@
+﻿<Window x:Class="WpfApplication1.MyValidationRuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:WpfApplication1"
+        Title="MyValidationRuleWindow" Height="300" Width="400">
+    <Window.Resources>
+
+        <!-- エラーのスタイル（トリガ付き） -->
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- エラー時のテンプレート -->
+        <ControlTemplate x:Key="textBoxValidErrorTemplate">
+            <Border BorderBrush="Yellow" BorderThickness="3">
+                <AdornedElementPlaceholder/>
+            </Border>
+        </ControlTemplate>
+
+    </Window.Resources>
+    
+    <StackPanel>
+
+        <Label Height="23">カスタムのValidationRule（正の整数＋最大値設定可:100）</Label>
+        <TextBox Height="23" Margin="5" Name="textBox1">
+            <Binding Path="SourceProperty1" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <!-- カスタムのValidationRule（最大値:100） -->
+                    <my:MyValidationRule Max="100"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+
+        <Label Height="23">カスタムのValidationRule（正の整数＋最大値設定可:200）</Label>
+        <Label Height="23">+ UpdateSourceTrigger変更 + Validation.Errorハンドラ設定</Label>
+        <TextBox Height="23" Margin="5" Name="textBox2"
+                 Validation.Error="textBox2_Error">
+            <Binding Path="SourceProperty2"
+                     UpdateSourceTrigger="LostFocus"
+                     NotifyOnValidationError="True">
+                <Binding.ValidationRules>
+                    <!-- カスタムのValidationRule（最大値:200） -->
+                    <my:MyValidationRule Max="200"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+
+        <Label Height="23">カスタムのValidationRule（正の整数＋最大値設定可:200） + ErrorTemplate</Label>
+        <TextBox Height="23" Margin="5" Name="textBox3"
+                 Validation.ErrorTemplate="{StaticResource textBoxValidErrorTemplate}">
+            <Binding Path="SourceProperty3" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <!-- カスタムのValidationRule（最大値:200） -->
+                    <my:MyValidationRule Max="200"/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+        
+    </StackPanel>
+</Window>

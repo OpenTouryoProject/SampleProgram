@@ -1,0 +1,20 @@
+﻿<Window x:Class="TimelineAndFrame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="300" Width="300">
+    <StackPanel>
+        <TextBlock></TextBlock>
+        <TextBlock>タイムラインベースのアニメーション</TextBlock>
+        <Button Content="TimelineAnimationサンプル1" Name="button1" VerticalAlignment="Center" Click="button1_Click" />
+        <Button Content="TimelineAnimationサンプル2" Name="button2" VerticalAlignment="Center" Click="button2_Click" />
+        <Button Content="LayoutTransformOnlyサンプル" Name="button3" VerticalAlignment="Center" Click="button3_Click" />
+        <Button Content="RenderTransformOnlyサンプル" Name="button4" VerticalAlignment="Center" Click="button4_Click" />
+        <Button Content="RenderTransformAnimationサンプル" Name="button5" VerticalAlignment="Center" Click="button5_Click" />
+        <Button Content="TransformGroupAnimationサンプル" Name="button6" VerticalAlignment="Center" Click="button6_Click" />
+        <Button Content="PathAnimationサンプル" Name="button7" VerticalAlignment="Center" Click="button7_Click" />
+        <Button Content="KeyFrameAnimationサンプル" Name="button8" VerticalAlignment="Center" Click="button8_Click" />
+        <TextBlock></TextBlock>
+        <TextBlock>フレームベースのアニメーション</TextBlock>
+        <Button Content="FrameBaseAnimationサンプル" Name="button9" VerticalAlignment="Center" Click="button9_Click" />
+    </StackPanel>
+</Window>

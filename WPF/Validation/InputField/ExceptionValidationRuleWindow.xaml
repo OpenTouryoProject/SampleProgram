@@ -1,0 +1,85 @@
+﻿<Window x:Class="WpfApplication1.ExceptionValidationRuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ExceptionValidationRuleWindow" Height="400" Width="400">
+    <Window.Resources>
+
+        <!-- エラーのスタイル（トリガ付き） -->
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="Background" Value="Red" />
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- エラー時のテンプレート -->
+        <ControlTemplate x:Key="textBoxValidErrorTemplate">
+            <Border BorderBrush="Yellow" BorderThickness="3">
+                <AdornedElementPlaceholder/>
+            </Border>
+        </ControlTemplate>
+
+    </Window.Resources>
+    
+    <StackPanel>
+
+        <Label Height="23">各種のValidationRuleを使用</Label>
+
+        <Label Height="23">ExceptionValidationRule（int）</Label>
+        <TextBox Height="23" Margin="5" Name="textBox1">
+            <Binding Path="SourceProperty1" UpdateSourceTrigger="PropertyChanged">
+                <Binding.ValidationRules>
+                    <!-- ExceptionValidationRule -->
+                    <ExceptionValidationRule/>
+                </Binding.ValidationRules>
+            </Binding>
+        </TextBox>
+
+        <Label Height="23">ExceptionValidationRule（int）</Label>
+        <TextBox Height="23" Margin="5" Name="textBox2">
+            <!-- ExceptionValidationRuleの属性構文化 -->
+            <Binding Path="SourceProperty2"
+                     ValidatesOnExceptions="True"
+                     UpdateSourceTrigger="PropertyChanged"/>
+        </TextBox>
+
+        <Label Height="23">ExceptionValidationRule（int）</Label>
+        <Label Height="23">+ UpdateSourceTrigger変更 + Validation.Errorハンドラ設定</Label>
+        <TextBox Height="23" Margin="5" Name="textBox3"
+                 Validation.Error="textBox3_Error">
+            <!-- Validation.Errorハンドラを設定↑ -->
+            <!-- UpdateSourceTriggerを変更↓ -->
+            <Binding Path="SourceProperty3"
+                     ValidatesOnExceptions="True"
+                     UpdateSourceTrigger="LostFocus"
+                     NotifyOnValidationError="True"/>
+        </TextBox>
+
+        <Label Height="23">ExceptionValidationRule（int）+ ErrorTemplate</Label>
+        <TextBox Height="23" Margin="5" Name="textBox4">
+            <Binding Path="SourceProperty4"
+                     ValidatesOnExceptions="True"
+                     UpdateSourceTrigger="PropertyChanged"/>
+            <Validation.ErrorTemplate>
+                <!-- エラー発生時に適用するテンプレート -->
+                <ControlTemplate>
+                    <Border BorderBrush="Blue" BorderThickness="3">
+                        <AdornedElementPlaceholder/>
+                    </Border>
+                </ControlTemplate>
+            </Validation.ErrorTemplate>
+        </TextBox>
+
+        <Label Height="23">ExceptionValidationRule（int）+ ErrorTemplate(Resources)</Label>
+        <!-- エラー発生時に適用するテンプレートのリソース化 -->
+        <TextBox Height="23" Margin="5" Name="textBox5"
+                 Validation.ErrorTemplate="{StaticResource textBoxValidErrorTemplate}">
+            <Binding Path="SourceProperty5"
+                     ValidatesOnExceptions="True"
+                     UpdateSourceTrigger="PropertyChanged"/>
+        </TextBox>
+
+    </StackPanel>
+</Window>

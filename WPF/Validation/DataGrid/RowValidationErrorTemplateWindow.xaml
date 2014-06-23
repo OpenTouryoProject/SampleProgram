@@ -1,0 +1,50 @@
+﻿<Window x:Class="WpfApplication1.RowValidationErrorTemplateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:my="clr-namespace:WpfApplication1"
+        Title="RowValidationErrorTemplateWindow" Height="400" Width="600">
+    <Window.Resources>
+        <my:Courses x:Key="courses"/>
+        
+        <ControlTemplate x:Key="myTemplate">
+            <Grid ToolTip="{Binding RelativeSource={RelativeSource
+                        FindAncestor, AncestorType={x:Type DataGridRow}},
+                        Path=(Validation.Errors)[0].ErrorContent}">
+
+                <Ellipse StrokeThickness="0" Fill="Red" 
+                                 Width="{TemplateBinding FontSize}" 
+                                 Height="{TemplateBinding FontSize}" />
+                <TextBlock Text="!" FontSize="{TemplateBinding FontSize}" 
+                                   FontWeight="Bold" Foreground="White" 
+                                   HorizontalAlignment="Center"  />
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
+
+    <StackPanel>
+
+        <TextBlock>RowValidationErrorTemplateを使用するサンプル</TextBlock>
+        <TextBlock>MSDN > 方法: DataGrid コントロールを使用して検証を実装する</TextBlock>
+        <TextBox IsReadOnly="True">http://msdn.microsoft.com/ja-jp/library/ee622975.aspx</TextBox>
+        
+        <DataGrid Name="dataGrid1" ItemsSource="{StaticResource courses}"
+                  AutoGenerateColumns="False"
+                  RowValidationErrorTemplate="{StaticResource myTemplate}">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Course Name" 
+                                    Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="Course ID"
+                                    Binding="{Binding Id, ValidatesOnExceptions=True}"/>
+                <DataGridTextColumn Header="Start Date"
+                                    Binding="{Binding StartDate, ValidatesOnExceptions=True, StringFormat=d}"/>
+                <DataGridTextColumn Header="End Date"
+                                    Binding="{Binding EndDate, ValidatesOnExceptions=True, StringFormat=d}"/>
+            </DataGrid.Columns>
+
+            <DataGrid.RowValidationRules>
+                <my:CourseValidationRule ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
+        </DataGrid>
+    </StackPanel>
+</Window>

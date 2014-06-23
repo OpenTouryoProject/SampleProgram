@@ -1,0 +1,37 @@
+﻿<Window x:Class="WpfApplication1.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="clr-namespace:WpfApplication1"
+    Title="Window1" Height="377" Width="304" Loaded="Window_Loaded">
+    <Window.Resources>
+        <my:CbxData1 x:Key="cbxData1"/>
+        <my:CbxData2 x:Key="cbxData2"/>
+    </Window.Resources>
+    <StackPanel>
+        <DataGrid Name="dataGrid1" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="性" Width="45" Binding="{Binding Path=[Last]}"/>
+                <DataGridTextColumn Header="名" Width="45" Binding="{Binding Path=[First]}"/>
+                <DataGridTemplateColumn Header="性別">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Width="75" ItemsSource="{Binding Source={StaticResource cbxData1}}"
+                                      SelectedValuePath="Value" DisplayMemberPath="Display"
+                                      SelectedValue="{Binding Path=[Gender], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="出身">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Width="75" ItemsSource="{Binding Source={StaticResource cbxData2}}"
+                                      SelectedValuePath="Value" DisplayMemberPath="Display"
+                                      SelectedValue="{Binding Path=[Homeland], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Height="23" Name="button1" Width="75" Click="button1_Click">Button</Button>
+    </StackPanel>
+</Window>

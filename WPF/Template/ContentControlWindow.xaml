@@ -1,0 +1,29 @@
+﻿<Window x:Class="Template.ContentControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ContentControlWindow" Height="300" Width="300" FontSize="24">
+    <Grid>
+        <Button Content="Click Here" FontFamily="MS UI Gothic"
+                Margin="5" Width="200" Height="200">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle Fill="Blue"/>
+                        <Ellipse Fill="Red"/>
+                        <ContentPresenter
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.ContentTemplate>
+                <DataTemplate>
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="{Binding}"/>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource Self}, Path=FontFamily}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Button.ContentTemplate>
+        </Button>
+    </Grid>
+</Window>

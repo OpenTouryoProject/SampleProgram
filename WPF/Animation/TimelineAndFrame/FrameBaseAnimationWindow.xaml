@@ -1,0 +1,12 @@
+﻿<Window x:Class="TimelineAndFrame.FrameBaseAnimationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FrameBaseAnimationWindow" Height="300" Width="300">
+    <Canvas>
+        <Ellipse Name="ellipse" Width="20" Height="20"
+                 Fill="Aqua" Canvas.Left="30" Canvas.Top="30"/>
+        <Button Name="button1" Width="75" Height="23"
+                Click="button1_Click">Button</Button>
+    </Canvas>
+
+</Window>

@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfApplication1.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:my="clr-namespace:WpfApplication1"
+    Title="Window1" Height="400" Width="400" Loaded="Window_Loaded">
+    <Window.Resources>
+        <my:CbxData1 x:Key="cbxData1"/>
+        <my:CbxData2 x:Key="cbxData2"/>
+        <DataTemplate x:Key="listViewHeaderTemplate">
+            <TextBlock FontSize="16" Foreground="Navy" Text="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel>
+        <ListView x:Name="listView1" ItemsSource="{Binding}">
+            <ListView.View>
+                <GridView ColumnHeaderTemplate="{StaticResource listViewHeaderTemplate}">
+                    <GridViewColumn Header="姓">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="50" Text="{Binding Path=[Last]}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="名">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Width="50" Text="{Binding Path=[First]}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="性別">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Width="80" SelectedValue="{Binding Path=[Gender]}" 
+                                          SelectedValuePath="Value" DisplayMemberPath="Display"
+                                          ItemsSource="{Binding Source={StaticResource cbxData1}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="出身">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Width="80" SelectedValue="{Binding Path=[Homeland]}" 
+                                          SelectedValuePath="Value" DisplayMemberPath="Display"
+                                          ItemsSource="{Binding Source={StaticResource cbxData2}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Height="23" Name="button1" Width="75" Click="button1_Click">Button</Button>
+    </StackPanel>
+</Window>

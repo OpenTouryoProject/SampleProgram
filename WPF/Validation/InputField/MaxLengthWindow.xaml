@@ -1,0 +1,54 @@
+﻿<Window x:Class="WpfApplication1.IMEWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:igEditors="http://infragistics.com/Editors"
+    Title="IMEWindow" Height="400" Width="500">
+    <StackPanel Orientation="Vertical">
+        
+        <Label Height="23">IME制御用のサンプル</Label>
+        <Label Height="23">問題点１：IME2007サポート、IME2003ではON・OFFのみサポート</Label>
+        <Label Height="23">問題点２：GotFocusが２回呼ばれる仕様なので、元のIME値を保存する場合は工夫が必要</Label>
+        
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="制御なし："/>
+            <TextBox Name="textBox0" Height="23" Width="300"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Text="以下、XAMLで制御"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="ＯＦＦ："/>
+            <TextBox Name="textBox4" Height="23" Width="300"
+                     InputMethod.PreferredImeState="Off"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="ＯＮ："/>
+            <TextBox Name="textBox5" Height="23" Width="300"
+                     InputMethod.PreferredImeState="On"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="半角片仮名："/>
+            <TextBox Name="textBox6" Height="23" Width="300"
+                     InputMethod.PreferredImeState="On"
+                     InputMethod.PreferredImeConversionMode="Native,Fixed,Katakana"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Text="以下、イベントで制御"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="ＯＦＦ："/>
+            <TextBox Name="textBox1" Height="23" Width="300"
+                     GotFocus="GotFocus_IME_OFF"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="ＯＮ："/>
+            <TextBox Name="textBox2" Height="23" Width="300"
+                     GotFocus="GotFocus_IME_ON"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Height="23" Width="80" Text="全角片仮名："/>
+            <TextBox Name="textBox3" Height="23" Width="300"
+                     GotFocus="GotFocus_IME_Katakana"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

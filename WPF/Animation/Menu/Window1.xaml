@@ -1,0 +1,41 @@
+﻿<Window x:Class="WpfApplication1.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="400" Width="400" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Storyboard x:Key="myStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Height" Duration="0:0:0.3" From="28" To="150"/>
+        </Storyboard>
+    </Window.Resources>
+    <StackPanel>
+        <Label>アニメーションを使用したメニューです。左クリックで開く。右クリックで閉じる。</Label>
+        <StackPanel Name="stackPanel1" Height="150" HorizontalAlignment="Stretch" Background="AliceBlue"
+                    PreviewMouseLeftButtonDown="stackPanel_PreviewMouseLeftButtonDown">
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="StackPanel.MouseLeftButtonDown">
+                    <BeginStoryboard x:Name="myBeginStoryboard1" Storyboard="{StaticResource myStoryboard}" />
+                </EventTrigger>
+                <EventTrigger x:Name="rsEventTrigger1" RoutedEvent="StackPanel.MouseRightButtonDown">
+                    <RemoveStoryboard BeginStoryboardName="myBeginStoryboard1" />
+                </EventTrigger>
+            </StackPanel.Triggers>
+            <Label Content="タイトル１" Height="28" Name="label11" HorizontalAlignment="Stretch" Background="Aquamarine" />
+            <Label Content="Label" Height="28" Name="label12" Width="100" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+            <Button Content="Button" Height="23" Name="button11" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        </StackPanel>
+        <StackPanel Name="stackPanel2" Height="150" HorizontalAlignment="Stretch" Background="AntiqueWhite"
+                    PreviewMouseLeftButtonDown="stackPanel_PreviewMouseLeftButtonDown">
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="StackPanel.MouseLeftButtonDown">
+                    <BeginStoryboard x:Name="myBeginStoryboard2" Storyboard="{StaticResource myStoryboard}" />
+                </EventTrigger>
+                <EventTrigger x:Name="rsEventTrigger2" RoutedEvent="StackPanel.MouseRightButtonDown">
+                    <RemoveStoryboard BeginStoryboardName="myBeginStoryboard2" />
+                </EventTrigger>
+            </StackPanel.Triggers>
+            <Label Content="タイトル２" Height="28" Name="label21" HorizontalAlignment="Stretch" Background="BurlyWood" />
+            <Label Content="Label" Height="28" Name="label22" Width="100" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+            <Button Content="Button" Height="23" Name="button21" Width="100" HorizontalAlignment="Left" Margin="20,0,0,0"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

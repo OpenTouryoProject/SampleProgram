@@ -1,0 +1,37 @@
+// VC_COM.idl : VC_COM の IDL ソース
+//
+
+// このファイルは、タイプ ライブラリ (VC_COM.tlb) およびマーシャリング コードを
+// 作成するために MIDL ツールによって処理されます。
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(CF475B99-0DEB-44C0-A2A2-EFDF1A660CFA),
+	dual,
+	nonextensible,
+	helpstring("IClassTest インターフェイス"),
+	pointer_default(unique)
+]
+interface IClassTest : IDispatch{
+	[id(1), helpstring("メソッド MethodTest")] HRESULT MethodTest([in] BSTR bstrText, [in] BSTR bstrCaption, [out,retval] BSTR* rtnval);
+};
+[
+	uuid(67F392A3-01AD-48D7-AC4F-56F0DC41807B),
+	version(1.0),
+	helpstring("VC_COM 1.0 タイプ ライブラリ")
+]
+library VC_COMLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(35D055A8-7DA7-4868-979F-2F86F8B92B7E),
+		helpstring("ClassTest Class")
+	]
+	coclass ClassTest
+	{
+		[default] interface IClassTest;
+	};
+};

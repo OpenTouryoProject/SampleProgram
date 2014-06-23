@@ -1,0 +1,7 @@
+;MS系以外のツールから呼ぶときは、
+;DefファイルのEXPORTSを使用してExportする。
+LIBRARY	"VC_DLL"
+EXPORTS
+   Test_MYLIBAPI
+   TestArrayMethod
+

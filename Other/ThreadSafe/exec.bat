@@ -1,0 +1,1 @@
+ThreadSafe.exe > result.txt

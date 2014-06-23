@@ -1,0 +1,28 @@
+﻿<Window x:Class="TimelineAndFrame.RenderTransformAnimationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="RenderTransformAnimationWindow" Height="300" Width="300">
+    <Window.Resources>
+        <Storyboard x:Key="myStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:3" From="10" To="200"/>
+            <DoubleAnimation Storyboard.TargetProperty="Height" Duration="0:0:3" From="10" To="200"/>
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Angle" Duration="0:0:3" From="0" To="360"/>
+        </Storyboard>
+    </Window.Resources>
+    <Grid>
+        <TextBlock FontSize="16">DoubleAnimation + RenderTransform</TextBlock>
+        <Rectangle Width="100" Height="100" Fill="Aqua">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.MouseEnter">
+                    <BeginStoryboard x:Name="myBeginStoryboard" Storyboard="{StaticResource myStoryboard}" />
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Rectangle.MouseDown">
+                    <RemoveStoryboard BeginStoryboardName="myBeginStoryboard" />
+                </EventTrigger>
+            </Rectangle.Triggers>
+            <Rectangle.RenderTransform>
+                <RotateTransform CenterX="50" CenterY="50" Angle="0"/>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+    </Grid>
+</Window>

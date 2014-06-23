@@ -1,0 +1,25 @@
+﻿<Window x:Class="TimelineAndFrame.TimelineAnimationWindow1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TimelineAnimationWindow" Height="300" Width="300">
+    <Grid>
+        <TextBlock FontSize="24">DoubleAnimation</TextBlock>
+        <Rectangle Width="100" Height="100" Fill="Aqua">
+            <Rectangle.Triggers>
+                <EventTrigger RoutedEvent="Rectangle.MouseEnter">
+                    <BeginStoryboard x:Name="myBeginStoryboard">
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="Width"
+                                             Duration="0:0:3" From="10" To="200"/>
+                            <DoubleAnimation Storyboard.TargetProperty="Height"
+                                             Duration="0:0:3" From="10" To="200"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Rectangle.MouseDown">
+                    <RemoveStoryboard BeginStoryboardName="myBeginStoryboard" />
+                </EventTrigger>
+            </Rectangle.Triggers>
+        </Rectangle>
+    </Grid>
+</Window>

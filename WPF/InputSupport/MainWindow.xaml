@@ -1,0 +1,243 @@
+﻿<Window x:Class="InputSupport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="300" Width="881">
+    <Window.CommandBindings>
+        <!--ApplicationCommands.Saveのカスタム動作（実行可否、イベント処理）を実装する-->
+        <CommandBinding x:Name="SaveCommand"
+    Command="ApplicationCommands.Save"
+    CanExecute="SaveCommand_CanExecute"
+    Executed="SaveCommand_Executed"/>
+        <!--ApplicationCommands.Closeのカスタム動作（実行可否、イベント処理）を実装する-->
+        <CommandBinding x:Name="CloseCommand"
+    Command="ApplicationCommands.Close"
+    CanExecute="CloseCommand_CanExecute"
+    Executed="CloseCommand_Executed"/>
+    </Window.CommandBindings>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="ファイル(_F)">
+                <!--ApplicationCommands.Save → カスタム動作 → CommandBinding-->
+                <MenuItem Header="保存(_S)" Command="ApplicationCommands.Save">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\save.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <!--ApplicationCommands.Close → カスタム動作 → CommandBinding-->
+                <!--MenuItem Header="終了(_X)" Command="ApplicationCommands.Close"-->
+                <!--ApplicationCommands.Close → カスタム動作 → カスタムイベント-->
+                <MenuItem Name="Exit" Click="Exit_Click"  Header="終了(_X)">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\exit.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="編集(_E)">
+                <!--ApplicationCommands.Undo → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="元に戻す(_U)" Command="ApplicationCommands.Undo">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\undo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <!--ApplicationCommands.Redo → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="やり直し(_R)" Command="ApplicationCommands.Redo">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\redo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <!--ApplicationCommands.Cut → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="切り取り(_T)" Command="ApplicationCommands.Cut">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\cut.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <!--ApplicationCommands.Copy → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="コピー(_C)" Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <!--ApplicationCommands.Paste → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="貼り付け(_P)" Command="ApplicationCommands.Paste">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <!--ApplicationCommands.Delete → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                <MenuItem Header="削除(_D)" Command="ApplicationCommands.Delete">
+                    <MenuItem.Icon>
+                        <Image Source=".\icons\delete.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="配置(_A)">
+                    <!--EditingCommands.AlignLeft → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="左揃え" Command="EditingCommands.AlignLeft">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_align_left.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.AlignCenter → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="中央揃え" Command="EditingCommands.AlignCenter">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_align_center.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.AlignRight → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="右揃え" Command="EditingCommands.AlignRight">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_align_right.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.AlignJustify → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="両端揃え" Command="EditingCommands.AlignJustify">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_align_justify.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="スタイル(_S)">
+                    <!--EditingCommands.ToggleBold → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="太字" Command="EditingCommands.ToggleBold">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_bold.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.ToggleItalic → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="斜体" Command="EditingCommands.ToggleItalic">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_italic.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.ToggleUnderline → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="下線" Command="EditingCommands.ToggleUnderline">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_underline.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.ToggleBullets → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="箇条書き" Command="EditingCommands.ToggleBullets">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_list_bullets.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.ToggleNumbering → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="段落番号" Command="EditingCommands.ToggleNumbering">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_list_numbers.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.IncreaseIndentation → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="インデントを増やす" Command="EditingCommands.IncreaseIndentation">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_indent.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <!--EditingCommands.DecreaseIndentation → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="インデントを減らす" Command="EditingCommands.DecreaseIndentation">
+                        <MenuItem.Icon>
+                            <Image Source=".\icons\text_indent_remove.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="テキスト(_T)">
+                    <!--EditingCommands.IncreaseFontSize → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="フォントの拡大" Command="EditingCommands.IncreaseFontSize"/>
+                    <!--EditingCommands.DecreaseFontSize → フォーカスのあるコントロール（RichTextBox）の既定の動作を実行-->
+                    <MenuItem Header="フォントの縮小" Command="EditingCommands.DecreaseFontSize"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="ヘルプ(_H)">
+                <!--RoutedCommandをコードビハインドから自作しカスタム動作（実行可否、イベント処理）を実装する-->
+                <MenuItem Header="バージョン情報(_A)" Name="About">
+                    <MenuItem.Icon>
+                        [ver]
+                        <!--Image Source=".\icons\about.png"/-->
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar Header="編集:">
+                <Button ToolTip="元に戻す" Command="ApplicationCommands.Undo">
+                    [元に戻す]
+                    <!--Image Source=".\icons\undo.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="やり直し" Command="ApplicationCommands.Redo">
+                    [やり直し]
+                    <!--Image Source=".\icons\redo.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="切り取り" Command="ApplicationCommands.Cut">
+                    [切り取り]
+                    <!--Image Source=".\icons\cut.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="コピー" Command="ApplicationCommands.Copy">
+                    [コピー]
+                    <!--Image Source=".\icons\copy.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="貼り付け" Command="ApplicationCommands.Paste">
+                    [貼り付け]
+                    <!--Image Source=".\icons\paste.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="削除" Command="ApplicationCommands.Delete">
+                    削除
+                    <!--Image Source=".\icons\delete.png" Stretch="Fill"/-->
+                </Button>
+            </ToolBar>
+            <ToolBar Header="配置:">
+                <Button ToolTip="左揃え" Command="EditingCommands.AlignLeft">
+                    [左揃え]
+                    <!--Image Source=".\icons\text_align_left.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="中央揃え" Command="EditingCommands.AlignCenter">
+                    [中央揃え]
+                    <!--Image Source=".\icons\text_align_center.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="右揃え" Command="EditingCommands.AlignRight">
+                    [右揃え]
+                    <!--Image Source=".\icons\text_align_right.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="両端揃え" Command="EditingCommands.AlignJustify">
+                    [両端揃え]
+                    <!--Image Source=".\icons\text_align_justify.png" Stretch="Fill"/-->
+                </Button>
+            </ToolBar>
+            <ToolBar Header="スタイル:">
+                <Button ToolTip="太字" Command="EditingCommands.ToggleBold">
+                    [太字]
+                    <!--Image Source=".\icons\text_bold.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="斜体" Command="EditingCommands.ToggleItalic">
+                    [斜体]
+                    <!--Image Source=".\icons\text_italic.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="下線" Command="EditingCommands.ToggleUnderline">
+                    [下線]
+                    <!--Image Source=".\icons\text_underline.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="箇条書き" Command="EditingCommands.ToggleBullets">
+                    [箇条書き]
+                    <!--Image Source=".\icons\text_list_bullets.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="段落番号" Command="EditingCommands.ToggleNumbering">
+                    [段落番号]
+                    <!--Image Source=".\icons\text_list_numbers.png" Stretch="fill"/-->
+                </Button>
+                <Button ToolTip="インデントを増やす" Command="EditingCommands.IncreaseIndentation">
+                    [インデントを増やす]
+                    <!--Image Source=".\icons\text_indent.png" Stretch="Fill"/-->
+                </Button>
+                <Button ToolTip="インデントを減らす" Command="EditingCommands.DecreaseIndentation">
+                    [インデントを減らす]
+                    <!--Image Source=".\icons\text_indent_remove.png" Stretch="Fill"/-->
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <RichTextBox DockPanel.Dock="Top" Width="Auto" Height="100"
+                     IsDocumentEnabled="True" AcceptsTab="True" FontSize="24"/>
+        <RichTextBox DockPanel.Dock="Top" Width="Auto" Height="100"
+                     IsDocumentEnabled="True" AcceptsTab="True" FontSize="24"/>
+    </DockPanel>
+</Window>

@@ -1,0 +1,17 @@
+﻿<Window x:Class="WpfApp.UseThreadPool"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="UseThreadPool" Height="500" Width="300">
+    <StackPanel>
+        <Label Height="28">ThreadPoolを使用した非同期実行</Label>
+        <Label Height="28">実行時間の最大値（秒）</Label>
+        <TextBox Height="23" Name="textBox1">3</TextBox>
+        <Button Height="23" Name="button1" Click="button1_Click">ThreadPoolにキューイングし実行</Button>
+        <Label Height="28">結果の表示</Label>
+        <StackPanel Orientation="Horizontal">
+            <Label Height="28">現在のスレッド数：</Label>
+            <Label Height="28" Name="label1">0</Label>
+        </StackPanel>
+        <TextBox Height="300" Name="textBox2" AcceptsReturn="True" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+    </StackPanel>
+</Window>

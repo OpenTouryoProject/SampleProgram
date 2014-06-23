@@ -1,0 +1,29 @@
+﻿<Window x:Class="InterProcComm.SharedMemCStrct"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="SharedMemCStrct" Height="500" Width="300"
+    Closing="Window_Closing">
+    <StackPanel>
+        <Label Height="23" HorizontalAlignment="Left">これは、共有メモリ＠C構造体を処理する版</Label>
+        <TabControl Name="tabControl1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TabItem Header="サーバ" Name="tabItem1">
+                <StackPanel>
+                    <Label Height="23" HorizontalAlignment="Center" >サーバの複数起動が可能</Label>
+                    <Button Height="23" Name="button1" Click="button1_Click">サーバを起動（マップ＋ポーリング）する。</Button>
+                    <Button Height="23" Name="button2" Click="button2_Click">サーバを停止（ポーリング停止＋アンマップ）する。</Button>
+                    <TextBox Height="250" Name="textBox1" IsReadOnly="True"
+                             AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="クライアント" Name="tabItem2">
+                <StackPanel>
+                    <Button Height="23" Name="button3" Click="button3_Click">
+                        クライアントを起動する（複数起動可能）。
+                    </Button>
+                    <TextBox Height="250" Name="textBox4" IsReadOnly="True" 
+                             AcceptsReturn="True" VerticalScrollBarVisibility="Visible" />
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</Window>

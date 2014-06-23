@@ -1,0 +1,34 @@
+﻿<Window x:Class="TimelineAndFrame.TimelineAnimationWindow2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TimelineAnimationWindow2" Height="300" Width="300">
+    <Window.Resources>
+        <Storyboard x:Key="myStoryboard">
+            <DoubleAnimation Storyboard.TargetProperty="Width" Duration="0:0:3" From="10" To="200"/>
+            <DoubleAnimation Storyboard.TargetProperty="Height" Duration="0:0:3" From="10" To="200"/>
+        </Storyboard>
+        <Style x:Key="MyTemplate" TargetType="Control">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Control">
+                        <Rectangle Width="{Binding Path=Width, RelativeSource={RelativeSource TemplatedParent}}"
+                                   Height="{Binding Path=Height, RelativeSource={RelativeSource TemplatedParent}}" Fill="Aqua">
+                        </Rectangle>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="Control.MouseEnter">
+                                <BeginStoryboard x:Name="myBeginStoryboard" Storyboard="{StaticResource myStoryboard}"/>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="Control.MouseDown">
+                                <RemoveStoryboard BeginStoryboardName="myBeginStoryboard" />
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TextBlock FontSize="16">DoubleAnimation + Resources</TextBlock>
+        <Control Width="100" Height="100" Style="{StaticResource MyTemplate}"/>
+    </Grid>
+</Window>
