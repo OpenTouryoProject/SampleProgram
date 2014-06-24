@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfApplication1.Window1"
+﻿<Window x:Class="DataGrid.Window1"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:my="clr-namespace:WpfApplication1"
+    xmlns:my="clr-namespace:DataGrid"
     Title="Window1" Height="377" Width="304" Loaded="Window_Loaded">
     <Window.Resources>
         <my:CbxData1 x:Key="cbxData1"/>

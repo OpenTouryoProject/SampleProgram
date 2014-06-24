@@ -27,11 +27,11 @@ using System.Windows;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("DNET_Client")]
+[assembly: AssemblyTitle("InteropWithUnmanage DNET_Client")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hitachi Solutions")]
-[assembly: AssemblyProduct("DNET_Client")]
+[assembly: AssemblyProduct("InteropWithUnmanage DNET_Client")]
 [assembly: AssemblyCopyright("Copyright (C) 2007,2014 Hitachi Solutions,Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

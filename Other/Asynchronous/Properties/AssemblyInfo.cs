@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Asynchronous")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("seigi")]
+[assembly: AssemblyCompany("Hitachi Solutions")]
 [assembly: AssemblyProduct("Asynchronous")]
-[assembly: AssemblyCopyright("Copyright © seigi 2010")]
+[assembly: AssemblyCopyright("Copyright (C) 2007,2014 Hitachi Solutions,Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

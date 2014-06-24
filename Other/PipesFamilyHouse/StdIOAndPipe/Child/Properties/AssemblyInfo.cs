@@ -25,11 +25,11 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("Child")]
+[assembly: AssemblyTitle("StdIOAndPipe Child")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Hitachi Solutions")]
-[assembly: AssemblyProduct("Child")]
+[assembly: AssemblyProduct("StdIOAndPipe Child")]
 [assembly: AssemblyCopyright("Copyright (C) 2007,2014 Hitachi Solutions,Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfApplication1.MyValidationRuleWindow"
+﻿<Window x:Class="InputField.MyValidationRuleWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:my="clr-namespace:WpfApplication1"
+        xmlns:my="clr-namespace:InputField"
         Title="MyValidationRuleWindow" Height="300" Width="400">
     <Window.Resources>
 

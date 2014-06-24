@@ -28,12 +28,12 @@ using System.Runtime.InteropServices;
 // アセンブリに関する一般情報は以下の属性セットをとおして制御されます。
 // アセンブリに関連付けられている情報を変更するには、
 // これらの属性値を変更してください。
-[assembly: AssemblyTitle("CallerEXE2")]
+[assembly: AssemblyTitle("DotNETBridge CallerEXE2")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("seigi")]
-[assembly: AssemblyProduct("CallerEXE2")]
-[assembly: AssemblyCopyright("Copyright © seigi 2011")]
+[assembly: AssemblyCompany("Hitachi Solutions")]
+[assembly: AssemblyProduct("DotNETBridge CallerEXE2")]
+[assembly: AssemblyCopyright("Copyright (C) 2007,2014 Hitachi Solutions,Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

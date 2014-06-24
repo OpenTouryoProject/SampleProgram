@@ -1,8 +1,8 @@
-﻿<Window x:Class="WpfApplication1.NumericValidationRuleBgWindow"
+﻿<Window x:Class="InputField.NumericValidationRuleBgWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:my="clr-namespace:WpfApplication1"
+        xmlns:my="clr-namespace:InputField"
         xmlns:igEditors="http://infragistics.com/Editors"
         Title="NumericValidationRuleBgWindow" Height="300" Width="300">
     <Window.Resources>

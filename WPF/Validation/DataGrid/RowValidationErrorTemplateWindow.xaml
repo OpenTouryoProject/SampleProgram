@@ -1,7 +1,7 @@
-﻿<Window x:Class="WpfApplication1.RowValidationErrorTemplateWindow"
+﻿<Window x:Class="DataGrid.RowValidationErrorTemplateWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:my="clr-namespace:WpfApplication1"
+        xmlns:my="clr-namespace:DataGrid"
         Title="RowValidationErrorTemplateWindow" Height="400" Width="600">
     <Window.Resources>
         <my:Courses x:Key="courses"/>

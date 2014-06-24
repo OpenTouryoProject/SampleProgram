@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApplication1.IMEWindow"
+﻿<Window x:Class="InputField.IMEWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:igEditors="http://infragistics.com/Editors"
