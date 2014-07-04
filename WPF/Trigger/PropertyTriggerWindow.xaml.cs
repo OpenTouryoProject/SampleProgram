@@ -38,6 +38,7 @@ namespace Trigger
     /// </summary>
     public partial class PropertyTriggerWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public PropertyTriggerWindow()
         {
             InitializeComponent();

@@ -38,6 +38,7 @@ namespace DataBinding.CalcBMI
     /// </summary>
     public partial class CalcBMIWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public CalcBMIWindow()
         {
             InitializeComponent();

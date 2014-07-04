@@ -38,6 +38,7 @@ namespace DataBinding.Slider
     /// </summary>
     public partial class SliderWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public SliderWindow()
         {
             InitializeComponent();

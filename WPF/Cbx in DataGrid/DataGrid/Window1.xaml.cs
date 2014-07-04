@@ -42,6 +42,7 @@ namespace DataGrid
     /// </summary>
     public partial class Window1 : Window
     {
+        /// <summary>コンストラクタ</summary>
         public Window1()
         {
             InitializeComponent();
@@ -225,6 +226,7 @@ namespace DataGrid
             this.dataGrid1.DataContext = dt;
         }
 
+        /// <summary>行の状態を確認する。</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             DataTable dt = (DataTable)this.dataGrid1.DataContext;

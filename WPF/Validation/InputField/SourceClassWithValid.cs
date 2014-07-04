@@ -27,9 +27,7 @@ using System.ComponentModel;
 
 namespace InputField
 {
-    /// <summary>
-    /// ソースクラス（バリデーション付）
-    /// </summary>
+    /// <summary>ソースクラス（バリデーション付）</summary>
     public class SourceClassWithValid : IDataErrorInfo
     {
         /// <summary>ソースプロパティ１</summary>

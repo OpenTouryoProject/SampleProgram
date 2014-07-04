@@ -27,9 +27,7 @@ using System.Windows;
 
 namespace Trigger
 {
-    /// <summary>
-    /// App.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>App.xaml の相互作用ロジック</summary>
     public partial class App : Application
     {
     }

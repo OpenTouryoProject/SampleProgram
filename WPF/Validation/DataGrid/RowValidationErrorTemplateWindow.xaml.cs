@@ -41,6 +41,7 @@ namespace DataGrid
     /// </summary>
     public partial class RowValidationErrorTemplateWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public RowValidationErrorTemplateWindow()
         {
             InitializeComponent();
@@ -50,6 +51,7 @@ namespace DataGrid
     /// <summary>バインディング ソース（コレクション）</summary>
     public class Courses : ObservableCollection<Course>
     {
+        /// <summary>コンストラクタ</summary>
         public Courses()
         {
             this.Add(new Course

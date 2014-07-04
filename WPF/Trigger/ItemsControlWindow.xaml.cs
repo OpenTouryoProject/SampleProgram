@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace Trigger
 {
-    /// <summary>
-    /// ItemsControlWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>ItemsControlWindow.xaml の相互作用ロジック</summary>
     public partial class ItemsControlWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public ItemsControlWindow()
         {
             InitializeComponent();
@@ -70,6 +69,7 @@ namespace Trigger
             this.stackPanel1.DataContext = lst;
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, string> dic = (Dictionary<string, string>)this.ListBox1.SelectedValue;

@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// MyValidationRuleBgWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>MyValidationRuleBgWindow.xaml の相互作用ロジック</summary>
     public partial class MyValidationRuleBgWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public MyValidationRuleBgWindow()
         {
             InitializeComponent();
@@ -46,14 +45,13 @@ namespace InputField
             this.DataContext = new SourceClass();
         }
 
-        /// <summary>
-        /// Validation.Errorに設定するエラーハンドラ
-        /// </summary>
+        /// <summary>Validation.Errorに設定するエラーハンドラ</summary>
         private void textBox2_Error(object sender, ValidationErrorEventArgs e)
         {
             MessageBox.Show("エラー");
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             if (!this.stackPanel.BindingGroup.ValidateWithoutUpdate())

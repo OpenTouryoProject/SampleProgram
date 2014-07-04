@@ -45,14 +45,15 @@ namespace WpfApplication1
             InitializeComponent();
         }
 
-        
 
+        /// <summary>Window_Loaded</summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             stackPanel1.Height = 28;
             stackPanel2.Height = 28;
         }
 
+        /// <summary>stackPanel_PreviewMouseLeftButtonDown</summary>
         private void stackPanel_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             // 縮んでいるとき（スタックパネルのHeightが28なら）

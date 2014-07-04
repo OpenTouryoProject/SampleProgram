@@ -33,64 +33,72 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>MainWindow.xaml の相互作用ロジック</summary>
     public partial class MainWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             Window w = new ExceptionValidationRuleWindow();
             w.Show();
         }
 
+        /// <summary>button2_Click</summary>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             Window w = new MyValidationRuleWindow();
             w.Show(); 
         }
 
+        /// <summary>button3_Click</summary>
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             Window w = new NumericValidationRuleWindow();
             w.Show();
         }
 
+        /// <summary>button4_Click</summary>
         private void button4_Click(object sender, RoutedEventArgs e)
         {
             Window w = new LengthValidationRuleWindow();
             w.Show();
         }
 
+        /// <summary>button5_Click</summary>
         private void button5_Click(object sender, RoutedEventArgs e)
         {
             Window w = new DataErrorValidationRuleWindow();
             w.Show();
         }
 
+        /// <summary>button6_Click</summary>
         private void button6_Click(object sender, RoutedEventArgs e)
         {
             Window w = new MyValidationRuleBgWindow();
             w.Show();
         }
 
+        /// <summary>button7_Click</summary>
         private void button7_Click(object sender, RoutedEventArgs e)
         {
             Window w = new NumericValidationRuleBgWindow();
             w.Show();
         }
 
+        /// <summary>button8_Click</summary>
         private void button8_Click(object sender, RoutedEventArgs e)
         {
             Window w = new LengthValidationRuleBgWindow();
             w.Show();
         }
 
+        /// <summary>button9_Click</summary>
         private void button9_Click(object sender, RoutedEventArgs e)
         {
             Window w = new IMEWindow();

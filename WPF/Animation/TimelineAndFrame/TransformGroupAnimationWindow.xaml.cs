@@ -38,6 +38,7 @@ namespace TimelineAndFrame
     /// </summary>
     public partial class TransformGroupAnimationWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public TransformGroupAnimationWindow()
         {
             InitializeComponent();

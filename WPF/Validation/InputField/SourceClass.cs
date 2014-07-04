@@ -25,9 +25,7 @@ using System.Text;
 
 namespace InputField
 {
-    /// <summary>
-    /// ソースクラス
-    /// </summary>
+    /// <summary>ソースクラス</summary>
     public class SourceClass
     {
         /// <summary>ソースプロパティ１</summary>

@@ -33,26 +33,28 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// IMEWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>IMEWindow.xaml の相互作用ロジック</summary>
     public partial class IMEWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public IMEWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>GotFocus_IME_OFF</summary>
         private void GotFocus_IME_OFF(object sender, RoutedEventArgs e)
         {
             InputMethod.Current.ImeState = InputMethodState.Off;
         }
 
+        /// <summary>GotFocus_IME_ON</summary>
         private void GotFocus_IME_ON(object sender, RoutedEventArgs e)
         {
             InputMethod.Current.ImeState = InputMethodState.On;
         }
 
+        /// <summary>GotFocus_IME_Katakana</summary>
         private void GotFocus_IME_Katakana(object sender, RoutedEventArgs e)
         {
             InputMethod.Current.ImeState = InputMethodState.On;
@@ -60,6 +62,7 @@ namespace InputField
             | ImeConversionModeValues.FullShape | ImeConversionModeValues.Katakana;
         }
 
+        /// <summary>GotFocus_IME_Hiragana</summary>
         private void GotFocus_IME_Hiragana(object sender, RoutedEventArgs e)
         {
             InputMethod.Current.ImeState = InputMethodState.On;
@@ -67,6 +70,7 @@ namespace InputField
             | ImeConversionModeValues.FullShape | ImeConversionModeValues.Native;
         }
 
+        ///// <summary>LostFocus_IME</summary>
         //private void LostFocus_IME(object sender, RoutedEventArgs e)
         //{
         //    InputMethod.Current.ImeState = ims;

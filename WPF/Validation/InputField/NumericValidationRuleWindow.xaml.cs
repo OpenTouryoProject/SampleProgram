@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// NumericValidationRuleWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>NumericValidationRuleWindow.xaml の相互作用ロジック</summary>
     public partial class NumericValidationRuleWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public NumericValidationRuleWindow()
         {
             InitializeComponent();

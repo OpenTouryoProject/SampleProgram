@@ -38,6 +38,7 @@ namespace TimelineAndFrame
     /// </summary>
     public partial class KeyFrameAnimationWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public KeyFrameAnimationWindow()
         {
             InitializeComponent();

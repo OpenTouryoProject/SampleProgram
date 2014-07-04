@@ -40,27 +40,34 @@ namespace WpfApplication1
     /// </summary>
     public partial class Window2 : Window
     {
+        /// <summary>定数</summary>
+        private double SpHeight1Ini = 28.0;
+        /// <summary></summary>
+        private double SpHeight2Ini = 28.0;
+        /// <summary></summary>
+        private double SpHeight1To = 150.0;
+        /// <summary></summary>
+        private double SpHeight2To = 150.0;
+        /// <summary></summary>
+        private Duration D = new Duration(new TimeSpan(0, 0, 0, 0, 300));
+
+        /// <summary>コンストラクタ</summary>
         public Window2()
         {
             InitializeComponent();
         }
-
-        private double SpHeight1Ini = 28.0;
-        private double SpHeight2Ini = 28.0;
-
-        private double SpHeight1To = 150.0;
-        private double SpHeight2To = 150.0;
-
-        private Duration D = new Duration(new TimeSpan(0, 0, 0, 0, 300));
-
+        
+        /// <summary>Window_Loaded</summary>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             stackPanel1.Height = this.SpHeight1Ini;
             stackPanel2.Height = this.SpHeight2Ini;
         }
 
+        /// <summary>フラグ</summary>
         private bool flg = false;
 
+        /// <summary>アニメーションを切り替え</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             if (this.flg)
@@ -79,10 +86,12 @@ namespace WpfApplication1
             this.flg = !this.flg;
         }
 
+        /// <summary>ReturnDoubleAnimation</summary>
+        /// <param name="spHeightFrom">DoubleAnimation.From</param>
+        /// <param name="spHeightTo">DoubleAnimation.To</param>
+        /// <returns>DoubleAnimation</returns>
         private DoubleAnimation ReturnDoubleAnimation(double spHeightFrom, double spHeightTo)
         {
-            Storyboard sb = new Storyboard();
-
             DoubleAnimation da = new DoubleAnimation();
             da.From = spHeightFrom;
             da.To = spHeightTo;
@@ -91,6 +100,9 @@ namespace WpfApplication1
             return da;
         }
 
+        #region BeginAnimation
+
+        /// <summary>stackPanel1_MouseLeftButtonDown</summary>
         private void stackPanel1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (this.stackPanel1.Height == this.SpHeight1Ini)
@@ -101,6 +113,7 @@ namespace WpfApplication1
             }
         }
 
+        /// <summary>stackPanel1_MouseRightButtonDown</summary>
         private void stackPanel1_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {   
             this.stackPanel1.BeginAnimation(
@@ -109,6 +122,7 @@ namespace WpfApplication1
             this.stackPanel1.Height = this.SpHeight1Ini;
         }
 
+        /// <summary>stackPanel2_MouseLeftButtonDown</summary>
         private void stackPanel2_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (this.stackPanel2.Height == this.SpHeight2Ini)
@@ -119,6 +133,7 @@ namespace WpfApplication1
             }
         }
 
+        /// <summary>stackPanel2_MouseRightButtonDown</summary>
         private void stackPanel2_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             this.stackPanel2.BeginAnimation(
@@ -126,5 +141,8 @@ namespace WpfApplication1
 
             this.stackPanel2.Height = this.SpHeight2Ini;
         }
+        
+        #endregion
+
     }
 }

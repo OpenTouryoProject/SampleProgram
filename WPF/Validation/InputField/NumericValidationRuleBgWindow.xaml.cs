@@ -38,6 +38,7 @@ namespace InputField
     /// </summary>
     public partial class NumericValidationRuleBgWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public NumericValidationRuleBgWindow()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace InputField
             this.DataContext = new SourceClass();
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             if (!this.stackPanel.BindingGroup.ValidateWithoutUpdate())

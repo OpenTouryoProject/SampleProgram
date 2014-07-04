@@ -38,6 +38,7 @@ namespace TimelineAndFrame
     /// </summary>
     public partial class PathAnimationWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public PathAnimationWindow()
         {
             InitializeComponent();

@@ -38,6 +38,7 @@ namespace TimelineAndFrame
     /// </summary>
     public partial class LayoutTransformOnlyWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public LayoutTransformOnlyWindow()
         {
             InitializeComponent();

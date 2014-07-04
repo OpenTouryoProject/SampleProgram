@@ -34,28 +34,30 @@ using System.Windows.Shapes;
 
 namespace Template
 {
-    /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>MainWindow.xaml の相互作用ロジック</summary>
     public partial class MainWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             Window w = new ContentControlWindow();
             w.Show();
         }
 
+        /// <summary>button2_Click</summary>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             Window w = new ItemsControlWindow();
             w.Show();
         }
 
+        /// <summary>button3_Click</summary>
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             Window w = new GridViewWindow();

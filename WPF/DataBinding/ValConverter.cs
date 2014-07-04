@@ -27,6 +27,7 @@ using System.Windows.Data;
 
 namespace DataBinding.Slider
 {
+    /// <summary>ValConverter</summary>
     public class ValConverter : IValueConverter
     {
         #region IValueConverter メンバ

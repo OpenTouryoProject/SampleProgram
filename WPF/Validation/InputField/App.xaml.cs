@@ -27,9 +27,7 @@ using System.Windows;
 
 namespace InputField
 {
-    /// <summary>
-    /// App.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>App.xaml の相互作用ロジック</summary>
     public partial class App : Application
     {
     }

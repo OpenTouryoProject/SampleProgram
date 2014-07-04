@@ -33,6 +33,9 @@ namespace InputField
     /// <summary>全チェック用バリデーション ルール</summary>
     public class ValidationRuleNothing : ValidationRule
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public override ValidationResult Validate(object value,
           System.Globalization.CultureInfo cultureInfo)
         {

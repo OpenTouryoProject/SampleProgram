@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// DataErrorValidationRuleWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>DataErrorValidationRuleWindow.xaml の相互作用ロジック</summary>
     public partial class DataErrorValidationRuleWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public DataErrorValidationRuleWindow()
         {
             InitializeComponent();

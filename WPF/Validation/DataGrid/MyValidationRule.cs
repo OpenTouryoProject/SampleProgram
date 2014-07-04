@@ -31,23 +31,17 @@ namespace DataGrid
     /// <summary>カスタム バリデーション</summary>
     public class MyValidationRule : ValidationRule
     {
-        /// <summary>
-        /// 最大値（メンバ）
-        /// </summary>
+        /// <summary>最大値（メンバ）</summary>
         private int _max = 0;
 
-        /// <summary>
-        /// 最大値（アクセッサ）
-        /// </summary>
+        /// <summary>最大値（アクセッサ）</summary>
         public int Max
         {
             get { return this._max; }
             set { this._max = value; }
         }
 
-        /// <summary>
-        /// カスタム バリデーション メソッド
-        /// </summary>
+        /// <summary>カスタム バリデーション メソッド</summary>
         /// <param name="value">入力値</param>
         /// <param name="cultureInfo">カルチャ</param>
         /// <returns>ValidationResult</returns>

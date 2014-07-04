@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// LengthValidationRuleBgWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>LengthValidationRuleBgWindow.xaml の相互作用ロジック</summary>
     public partial class LengthValidationRuleBgWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public LengthValidationRuleBgWindow()
         {
             InitializeComponent();
@@ -46,6 +45,7 @@ namespace InputField
             this.DataContext = new SourceClass();
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             if (!this.stackPanel.BindingGroup.ValidateWithoutUpdate())

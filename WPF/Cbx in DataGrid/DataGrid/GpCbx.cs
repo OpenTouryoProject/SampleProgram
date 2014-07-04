@@ -33,6 +33,7 @@ namespace DataGrid
     /// <summary>汎用コンボボックス コレクション データクラス</summary>
     public class GpCbxCollectionData : Collection<GpCbxItemData>
     {
+        /// <summary>コンストラクタ</summary>
         public GpCbxCollectionData(string key)
             : base()
         {
@@ -51,20 +52,26 @@ namespace DataGrid
     /// <summary>汎用コンボボックス アイテム データクラス</summary>
     public class GpCbxItemData
     {
+        /// <summary>値</summary>
         private int _value;
+        /// <summary>表示</summary>
         private string _display;
 
+        /// <summary>コンストラクタ</summary>
         public GpCbxItemData(int value, string display)
         {
             this._value = value;
             this._display = display;
         }
 
+        /// <summary>値</summary>
         public int Value
         {
             get { return this._value; }
             set { this._value = value; }
         }
+
+        /// <summary>表示</summary>
         public string Display
         {
             get { return this._display; }

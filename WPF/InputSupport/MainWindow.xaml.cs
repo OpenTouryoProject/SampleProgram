@@ -50,6 +50,7 @@ namespace InputSupport
         // AboutCommand（カスタムのRoutedCommand）
         public static readonly RoutedCommand AboutCommand = new RoutedCommand();
 
+        /// <summary>InitRoutedCommands_about</summary>
         private void InitRoutedCommands_about()
         {
 
@@ -64,40 +65,54 @@ namespace InputSupport
             About.Command = AboutCommand;
         }
 
-        // 【情報メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// <summary>
+        /// 【情報メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// </summary>
         private void AboutCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-        // 【情報メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// <summary>
+        /// 【情報メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// </summary>
         private void AboutCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             // 情報表示処理
         }
 
-        // 【保存メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// <summary>
+        /// 【保存メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// </summary>
         private void SaveCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-        // 【保存メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（イベント処理）
+        /// <summary>
+        /// 【保存メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（イベント処理）
+        /// </summary>
         private void SaveCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             // 保存処理
         }
 
-        // 【終了メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// <summary>
+        /// 【終了メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（実行可否）
+        /// </summary>
         private void CloseCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
-        // 【終了メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（イベント処理）
+        /// <summary>
+        /// 【終了メニュー＋コマンド】UIElementにRoutedCommandをバインド：カスタム動作（イベント処理）
+        /// </summary>
         private void CloseCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.Close();
         }
 
-        // 【終了メニュー】メニューのクリックイベントのみの実装で済ます場合。
+        /// <summary>
+        /// 【終了メニュー】メニューのクリックイベントのみの実装で済ます場合。
+        /// </summary>
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

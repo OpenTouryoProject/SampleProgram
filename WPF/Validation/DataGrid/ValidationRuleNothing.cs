@@ -33,6 +33,7 @@ namespace DataGrid
     /// <summary>全チェック用バリデーション ルール</summary>
     public class ValidationRuleNothing : ValidationRule
     {
+        /// <summary>バリデーション メソッド</summary>
         public override ValidationResult Validate(object value,
           System.Globalization.CultureInfo cultureInfo)
         {

@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// LengthValidationRuleWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>LengthValidationRuleWindow.xaml の相互作用ロジック</summary>
     public partial class LengthValidationRuleWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public LengthValidationRuleWindow()
         {
             InitializeComponent();

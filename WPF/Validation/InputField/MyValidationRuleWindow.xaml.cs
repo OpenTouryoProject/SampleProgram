@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace InputField
 {
-    /// <summary>
-    /// MyValidationRuleWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>MyValidationRuleWindow.xaml の相互作用ロジック</summary>
     public partial class MyValidationRuleWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public MyValidationRuleWindow()
         {
             InitializeComponent();
@@ -46,9 +45,7 @@ namespace InputField
             this.DataContext = new SourceClass();
         }
 
-        /// <summary>
-        /// Validation.Errorに設定するエラーハンドラ
-        /// </summary>
+        /// <summary>Validation.Errorに設定するエラーハンドラ</summary>
         private void textBox2_Error(object sender, ValidationErrorEventArgs e)
         {
             MessageBox.Show("エラー");

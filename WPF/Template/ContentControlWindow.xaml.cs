@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace Template
 {
-    /// <summary>
-    /// ContentControlWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>ContentControlWindow.xaml の相互作用ロジック</summary>
     public partial class ContentControlWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public ContentControlWindow()
         {
             InitializeComponent();

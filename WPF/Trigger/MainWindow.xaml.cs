@@ -39,23 +39,25 @@ namespace Trigger
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             Window w = new DataTriggerWindow();
             w.Show(); 
         }
-
+        /// <summary>button2_Click</summary>
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             Window w = new PropertyTriggerWindow();
             w.Show(); 
         }
-
+        /// <summary>button3_Click</summary>
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             Window w = new ItemsControlWindow();

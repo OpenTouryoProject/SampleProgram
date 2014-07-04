@@ -33,11 +33,10 @@ using System.Windows.Shapes;
 
 namespace Trigger
 {
-    /// <summary>
-    /// DataTriggerWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>DataTriggerWindow.xaml の相互作用ロジック</summary>
     public partial class DataTriggerWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public DataTriggerWindow()
         {
             InitializeComponent();

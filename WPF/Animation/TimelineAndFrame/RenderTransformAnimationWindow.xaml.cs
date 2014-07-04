@@ -38,6 +38,7 @@ namespace TimelineAndFrame
     /// </summary>
     public partial class RenderTransformAnimationWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public RenderTransformAnimationWindow()
         {
             InitializeComponent();

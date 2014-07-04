@@ -11,7 +11,6 @@
         <Button Height="23" Name="button4" Click="button4_Click">LengthValidationRuleWindow</Button>
         <Button Height="23" Name="button5" Click="button5_Click">DataErrorValidationRuleWindow</Button>
         
-        <TextBlock/><TextBlock>上記をXamTextEditor化</TextBlock>
         <TextBlock/><TextBlock>上記の各ValidationRuleにBindingGroupを追加</TextBlock>
         <Button Height="23" Name="button11" Click="button6_Click">MyValidationRuleBgWindow</Button>
         <Button Height="23" Name="button13" Click="button7_Click">NumericValidationRuleBgWindow</Button>

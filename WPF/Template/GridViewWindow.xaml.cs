@@ -35,11 +35,10 @@ using System.Data;
 
 namespace Template
 {
-    /// <summary>
-    /// GridViewWindow.xaml の相互作用ロジック
-    /// </summary>
+    /// <summary>GridViewWindow.xaml の相互作用ロジック</summary>
     public partial class GridViewWindow : Window
     {
+        /// <summary>コンストラクタ</summary>
         public GridViewWindow()
         {
             InitializeComponent();

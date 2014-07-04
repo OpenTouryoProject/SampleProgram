@@ -29,7 +29,7 @@ namespace Trigger
 {
     public class Places : ObservableCollection<Place>
     {
-        /// <summary>コンストラクタで</summary>
+        /// <summary>コンストラクタ</summary>
         public Places()
         {
             this.Add(new Place("Bellevue", "WA"));

@@ -40,6 +40,7 @@ namespace DataGrid
     /// </summary>
     public partial class TextBoxDataGridValidationBindingGroupWindow1 : Window
     {
+        /// <summary>コンストラクタ</summary>
         public TextBoxDataGridValidationBindingGroupWindow1()
         {
             InitializeComponent();

@@ -48,6 +48,7 @@ namespace TimelineAndFrame
         // 加速ｙ
         double AccelerationY = 0.3;
 
+        /// <summary>コンストラクタ</summary>
         public FrameBaseAnimationWindow()
         {
             InitializeComponent();
@@ -72,6 +73,7 @@ namespace TimelineAndFrame
             this.ellipse.SetValue(Canvas.TopProperty, y + SpeedY);
         }
 
+        /// <summary>button1_Click</summary>
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             SpeedX = 15;
