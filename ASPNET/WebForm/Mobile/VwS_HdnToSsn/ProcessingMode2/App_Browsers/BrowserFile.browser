@@ -1,0 +1,11 @@
+﻿<!--
+既存のブラウザ定義は次の場所にあります。
+    <windir>\Microsoft.NET\Framework\<ver>\CONFIG\Browsers
+-->
+<browsers>
+  <browser refID="Default">
+    <controlAdapters>
+      <adapter controlType="System.Web.UI.Page" adapterType="CustomPageAdapter" />
+    </controlAdapters>
+  </browser>
+</browsers>

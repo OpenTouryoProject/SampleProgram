@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\ProcessingMode2\", ".", "{06F7A7DE-14A3-4390-91DD-065CC80AA012}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/ProcessingMode2"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\SampleProgram\ASPNET\WebForm\Mobile\VwS_HdnToSsn\ProcessingMode2\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ProcessingMode2\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ProcessingMode2"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\SampleProgram\ASPNET\WebForm\Mobile\VwS_HdnToSsn\ProcessingMode2\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ProcessingMode2\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57641"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{06F7A7DE-14A3-4390-91DD-065CC80AA012}.Debug|.NET.ActiveCfg = Debug|.NET
+		{06F7A7DE-14A3-4390-91DD-065CC80AA012}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

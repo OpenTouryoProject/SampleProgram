@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "C:\...\ResponseFilter\", ".", "{D528A702-C9EF-4D71-9FFC-48386015AA7C}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.VirtualPath = "/ResponseFilter"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\SampleProgram\ASPNET\WebForm\Mobile\ResponseFilter\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ResponseFilter\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ResponseFilter"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\..\..\SampleProgram\ASPNET\WebForm\Mobile\ResponseFilter\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ResponseFilter\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57559"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D528A702-C9EF-4D71-9FFC-48386015AA7C}.Debug|.NET.ActiveCfg = Debug|.NET
+		{D528A702-C9EF-4D71-9FFC-48386015AA7C}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
