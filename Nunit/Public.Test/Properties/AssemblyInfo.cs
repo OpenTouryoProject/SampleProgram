@@ -1,8 +1,9 @@
-﻿#region Apache License
+﻿//**********************************************************************************
+//* Copyright (C) 2007,2014 Hitachi Solutions,Ltd.
+//**********************************************************************************
+
+#region Apache License
 //
-//  
-// 
-//  
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License. 
 // You may obtain a copy of the License at
@@ -39,9 +40,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Public.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Hitachi Solutions")]
 [assembly: AssemblyProduct("Public.Test")]
-[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyCopyright("Copyright (C) 2007,2014 Hitachi Solutions,Ltd.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
