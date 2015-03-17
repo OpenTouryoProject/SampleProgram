@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "knockout.js サンプル";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* 本文レイアウト *@
+<div class="header" style="width: 99%; border-bottom: none; font-size: x-large;">
+    Entity Framework Sample Application           
+</div>
+<div style="width: 100%; border: solid 1px #000000; border-bottom: none;">
+    <table style="width: 96%; margin: 10px auto;">
+        <tr>
+            <td class="lblEFLeft">データアクセス制御クラス（データプロバイダ）を選択</td>
+            <td class="cmbEF fieldGap">
+                <select id="ddlDap" style="height: 100%; width: 100%"
+                    data-bind="options: ddlDapItems, optionsText: 'displayText', optionsValue: 'value', value: ddlDap">
+                </select>
+            </td>
+            <td class="lblEFRight">分離レベルを選択</td>
+            <td class="cmbEF">
+                <select id="ddlIso" style="height: 100%; width: 100%" disabled="disabled"
+                    data-bind="options: ddlIsoItems, optionsText: 'displayText', optionsValue: 'value', value: ddlIso">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="lblEFLeft">静的、動的のクエリ モードを選択（共通Dao選択時</td>
+            <td class="cmbEF fieldGap">
+                <select id="ddlMode1" style="height: 100%; width: 100%"
+                    data-bind="options: ddlMode1Items, optionsText: 'displayText', optionsValue: 'value', value: ddlMode1">
+                </select>
+            </td>
+            <td class="lblEFRight">通信制御</td>
+            <td class="cmbEF">
+                <select id="ddlTransmission" style="height: 100%; width: 100%" disabled="disabled"
+                    data-bind="options: ddlTransmissionItems, optionsText: 'displayText', optionsValue: 'value', value: ddlTransmission">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="lblEFLeft">静的、動的のクエリ モードを選択</td>
+            <td class="cmbEF fieldGap">
+                <select id="ddlMode2" style="height: 100%; width: 100%"
+                    data-bind="options: ddlMode2Items, optionsText: 'displayText', optionsValue: 'value', value: ddlMode2">
+                </select></td>
+            <td class="lblEFRight">並び替え対象列</td>
+            <td class="cmbEF">
+                <select id="ddlOrderColumn" style="height: 100%; width: 100%"
+                    data-bind="options: ddlOrderColumnItems, optionsText: 'displayText', optionsValue: 'value', value: ddlOrderColumn">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td class="lblEFLeft">コミット、ロールバックを設定（例外発生時、ロールバック）</td>
+            <td class="cmbEF fieldGap">
+                <select id="ddlExRollback" style="height: 100%; width: 100%"
+                    data-bind="options: ddlExRollbackItems, optionsText: 'displayText', optionsValue: 'value', value: ddlExRollback">
+                </select>
+            </td>
+            <td class="lblEFRight">昇順・降順</td>
+            <td class="cmbEF">
+                <select id="ddlOrderSequence" style="height: 100%; width: 100%"
+                    data-bind="options: ddlOrderSequenceItems, optionsText: 'displayText', optionsValue: 'value', value: ddlOrderSequence">
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table style="margin: auto;">
+        <tr style="height: 2%;">
+            <td style="border: none">
+                <input type="button" id="button1" value="件数取得" data-bind="click: GetCount" class="btn" /></td>
+            <td style="border: none">
+                <input type="button" id="button2" value="一覧取得（dt）" data-bind="click: GetList_dt" class="btn" /></td>
+            <td style="border: none">
+                <input type="button" id="button3" value="一覧取得（ds）" data-bind="click: GetList_ds" class="btn" /></td>
+            <td style="border: none">
+                <input type="button" id="button4" value="一覧取得（dr）" data-bind="click: GetList_dr" class="btn" /></td>
+            <td style="border: none;">
+                <input type="button" id="button5" value="一覧取得（動的SQL）" data-bind="click: GetList_dsql" class="btn" /></td>
+        </tr>
+    </table>
+</div>
+<div style="width: 100%; border: solid 1px #000000;">
+    <table style="width: 100%;">
+        <tr>
+            <td style="width: 30%; border-right: solid 1px #000000;">
+                <div class="header">CRUD Operation</div>
+                <div style="width: 100%;">
+                    <table style="width: 98%; margin: auto;">
+                        <tr style="height: 2%;">
+                            <td class="lblEFLeft" style="width: auto !important">ShipperId：</td>
+                            <td>
+                                <input type="text" id="textBox1" style="width: 99%; height: 100%" data-bind="value: ShipperId" /></td>
+                        </tr>
+                        <tr style="height: 2%;">
+                            <td class="lblEFLeft" style="width: auto !important">CompanyName：</td>
+                            <td>
+                                <input type="text" id="textBox2" style="width: 99%; height: 100%" data-bind="value: CompanyName" /></td>
+                        </tr>
+                        <tr style="height: 2%;">
+                            <td class="lblEFLeft" style="width: auto !important">Phone：</td>
+                            <td>
+                                <input type="text" id="textBox3" style="width: 99%; height: 100%" data-bind="value: Phone" /></td>
+                        </tr>
+                        <tr style="height: 2%">
+                            <td style="border: none" colspan="2">
+                                <input type="button" id="button7" value="一件参照" data-bind="click: GetDetail" class="btn" />
+                                <input type="button" id="button8" value="追加" data-bind="click: InsertRecord" class="btn" />
+                                <input type="button" id="button9" value="更新" data-bind="click: UpdateRecord" class="btn" />
+                                <input type="button" id="button10" value="削除" data-bind="click: DeleteRecord" class="btn" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td style="width: 70%; vertical-align: top">
+                <div style="width: 100%;">
+                    <table id="tblDetails" style="height: 100%; width: 96%; margin: auto; border: none" data-bind="style: { display: isVisibletblShippers() === false ? 'none' : 'block' }">
+                        <thead>
+                            <tr data-bind="if: dataLists().length" id="trDetails">
+                                <th style="width: 33%">ShipperID</th>
+                                <th style="width: 34%">CompanyName</th>
+                                <th style="width: 33%">Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultRecords" data-bind="foreach: dataLists" style="border: none">
+                            <tr style="width: 100%">
+                                <td data-bind="text: shipperID"></td>
+                                <td data-bind="text: companyName"></td>
+                                <td data-bind="text: phone"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table style="height: 100%; width: 96%; margin: auto; border: none" data-bind="if: Result,style : { display : isVisibletblCountShippers() === false ? 'none' : 'block'}, style: { display : isVisibletblDataProvider() === true ? 'none' : 'block'},style : {display: isMessage()=== true ? 'block' : 'none'}">
+                        <tr style="height: 2%;">
+                            <td class="lblEFLeft" style="width: auto !important">処理結果：</td>
+                            <td>
+                                <input type="text" id="labelMessage" style="width: 100%; height: 100%" data-bind="value: Result" /></td>
+                        </tr>
+                    </table>
+                    <table style="margin: auto; border: none; display: none" id="tblImageDeatail" data-bind="style : { display : isVisibletblShippers() === false ? 'none' : 'block'},style: { display : isVisibletblDataProvider() === true ? 'none' : 'block'},style: { display : flag() === true ? 'none' : 'none'},style: { display : flag1() === true ? 'block' : 'none'}">
+                        <tr>
+                            <td style="border: none;" data-bind="ifnot : dataLists().length || Result">
+                                <img alt="" src="~/Image/LoadingBlue.gif" /></td>
+                        </tr>
+                    </table>
+                    <table style="margin: auto; border: none; display: none" id="tblImageCount" data-bind="style : { display : isVisibletblCountShippers() === false ? 'block' : 'none'},style: { display : isVisibletblDataProvider() === true ? 'none' : 'block'},style: { display : flag() === true ? 'block' : 'none'}">
+                        <tr>
+                            <td style="border: none;" data-bind="ifnot:Result">
+                                <img alt="" src="~/Image/LoadingBlue.gif" /></td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Sample")
+}

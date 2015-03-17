@@ -1,0 +1,73 @@
+﻿body {
+    font-size: 80%;
+    font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+}
+
+div {
+    padding: 0px;
+    margin: 0px;
+    border-spacing: 0;
+}
+
+table {
+    border: none;
+    border-collapse: collapse;
+}
+
+td {
+    border: none;
+    padding: 5px;
+}
+
+table#tblDetails tr#trDetails {
+    background-color: #00008B;
+    color: white;
+}
+
+table#tblDetails tbody#resultRecords {
+    background-color: #fff;
+}
+
+    table#tblDetails tbody#resultRecords td {
+        border: 1px solid #eee;
+    }
+
+.header {
+    background-color: #00008B;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border: solid 1px #000000;
+}
+
+.btn:hover {
+    background-color: #61618f;
+    height: 30px;
+    color: #fff;
+}
+
+.btn {
+    background-color: #5c5cc8;
+    height: 30px;
+    color: #fff;
+}
+
+.lblEFLeft {
+    width: 33%;
+    background-color: #f2eeee;
+    border: 1px solid #fff;
+}
+
+.lblEFRight {
+    width: 16%;
+    background-color: #f2eeee;
+    border: 1px solid #fff;
+}
+
+.fieldGap {
+    padding-right: 30px;
+}
+
+.cmbEF {
+    width: 24%;
+}
