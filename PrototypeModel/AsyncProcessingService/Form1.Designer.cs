@@ -34,9 +34,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nudAsyncTask = new System.Windows.Forms.NumericUpDown();
             this.txtLogView = new System.Windows.Forms.TextBox();
-            this.btmOnStop = new System.Windows.Forms.Button();
+            this.btnOnStop = new System.Windows.Forms.Button();
             this.btnDeleteLog = new System.Windows.Forms.Button();
-            this.btnTurnedOn = new System.Windows.Forms.Button();
+            this.btnRegisterAsyncTask = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.nudAsyncTask2 = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
@@ -103,15 +103,15 @@
             this.txtLogView.Size = new System.Drawing.Size(738, 412);
             this.txtLogView.TabIndex = 6;
             // 
-            // btmOnStop
+            // btnOnStop
             // 
-            this.btmOnStop.Location = new System.Drawing.Point(382, 9);
-            this.btmOnStop.Name = "btmOnStop";
-            this.btmOnStop.Size = new System.Drawing.Size(87, 23);
-            this.btmOnStop.TabIndex = 7;
-            this.btmOnStop.Text = "OnStop";
-            this.btmOnStop.UseVisualStyleBackColor = true;
-            this.btmOnStop.Click += new System.EventHandler(this.btmOnStop_Click);
+            this.btnOnStop.Location = new System.Drawing.Point(382, 9);
+            this.btnOnStop.Name = "btnOnStop";
+            this.btnOnStop.Size = new System.Drawing.Size(87, 23);
+            this.btnOnStop.TabIndex = 7;
+            this.btnOnStop.Text = "OnStop";
+            this.btnOnStop.UseVisualStyleBackColor = true;
+            this.btnOnStop.Click += new System.EventHandler(this.btnOnStop_Click);
             // 
             // btnDeleteLog
             // 
@@ -123,15 +123,15 @@
             this.btnDeleteLog.UseVisualStyleBackColor = true;
             this.btnDeleteLog.Click += new System.EventHandler(this.btnDeleteLog_Click);
             // 
-            // btnTurnedOn
+            // btnRegisterAsyncTask
             // 
-            this.btnTurnedOn.Location = new System.Drawing.Point(371, 73);
-            this.btnTurnedOn.Name = "btnTurnedOn";
-            this.btnTurnedOn.Size = new System.Drawing.Size(379, 23);
-            this.btnTurnedOn.TabIndex = 9;
-            this.btnTurnedOn.Text = "Turned on the task.";
-            this.btnTurnedOn.UseVisualStyleBackColor = true;
-            this.btnTurnedOn.Click += new System.EventHandler(this.btnTurnedOn_Click);
+            this.btnRegisterAsyncTask.Location = new System.Drawing.Point(371, 73);
+            this.btnRegisterAsyncTask.Name = "btnRegisterAsyncTask";
+            this.btnRegisterAsyncTask.Size = new System.Drawing.Size(379, 23);
+            this.btnRegisterAsyncTask.TabIndex = 9;
+            this.btnRegisterAsyncTask.Text = "Register the async task.";
+            this.btnRegisterAsyncTask.UseVisualStyleBackColor = true;
+            this.btnRegisterAsyncTask.Click += new System.EventHandler(this.btnRegisterAsyncTask_Click);
             // 
             // label3
             // 
@@ -166,9 +166,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.nudAsyncTask2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnTurnedOn);
+            this.Controls.Add(this.btnRegisterAsyncTask);
             this.Controls.Add(this.btnDeleteLog);
-            this.Controls.Add(this.btmOnStop);
+            this.Controls.Add(this.btnOnStop);
             this.Controls.Add(this.txtLogView);
             this.Controls.Add(this.nudAsyncTask);
             this.Controls.Add(this.label2);
@@ -193,9 +193,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown nudAsyncTask;
         private System.Windows.Forms.TextBox txtLogView;
-        private System.Windows.Forms.Button btmOnStop;
+        private System.Windows.Forms.Button btnOnStop;
         private System.Windows.Forms.Button btnDeleteLog;
-        private System.Windows.Forms.Button btnTurnedOn;
+        private System.Windows.Forms.Button btnRegisterAsyncTask;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudAsyncTask2;
         private System.Windows.Forms.Label label4;

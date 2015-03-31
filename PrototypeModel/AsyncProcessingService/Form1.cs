@@ -39,15 +39,14 @@ namespace AsyncProcessingService
         public Form1()
         {
             InitializeComponent();
-            this.btnTurnedOn.Anchor = AnchorStyles.Top | AnchorStyles.Right; 
+            this.btnRegisterAsyncTask.Anchor = AnchorStyles.Top | AnchorStyles.Right; 
             this.btnDeleteLog.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             this.txtLogView.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
             this._infiniteLoop = false;
             this.btnOnStart.Enabled = true;
-            this.btmOnStop.Enabled = false;
-            this.btnTurnedOn.Enabled = false;
-            this.btnDeleteLog.Enabled = false;
+            this.btnOnStop.Enabled = false;
+            this.btnRegisterAsyncTask.Enabled = false;
             this.nudMaxWorkerThreadCount.Enabled = true;
 
             this.nudMaxWorkerThreadCount.Value = 5;
@@ -105,15 +104,14 @@ namespace AsyncProcessingService
 
         #region Button click
         
-        /// <summary>btmOnStop_Click</summary>
-        private void btmOnStop_Click(object sender, EventArgs e)
+        /// <summary>btnOnStop_Click</summary>
+        private void btnOnStop_Click(object sender, EventArgs e)
         {
             // Setting change of UI controls and flag.
             this._infiniteLoop = false;
             this.btnOnStart.Enabled = true;
-            this.btmOnStop.Enabled = false;
-            this.btnTurnedOn.Enabled = false;
-            this.btnDeleteLog.Enabled = false;
+            this.btnOnStop.Enabled = false;
+            this.btnRegisterAsyncTask.Enabled = false;
             this.nudMaxWorkerThreadCount.Enabled = true;
 
             // Wait the end of the main thread.
@@ -126,20 +124,18 @@ namespace AsyncProcessingService
             // Check the number of worker threads.
             int workerThreads = 0;
             int completionPortThreads = 0;
-            while (workerThreads == 0)
+
+            // Get available threads.
+            ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
+
+            while (workerThreads != (int)this.nudMaxWorkerThreadCount.Value)
             {
+                // Get available threads.
                 ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
 
-                if (workerThreads == (int)this.nudMaxWorkerThreadCount.Value)
-                {
-                    break; // Break the this loop.
-                }
-                else
-                {
-                    // Sleep(xxx msec leave the time slice.)
-                    // wait for the completion of the worker thread.
-                    Thread.Sleep(1000); // This parameter should be changed that  can be defined in the config file for tuning.
-                }
+                // Sleep(xxx msec leave the time slice.)
+                // wait for the completion of the worker thread.
+                Thread.Sleep(1000); // This parameter should be changed that  can be defined in the config file for tuning.
             }
 
             // output the message log.
@@ -153,9 +149,8 @@ namespace AsyncProcessingService
             // Setting change of UI controls and flag.
             this._infiniteLoop = true;
             this.btnOnStart.Enabled = false;
-            this.btmOnStop.Enabled = true;
-            this.btnTurnedOn.Enabled = true;
-            this.btnDeleteLog.Enabled = true;
+            this.btnOnStop.Enabled = true;
+            this.btnRegisterAsyncTask.Enabled = true;
             this.nudMaxWorkerThreadCount.Enabled = false;
 
             // Initialization of ThreadPool.
@@ -167,8 +162,8 @@ namespace AsyncProcessingService
             this._mainThread.Start();
         }
 
-        /// <summary>btnTurnedOn_Click</summary>
-        private void btnTurnedOn_Click(object sender, EventArgs e)
+        /// <summary>btnRegisterAsyncTask_Click</summary>
+        private void btnRegisterAsyncTask_Click(object sender, EventArgs e)
         {
             this.nudAsyncTask.Value = this.nudAsyncTask2.Value;
         }
@@ -192,11 +187,6 @@ namespace AsyncProcessingService
 
             while (this._infiniteLoop)
             {
-                //// output the message log.
-                //// This statement is necessary in order to clear the UIcontrol from other than UIThread.
-                //this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog),
-                //new object[] { "infiniteLoop\r\n" });
-
                 // Get asynchronous task.
                 int asynchronousTask = this._asynchronousTask;
                 this._asynchronousTask = 0;
@@ -223,20 +213,18 @@ namespace AsyncProcessingService
                     // Check the number of worker threads.
                     int workerThreads = 0;
                     int completionPortThreads = 0;
+
+                    // Get available threads.
+                    ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
+                    
                     while (workerThreads == 0)
                     {
+                        // Get available threads.
                         ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
 
-                        if (workerThreads != 0)
-                        {
-                            break; // Break the this loop.
-                        }
-                        else
-                        {
-                            // Sleep(xxx msec leave the time slice.)
-                            // wait for the completion of the worker thread.
-                            Thread.Sleep(1000); // This parameter should be changed that  can be defined in the config file for tuning.
-                        }
+                        // Sleep(xxx msec leave the time slice.)
+                        // wait for the completion of the worker thread.
+                        Thread.Sleep(1000); // This parameter should be changed that  can be defined in the config file for tuning.
                     }
 
                     string guid = Guid.NewGuid().ToString();
