@@ -1,5 +1,25 @@
 ﻿//**********************************************************************************
-//* クラス名        ：NorthwindEntities
+//* Copyright (C) 2007,2014 Hitachi Solutions,Ltd.
+//**********************************************************************************
+
+#region Apache License
+
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License. 
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+#endregion
+
+//**********************************************************************************
+//* クラス名        ：DaoLayer
 //*
 //* 作成日時        ：－
 //* 作成者          ：－
@@ -7,7 +27,8 @@
 //*
 //*  日時        更新者            内容
 //*  ----------  ----------------  -------------------------------------------------
-//*  2015/03/15  Sandeep Nayak     Implemented code to perform INSERT/UPDATE/DELETE operation using Entity Framework 
+//*  2015/03/15  Sandeep Nayak     Implemented code to perform INSERT/UPDATE/DELETE operation using Entity Framework
+//*  2015/04/26  Sandeep           Implemented select operation based static or dynamic execution 
 //**********************************************************************************
 
 // system
@@ -19,23 +40,23 @@ using System.Linq;
 using System.Web;
 
 // SPA_WebAPI_EF
-using SPA_WebAPI_EF.Codes.Common;
+using SPA_WebAPI_EF.Models;
 
 namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
 {
     /// <summary>
-    /// NorthwindEntities class
+    /// DaoLayer class
     /// </summary>
-    public partial class NorthwindEntities
+    public partial class DaoLayer
     {
         #region Insert
 
         /// <summary>
         /// Insert record in Shippers table
         /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void Insert(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param">param</param>
+        /// <param name="param">param</param>
+        public void Insert(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
@@ -46,8 +67,8 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 Shipper objShipper = new Shipper();
 
                 // Set vlaues to the Shipper Entity.
-                objShipper.CompanyName = testParameter.CompanyName;
-                objShipper.Phone = testParameter.Phone;
+                objShipper.CompanyName = param.CompanyName;
+                objShipper.Phone = param.Phone;
 
                 // Adds Shipper Entity to the context object.
                 context.Shippers.Add(objShipper);
@@ -55,7 +76,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 // Saves all changes made in the context object to the database.
                 dynObj = context.SaveChanges();
 
-                testReturn.Obj = dynObj;
+                param.Obj = dynObj;
             }
         }
 
@@ -66,9 +87,9 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         /// <summary>
         /// Update records in shippers table
         /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void Update(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param">param</param>
+        /// <param name="param">param</param>
+        public void Update(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
@@ -79,16 +100,16 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 Shipper objShipper = new Shipper();
 
                 // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.First(x => x.ShipperID == testParameter.ShipperID);
+                objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
 
                 // Set vlaues to the Shipper Entity.
-                objShipper.CompanyName = testParameter.CompanyName;
-                objShipper.Phone = testParameter.Phone;
+                objShipper.CompanyName = param.CompanyName;
+                objShipper.Phone = param.Phone;
 
                 // Saves all changes made in the context object to the database.      
                 dynObj = context.SaveChanges();
 
-                testReturn.Obj = dynObj;
+                param.Obj = dynObj;
             }
         }
 
@@ -99,9 +120,9 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         /// <summary>
         /// Delete records in shippers table
         /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void Delete(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param">param</param>
+        /// <param name="param">param</param>
+        public void Delete(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
@@ -112,7 +133,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 Shipper objShipper = new Shipper();
 
                 // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.First(x => x.ShipperID == testParameter.ShipperID);
+                objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
 
                 // Deletes Shipper entity from the context object.
                 context.Shippers.Remove(objShipper);
@@ -120,7 +141,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 // Saves all changes made in the context object to the database.
                 dynObj = context.SaveChanges();
 
-                testReturn.Obj = dynObj;
+                param.Obj = dynObj;
             }
         }
 
@@ -131,22 +152,21 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         /// <summary>
         /// Count the total number of records from shippers table
         /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void SelectCount(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param">param</param>
+        public void SelectCount(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
-                switch ((testParameter.ActionType.Split('%'))[2])
+                switch (param.ddlMode2)
                 {
                     // 静的SQL
                     case "static":
                         int total = (from m in context.Shippers select m).Count();
-                        testReturn.Obj = total;
+                        param.Obj = total;
                         break;
 
                     case "dynamic":
-                        testReturn.Obj = context.Shippers.Count();
+                        param.Obj = context.Shippers.Count();
                         break;
                 }
             }
@@ -155,142 +175,125 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         /// <summary>
         /// Select records from shippers table based on various conditions
         /// </summary>
-        /// <param name="testParameter"></param>
-        /// <param name="testReturn"></param>
-        public void Select(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param"></param>
+        public void SelectByCondition(WebApiParams param)
         {
-            // Create Shipper data table using entity model
-            DataTable dt = new DataTable();
-            using (NorthwindEntities context = new NorthwindEntities())
-            {
-                var colNames = typeof(Shipper).GetProperties().Select(a => a.Name).ToList();
-                for (int i = 0; i < colNames.Count; i++)
-                {
-                    DataColumn dc = new DataColumn(colNames[i]);
-                    dt.Columns.Add(dc);
-                }
-            }
+            List<Shipper> shipperList = new List<Shipper>();            
 
             // Get Shipper data from database based on condition.
             IQueryable<Shipper> parentQuery = null;
             using (NorthwindEntities context = new NorthwindEntities())
             {
                 // Get Shipper data if ShipperID, CompanyName and Phone number are entered
-                if (testParameter.ShipperID != 0 && !string.IsNullOrEmpty(testParameter.CompanyName) && !string.IsNullOrEmpty(testParameter.Phone))
+                if (param.ShipperId != 0 && !string.IsNullOrEmpty(param.CompanyName) && !string.IsNullOrEmpty(param.Phone))
                 {
                     parentQuery = context.Shippers;
-                    parentQuery = parentQuery.Where(c => c.ShipperID == testParameter.ShipperID && c.CompanyName == testParameter.CompanyName && c.Phone == testParameter.Phone).OrderByDescending(o => o.ShipperID);
+                    parentQuery = parentQuery.Where(c => c.ShipperID == param.ShipperId && c.CompanyName == param.CompanyName && c.Phone == param.Phone).OrderByDescending(o => o.ShipperID);
                     var dynQuery = parentQuery.ToList();
                     foreach (var item in dynQuery)
                     {
-                        DataRow dr = dt.NewRow();
-                        dr[0] = item.ShipperID;
-                        dr[1] = item.CompanyName;
-                        dr[2] = item.Phone;
-                        dt.Rows.Add(dr);
+                        Shipper shipperItem = new Shipper();
+                        shipperItem.ShipperID = item.ShipperID;
+                        shipperItem.CompanyName = item.CompanyName;
+                        shipperItem.Phone = item.Phone;
+                        shipperList.Add(shipperItem);
                     }
                 }
                 else
                 {
-                    if (testParameter.ShipperID != 0)
+                    if (param.ShipperId != 0)
                     {
                         parentQuery = context.Shippers;
 
                         // If only ShipperID is entered
-                        if (string.IsNullOrEmpty(testParameter.CompanyName) && string.IsNullOrEmpty(testParameter.Phone))
+                        if (string.IsNullOrEmpty(param.CompanyName) && string.IsNullOrEmpty(param.Phone))
                         {
-                            parentQuery = parentQuery.Where(c => c.ShipperID == testParameter.ShipperID);
+                            parentQuery = parentQuery.Where(c => c.ShipperID == param.ShipperId);
                         }
                         // If only ShipperID and CompanyName are entered
-                        else if (!string.IsNullOrEmpty(testParameter.CompanyName) && string.IsNullOrEmpty(testParameter.Phone))
+                        else if (!string.IsNullOrEmpty(param.CompanyName) && string.IsNullOrEmpty(param.Phone))
                         {
-                            parentQuery = parentQuery.Where(c => c.ShipperID == testParameter.ShipperID && c.CompanyName == testParameter.CompanyName);
+                            parentQuery = parentQuery.Where(c => c.ShipperID == param.ShipperId && c.CompanyName == param.CompanyName);
                         }
                         // If only ShipperID and Phone number are entered
-                        else if (string.IsNullOrEmpty(testParameter.CompanyName) && !string.IsNullOrEmpty(testParameter.Phone))
+                        else if (string.IsNullOrEmpty(param.CompanyName) && !string.IsNullOrEmpty(param.Phone))
                         {
-                            parentQuery = parentQuery.Where(c => c.ShipperID == testParameter.ShipperID && c.Phone == testParameter.Phone);
+                            parentQuery = parentQuery.Where(c => c.ShipperID == param.ShipperId && c.Phone == param.Phone);
                         }
 
                         // Execute the query and Assign Shipper data to the data table
                         var dynQuery = parentQuery.ToList();
                         foreach (var item in dynQuery)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
+                            Shipper shipperItem = new Shipper();
+                            shipperItem.ShipperID = item.ShipperID;
+                            shipperItem.CompanyName = item.CompanyName;
+                            shipperItem.Phone = item.Phone;
+                            shipperList.Add(shipperItem);
                         }
                     }
-                    else if (!string.IsNullOrEmpty(testParameter.CompanyName))
+                    else if (!string.IsNullOrEmpty(param.CompanyName))
                     {
                         parentQuery = context.Shippers;
 
                         // If CompanyName and Phone number are entered
-                        if (testParameter.Phone != null)
+                        if (param.Phone != null)
                         {
-                            parentQuery = parentQuery.Where(c => c.CompanyName == testParameter.CompanyName && c.Phone == testParameter.Phone);
+                            parentQuery = parentQuery.Where(c => c.CompanyName == param.CompanyName && c.Phone == param.Phone);
                         }
                         // If only CompanyName is entered
                         else
                         {
-                            parentQuery = parentQuery.Where(c => c.CompanyName == testParameter.CompanyName).OrderBy(o => o.ShipperID);
+                            parentQuery = parentQuery.Where(c => c.CompanyName == param.CompanyName).OrderBy(o => o.ShipperID);
                         }
 
                         // Execute the query and Assign Shipper data to the data table
                         var dynQuery = parentQuery.ToList();
                         foreach (var item in dynQuery)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
+                            Shipper shipperItem = new Shipper();
+                            shipperItem.ShipperID = item.ShipperID;
+                            shipperItem.CompanyName = item.CompanyName;
+                            shipperItem.Phone = item.Phone;
+                            shipperList.Add(shipperItem);
                         }
                     }
                     // If only Phone number is entered.
-                    else if (!string.IsNullOrEmpty(testParameter.Phone))
+                    else if (!string.IsNullOrEmpty(param.Phone))
                     {
                         parentQuery = context.Shippers;
-                        parentQuery = parentQuery.Where(c => c.Phone == testParameter.Phone).OrderBy(o => o.ShipperID);
+                        parentQuery = parentQuery.Where(c => c.Phone == param.Phone).OrderBy(o => o.ShipperID);
                         var dynQuery = parentQuery.ToList();
                         foreach (var item in dynQuery)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
+                            Shipper shipperItem = new Shipper();
+                            shipperItem.ShipperID = item.ShipperID;
+                            shipperItem.CompanyName = item.CompanyName;
+                            shipperItem.Phone = item.Phone;
+                            shipperList.Add(shipperItem);
                         }
                     }
                 }
             }
-            testReturn.Obj = dt;
+            param.Obj = shipperList;
         }
 
         /// <summary>
-        /// SelectAll_DT method
+        /// SelectAll_List method
         /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void SelectAll_DT(TestParameterValue testParameter, TestReturnValue testReturn)
+        /// <param name="param">param</param>
+        /// <param name="param">param</param>
+        public void SelectAll_List(WebApiParams param)
         {
-            DataTable dt = new DataTable();
+            List<Shipper> shipperList = new List<Shipper>();
             using (NorthwindEntities context = new NorthwindEntities())
             {
-                var colNames = typeof(Shipper).GetProperties().Select(a => a.Name).ToList();
-                for (int i = 0; i < colNames.Count; i++)
-                {
-                    DataColumn dc = new DataColumn(colNames[i]);
-                    dt.Columns.Add(dc);
-                }
-                switch ((testParameter.ActionType.Split('%'))[2])
+                switch (param.ddlMode2)
                 {
                     // 静的SQL
                     case "static":
                         // 静的SQL
-                        var query = (from shipper in context.Shippers
+                        var staticQuery = (from shipper in context.Shippers
                                      select new
                                      {
                                          ShipperID = shipper.ShipperID,
@@ -298,269 +301,33 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                                          Phone = shipper.Phone
                                      }).ToList();
 
-                        foreach (var item in query)
+                        foreach (var item in staticQuery)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
+                            Shipper shipperItem = new Shipper();
+                            shipperItem.ShipperID = item.ShipperID;
+                            shipperItem.CompanyName = item.CompanyName;
+                            shipperItem.Phone = item.Phone;
+                            shipperList.Add(shipperItem);
                         }
-                        testReturn.Obj = dt;
+                        param.Obj = shipperList;
                         break;
                     case "dynamic":
                         var dynQuery = context.Shippers;
-                        // 戻り値を設定
+                        
                         foreach (var item in dynQuery)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
+                            Shipper shipperItem = new Shipper();
+                            shipperItem.ShipperID = item.ShipperID;
+                            shipperItem.CompanyName = item.CompanyName;
+                            shipperItem.Phone = item.Phone;
+                            shipperList.Add(shipperItem);
                         }
-                        testReturn.Obj = dt;
+
+                        param.Obj = shipperList;
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// SelectAll_DS method
-        /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void SelectAll_DS(TestParameterValue testParameter, TestReturnValue testReturn)
-        {
-            DataSet ds = new DataSet();
-            using (NorthwindEntities context = new NorthwindEntities())
-            {
-                DataTable dt = new DataTable();
-                var colNames = typeof(Shipper).GetProperties().Select(a => a.Name).ToList();
-                for (int i = 0; i < colNames.Count; i++)
-                {
-                    DataColumn dc = new DataColumn(colNames[i]);
-                    dt.Columns.Add(dc);
-                }
-                switch ((testParameter.ActionType.Split('%'))[2])
-                {
-                    // 静的SQL
-                    case "static":
-                        var query = (from shipper in context.Shippers
-                                     select new
-                                     {
-                                         ShipperID = shipper.ShipperID,
-                                         CompanyName = shipper.CompanyName,
-                                         Phone = shipper.Phone
-                                     }).ToList();
-                        foreach (var item in query)
-                        {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
-                        }
-
-                        ds.Tables.Add(dt);
-                        // 戻り値を設定
-                        testReturn.Obj = ds;
-                        break;
-                    case "dynamic":
-                        var dynQuery = context.Shippers;
-                        foreach (var item in dynQuery)
-                        {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
-                        }
-                        ds.Tables.Add(dt);
-                        // 戻り値を設定
-                        testReturn.Obj = ds;
-                        break;
-                }
-            }
-            // 戻り値を設定
-            testReturn.Obj = ds;
-        }
-
-        /// <summary>
-        /// SelectAll_DR method
-        /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void SelectAll_DR(TestParameterValue testParameter, TestReturnValue testReturn)
-        {
-            // But pure ADO.NET way is much easier and faster because this example still uses mapping of query to SQL query
-            DataTable dt = new DataTable();
-
-            using (NorthwindEntities context = new NorthwindEntities())
-            {
-                var colNames = typeof(Shipper).GetProperties().Select(a => a.Name).ToList();
-                for (int i = 0; i < colNames.Count; i++)
-                {
-                    DataColumn dc = new DataColumn(colNames[i]);
-                    dt.Columns.Add(dc);
-                }
-                using (var con = new EntityConnection("name=NorthwindEntities"))
-                {
-                    con.Open();
-                    EntityCommand cmd = con.CreateCommand();
-                    cmd.CommandText = "SELECT VALUE st FROM NorthwindEntities.Shippers as st";
-                    using (EntityDataReader rdr = cmd.ExecuteReader(CommandBehavior.SequentialAccess | CommandBehavior.CloseConnection))
-                    {
-                        while (rdr.Read())
-                        {
-                            // DRから読む
-                            object[] objArray = new object[3];
-                            rdr.GetValues(objArray);
-
-                            // DTに設定する。
-                            DataRow dr = dt.NewRow();
-                            dr.ItemArray = objArray;
-                            dt.Rows.Add(dr);
-                        }
-                    }
-                    testReturn.Obj = dt;
-                }
-            }
-        }
-
-        /// <summary>
-        /// SelectAll_DSQL method
-        /// </summary>
-        /// <param name="testParameter">testParameter</param>
-        /// <param name="testReturn">testReturn</param>
-        public void SelectAll_DSQL(TestParameterValue testParameter, TestReturnValue testReturn)
-        {
-            DataTable dt = new DataTable();
-            using (NorthwindEntities context = new NorthwindEntities())
-            {
-                var colNames = typeof(Shipper).GetProperties().Select(a => a.Name).ToList();
-                for (int i = 0; i < colNames.Count; i++)
-                {
-                    DataColumn dc = new DataColumn(colNames[i]);
-                    dt.Columns.Add(dc);
-                }
-
-                switch ((testParameter.ActionType.Split('%'))[2])
-                {
-                    // 静的SQL
-                    case "static":
-                        // 静的SQL
-                        var query = (from shipper in context.Shippers
-                                     where shipper.CompanyName != testParameter.CompanyName
-                                     select new
-                                     {
-                                         ShipperID = shipper.ShipperID,
-                                         CompanyName = shipper.CompanyName,
-                                         Phone = shipper.Phone
-                                     }).ToList();
-
-                        if (testParameter.OrderColumn == "c1")
-                        {
-                            switch (testParameter.OrderSequence)
-                            {
-                                case "A":
-                                    query = query.OrderBy(o => o.ShipperID).ToList();
-                                    break;
-                                case "D":
-                                    query = query.OrderByDescending(o => o.ShipperID).ToList();
-                                    break;
-                            }
-                        }
-                        else if (testParameter.OrderColumn == "c2")
-                        {
-                            switch (testParameter.OrderSequence)
-                            {
-                                case "A":
-                                    query = query.OrderBy(o => o.CompanyName).ToList();
-                                    break;
-                                case "D":
-                                    query = query.OrderByDescending(o => o.CompanyName).ToList();
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (testParameter.OrderSequence)
-                            {
-                                case "A":
-                                    query = query.OrderBy(o => o.Phone).ToList();
-                                    break;
-                                case "D":
-                                    query = query.OrderByDescending(o => o.Phone).ToList();
-                                    break;
-                            }
-                        }
-                        foreach (var item in query)
-                        {
-                            DataRow dr = dt.NewRow();
-                            dr[0] = item.ShipperID;
-                            dr[1] = item.CompanyName;
-                            dr[2] = item.Phone;
-                            dt.Rows.Add(dr);
-                        }
-                        testReturn.Obj = dt;
-                        break;
-                    case "dynamic":
-                        IQueryable<Shipper> parentQuery = null;
-                        parentQuery = context.Shippers;
-                        if (!string.IsNullOrEmpty(testParameter.CompanyName))
-                        {
-                            if (testParameter.OrderColumn == "c1")
-                            {
-                                switch (testParameter.OrderSequence)
-                                {
-                                    case "A":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderBy(o => o.ShipperID);
-                                        break;
-                                    case "D":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderByDescending(o => o.ShipperID);
-                                        break;
-                                }
-                            }
-                            else if (testParameter.OrderColumn == "c2")
-                            {
-                                switch (testParameter.OrderSequence)
-                                {
-                                    case "A":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderBy(o => o.CompanyName);
-                                        break;
-                                    case "D":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderByDescending(o => o.CompanyName);
-                                        break;
-                                }
-                            }
-                            else
-                            {
-                                switch (testParameter.OrderSequence)
-                                {
-                                    case "A":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderBy(o => o.Phone);
-                                        break;
-                                    case "D":
-                                        parentQuery = parentQuery.Where(c => c.CompanyName != testParameter.CompanyName).OrderByDescending(o => o.Phone);
-                                        break;
-                                }
-                            }
-
-                            foreach (var item in parentQuery)
-                            {
-                                DataRow dr = dt.NewRow();
-                                dr[0] = item.ShipperID;
-                                dr[1] = item.CompanyName;
-                                dr[2] = item.Phone;
-                                dt.Rows.Add(dr);
-                            }
-                            testReturn.Obj = dt;
-                        }
-                        break;
-                }
-            }
-        }
+        }       
 
         #endregion
     }

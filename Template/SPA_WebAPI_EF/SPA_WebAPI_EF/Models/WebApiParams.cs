@@ -23,6 +23,9 @@ namespace SPA_WebAPI_EF.Models
     /// </summary>
     public class WebApiParams
     {
+        /// <summary>汎用エリア</summary>
+        public object Obj;
+
         /// <summary>
         /// データアクセス プロバイダ
         /// </summary>
@@ -31,17 +34,7 @@ namespace SPA_WebAPI_EF.Models
         /// <summary>
         /// クエリモード
         /// </summary>
-        public string ddlMode1 { get; set; }
-
-        /// <summary>
-        /// クエリモード
-        /// </summary>
         public string ddlMode2 { get; set; }
-
-        /// <summary>
-        /// コミット、ロールバックの設定
-        /// </summary>
-        public string ddlExRollback { get; set; }
 
         /// <summary>
         /// 並び替え対象列

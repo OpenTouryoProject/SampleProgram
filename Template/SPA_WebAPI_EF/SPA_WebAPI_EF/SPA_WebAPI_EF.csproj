@@ -40,14 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\Business.dll</HintPath>
-    </Reference>
-    <Reference Include="Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\Framework.dll</HintPath>
-    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -55,10 +47,6 @@
       <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Public, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\Public.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -207,8 +195,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Codes\Business\LayerB.cs" />
-    <Compile Include="Codes\Common\TestParameterValue.cs" />
-    <Compile Include="Codes\Common\TestReturnValue.cs" />
     <Compile Include="Codes\Dao\DaoLayer.cs" />
     <Compile Include="Codes\Dao\EntityFrameWork\Category.cs">
       <DependentUpon>ShipperModel.tt</DependentUpon>
@@ -330,7 +316,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Image\LoadingBlue.gif" />
-    <Content Include="Scripts\app\Test.viewmodel.js" />
     <EntityDeploy Include="Codes\Dao\EntityFrameWork\ShipperModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ShipperModel.Designer.cs</LastGenOutput>
@@ -373,17 +358,12 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\app\ajaxlogin.js" />
-    <Content Include="Scripts\app\todo.viewmodel.js" />
-    <Content Include="Scripts\app\todo.bindings.js" />
-    <Content Include="Scripts\app\todo.datacontext.js" />
-    <Content Include="Scripts\app\todo.model.js" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_UserSettings.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\version.json" />
-    <Content Include="Views\Shared\_AngularJSLayout.cshtml" />
     <Content Include="Views\SampleEF\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

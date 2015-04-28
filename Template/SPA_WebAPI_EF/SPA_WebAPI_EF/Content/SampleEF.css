@@ -19,49 +19,29 @@ td {
     padding: 5px;
 }
 
-table#tblDetails tr#trDetails {
-    background-color: #00008B;
-    color: white;
-}
-
-table#tblDetails tbody#resultRecords {
-    background-color: #fff;
-}
-
-    table#tblDetails tbody#resultRecords td {
-        border: 1px solid #eee;
-    }
-
+/* New */
 .header {
     background-color: #00008B;
     color: white;
     font-weight: bold;
-    padding: 5px;
     border: solid 1px #000000;
+    padding:5px;
 }
 
-.btn:hover {
-    background-color: #61618f;
-    height: 30px;
-    color: #fff;
-}
-
-.btn {
-    background-color: #5c5cc8;
-    height: 30px;
-    color: #fff;
+table.lblBg tr th {
+    text-align:left;
+    font-weight:normal;
+    background-color: #f2eeee;
+    border: 1px solid #fff;
+    padding-left: 5px;
 }
 
 .lblEFLeft {
     width: 33%;
-    background-color: #f2eeee;
-    border: 1px solid #fff;
 }
 
 .lblEFRight {
-    width: 16%;
-    background-color: #f2eeee;
-    border: 1px solid #fff;
+    width: 16%;    
 }
 
 .fieldGap {
@@ -71,3 +51,31 @@ table#tblDetails tbody#resultRecords {
 .cmbEF {
     width: 24%;
 }
+
+button:hover, input[type="button"]:hover, input[type="submit"]:hover { 
+    background-color: #61618f;
+    height: 30px;
+    color: #fff;
+}
+button, input[type="button"], input[type="submit"] { 
+    background-color: #5c5cc8;
+    height: 30px;
+    color: #fff;
+}
+
+table#tblShippers {
+    width: 96%; 
+    margin: auto;
+}
+table#tblShippers thead tr th {
+    background-color: #00008B;
+    color: white;
+    font-weight:bold;
+    border: 1px solid #808080;
+}
+table#tblShippers tbody tr td {
+    border: 1px solid #808080;
+    height: 20px;
+}
+
+/* New */

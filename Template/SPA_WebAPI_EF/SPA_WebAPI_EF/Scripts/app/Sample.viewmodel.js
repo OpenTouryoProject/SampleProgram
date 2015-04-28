@@ -16,55 +16,11 @@
     this.ddlDap = ko.observable("SQL");
 
     // 静的、動的のクエリ モード
-    this.ddlMode1Items = ko.observableArray([
-        { displayText: "個別Ｄａｏ", value: "individual" }, 
-        { displayText: "共通Ｄａｏ", value: "common" },
-        { displayText: "自動生成Ｄａｏ（更新のみ）", value: "generate" }
-    ]);
-    this.ddlMode1 = ko.observable("individual");
-
-    // 静的、動的のクエリ モード
     this.ddlMode2Items = ko.observableArray([
         { displayText: "静的クエリ", value: "static" },
         { displayText: "動的クエリ", value: "dynamic" }
     ]);
     this.ddlMode2 = ko.observable("static");
-
-    // 分離レベル
-    this.ddlIsoItems = ko.observableArray([
-        { displayText: "ノットコネクト", value: "NC" },
-        { displayText: "ノートランザクション", value: "NT" },
-        { displayText: "ダーティリード", value: "RU" },
-        { displayText: "リードコミット", value: "RC" },
-        { displayText: "リピータブルリード", value: "RR" },
-        { displayText: "シリアライザブル", value: "SZ" },
-        { displayText: "スナップショット", value: "SS" },
-        { displayText: "デフォルト", value: "DF" }
-    ]);
-    this.ddlIso = ko.observable("NT");
-
-    // コミット、ロールバックを設定
-    this.ddlExRollbackItems = ko.observableArray([
-        { displayText: "正常時", value: "-" },
-        { displayText: "業務例外", value: "Business" },
-        { displayText: "システム例外", value: "System" },
-        { displayText: "その他、一般的な例外", value: "Other" },
-        { displayText: "業務例外への振替", value: "Other-Business" },
-        { displayText: "システム例外への振替", value: "Other-System" }
-    ]);
-    this.ddlExRollback = ko.observable("-");
-
-    // 通信制御
-    this.ddlTransmissionItems = ko.observableArray([
-        { displayText: "Webサービス呼出", value: "testWebService" },
-        { displayText: "インプロセス呼出", value: "testInProcess" }
-    ]);
-    this.ddlTransmission = ko.observable("testWebService");
-
-    // Shipper テーブルの各項目
-    this.ShipperId = ko.observable("");
-    this.CompanyName = ko.observable("");
-    this.Phone = ko.observable("");
 
     // 並び替え対象列
     this.ddlOrderColumnItems = ko.observableArray([
@@ -81,6 +37,11 @@
     ]);
     this.ddlOrderSequence = ko.observable("A");
 
+    // Shipper テーブルの各項目
+    this.shipperId = ko.observable("");
+    this.companyName = ko.observable("");
+    this.phone = ko.observable("");    
+
     // 処理結果 (正常系)
     this.Result = ko.observable("");
 
@@ -88,50 +49,23 @@
     this.ErrorMessage = ko.observable("");
 
     this.isVisibletblShippers = ko.observable(false);
-    this.isVisibletblCountShippers = ko.observable(false);
-    this.isVisibletblCrudOperation = ko.observable(false);
-    this.isVisibletblDataProvider = ko.observable(true);
-    this.flag = ko.observable(false);
-    this.flag1 = ko.observable(false);
     this.isMessage = ko.observable(false);
-    this.ShowDataProviderPage = function () {
-        var self = this;
-        this.isVisibletblDataProvider(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblShippers(false);
-        this.flag(false);
-        this.flag1(false);
-        this.isVisibletblCrudOperation(false);
-        this.isMessage(false);
-    }
-    this.GetCrudOperation = function () {
-        var self = this;
-        this.isVisibletblShippers(false);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblCrudOperation(true);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(false);
-        this.isMessage(false);
-    }
+    this.isProgressLoading = ko.observable(false);    
+
     // ボタンコマンド (件数取得)
     this.GetCount = function () {
         var self = this;
-        this.isVisibletblShippers(false);
-        this.isVisibletblCountShippers(true);
-        this.isVisibletblDataProvider(false);
-        this.flag(true);
-        this.flag1(false);
+        this.isProgressLoading(true);
+        this.isVisibletblShippers(false);        
         this.isMessage(true);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
-            ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback()
+            ddlMode2: this.ddlMode2()
         }
 
         // Ajax でリクエストを送信
@@ -143,46 +77,42 @@
             success: function (data, dataType) {
                 if (data.error) {
                     // エラーメッセージ格納
-                    self.ErrorMessage(data.error);
+                    self.ErrorMessage(data.error);                    
                 }
                 else {
                     // 結果格納
                     self.Result(data.message);
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
 
     // ボタンコマンド (一覧取得（dt）)
-    this.GetList_dt = function () {
-       
+    this.GetList = function () {       
         var self = this;
-        this.isVisibletblShippers(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(true);
+        this.isProgressLoading(true);
+        this.isVisibletblShippers(true);       
         this.isMessage(false);
-        this.isVisibletblCrudOperation(false);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
-            ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback()
+            ddlMode2: this.ddlMode2()
         }
 
         // Ajax でリクエストを送信
         $.ajax({
             type: 'POST',
-            url: '/api/SelectDTEF',
+            url: '/api/SelectListEF',
             data: param,
             dataType: 'json',
             success: function (data, dataType) {
@@ -197,176 +127,38 @@
                     // 結果格納
                     self.dataLists(data);
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
-            }
-        });
-    };
-
-    this.GetList_ds = function () {
-        var self = this;
-        this.isVisibletblShippers(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(true);
-        this.isMessage(false);
-        // エラーメッセージをクリアする
-        this.ErrorMessage("");
-
-        // パラメタを JSON 形式で纏める
-        var param = {
-            ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
-            ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback()
-        }
-
-        // Ajax でリクエストを送信
-        $.ajax({
-            type: 'POST',
-            url: '/api/SelectDSEF',
-            data: param,
-            dataType: 'json',
-            success: function (data, dataType) {
-                if (data.error) {
-                    // エラーメッセージ格納
-                    self.ErrorMessage(data.error);
-                }
-                else {
-                    // 一旦レコードリストをクリアする
-                    self.ClearList();
-
-                    // 結果格納
-                    self.dataLists(data);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                // エラーメッセージ格納
-                self.ErrorMessage(XMLHttpRequest.responseText);
-            }
-        });
-    };
-
-    this.GetList_dr = function () {
-        var self = this;
-        this.isVisibletblShippers(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(true);
-        this.isMessage(false);
-        // エラーメッセージをクリアする
-        this.ErrorMessage("");
-
-        // パラメタを JSON 形式で纏める
-        var param = {
-            ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
-            ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback()
-        }
-
-        // Ajax でリクエストを送信
-        $.ajax({
-            type: 'POST',
-            url: '/api/SelectDREF',
-            data: param,
-            dataType: 'json',
-            success: function (data, dataType) {
-                if (data.error) {
-                    // エラーメッセージ格納
-                    self.ErrorMessage(data.error);
-                }
-                else {
-                    // 一旦レコードリストをクリアする
-                    self.ClearList();
-
-                    // 結果格納
-                    self.dataLists(data);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                // エラーメッセージ格納
-                self.ErrorMessage(XMLHttpRequest.responseText);
-            }
-        });
-    };
-
-    this.GetList_dsql = function () {
-        var self = this;
-        this.isVisibletblShippers(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(true);
-        this.isMessage(false);
-        // エラーメッセージをクリアする
-        this.ErrorMessage("");
-
-        // パラメタを JSON 形式で纏める
-        var param = {
-            ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
-            ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback(),
-            OrderColumn: this.ddlOrderColumn(),
-            OrderSequence: this.ddlOrderSequence()
-        }
-
-        // Ajax でリクエストを送信
-        $.ajax({
-            type: 'POST',
-            url: '/api/SelectDSQLEF',
-            data: param,
-            dataType: 'json',
-            success: function (data, dataType) {
-                if (data.error) {
-                    // エラーメッセージ格納
-                    self.ErrorMessage(data.error);
-                }
-                else {
-                    // 一旦レコードリストをクリアする
-                    self.ClearList();
-
-                    // 結果格納
-                    self.dataLists(data);
-                }
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                // エラーメッセージ格納
-                self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
 
     this.GetDetail = function () {
         var self = this;
+        this.isProgressLoading(true);
         this.isVisibletblShippers(true);
-        this.isVisibletblCountShippers(false);
-        this.isVisibletblDataProvider(false);
-        this.flag(false);
-        this.flag1(true);
+        this.isMessage(false);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
             ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback(),
-            ShipperId: this.ShipperId(),
-            companyName: this.CompanyName(),
-            phone:this.Phone()
+            shipperId: this.shipperId(),
+            companyName: this.companyName(),
+            phone:this.phone()
         }
 
         // Ajax でリクエストを送信
         $.ajax({
             type: 'POST',
-            url: '/api/SelectEF',
+            url: '/api/SearchEF',
             data: param,
             dataType: 'json',
             success: function (data, dataType) {
@@ -375,10 +167,6 @@
                     self.ErrorMessage(data.error);
                 }
                 else {
-                    // 結果格納
-                    //self.ShipperId(data.shipperID);
-                    //self.CompanyName(data.companyName);
-                    //self.Phone(data.phone);
                     // 一旦レコードリストをクリアする
                     self.ClearList();
 
@@ -393,32 +181,32 @@
                         self.isMessage(false);
                         self.dataLists(data);
                     }
-
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
 
     this.InsertRecord = function () {
         var self = this;
-        this.isVisibletblCountShippers(false);
+        this.isProgressLoading(true);
         this.isVisibletblShippers(false);
         this.isMessage(true);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
             ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback(),
-            CompanyName: this.CompanyName(),
-            Phone: this.Phone()
+            companyName: this.companyName(),
+            phone: this.phone()
         }
 
         // Ajax でリクエストを送信
@@ -436,30 +224,31 @@
                     // 結果格納
                     self.Result(data.message);
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
 
     this.UpdateRecord = function () {
         var self = this;
-        this.isVisibletblCountShippers(false);
+        this.isProgressLoading(true);
         this.isVisibletblShippers(false);
         this.isMessage(true);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
             ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback(),
-            ShipperId: this.ShipperId(),
-            CompanyName: this.CompanyName(),
-            Phone: this.Phone()
+            shipperId: this.shipperId(),
+            companyName: this.companyName(),
+            phone: this.phone()
         }
 
         // Ajax でリクエストを送信
@@ -477,6 +266,7 @@
                     // 結果格納
                     self.Result(data.message);
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
@@ -487,19 +277,18 @@
 
     this.DeleteRecord = function () {
         var self = this;
-        this.isVisibletblCountShippers(false);
+        this.isProgressLoading(true);
         this.isVisibletblShippers(false);
         this.isMessage(true);
+
         // エラーメッセージをクリアする
         this.ErrorMessage("");
 
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode1: this.ddlMode1(),
             ddlMode2: this.ddlMode2(),
-            ddlExRollback: this.ddlExRollback(),
-            ShipperId: this.ShipperId()
+            shipperId: this.shipperId()
         }
 
         // Ajax でリクエストを送信
@@ -517,10 +306,12 @@
                     // 結果格納
                     self.Result(data.message);
                 }
+                self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
@@ -551,6 +342,4 @@ model.ErrorMessage.subscribe(function (newValue) {
         });
     }
 });
-
-//ko.applyBindings(new SampleViewModel());
 ko.applyBindings(model);
