@@ -40,12 +40,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ionic.Zip">
-      <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\Ionic.Zip.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net">
-      <HintPath>C:\OpenTouryoProjects\OpenTouryo\root\programs\C#\Frameworks\Infrastructure\Build\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />

@@ -39,12 +39,12 @@ namespace SPA_WebAPI_EF.Models
         /// <summary>
         /// 並び替え対象列
         /// </summary>
-        public string OrderColumn { get; set; }
+        public string ddlOrderColumn { get; set; }
 
         /// <summary>
         /// 降順・昇順
         /// </summary>
-        public string OrderSequence { get; set; }
+        public string ddlOrderSequence { get; set; }
 
         /// <summary>
         /// 荷主 ID

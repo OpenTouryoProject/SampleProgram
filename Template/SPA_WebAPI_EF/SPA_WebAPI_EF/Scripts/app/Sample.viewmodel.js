@@ -106,7 +106,9 @@
         // パラメタを JSON 形式で纏める
         var param = {
             ddlDap: this.ddlDap(),
-            ddlMode2: this.ddlMode2()
+            ddlMode2: this.ddlMode2(),
+            ddlOrderColumn: this.ddlOrderColumn(),
+            ddlOrderSequence: this.ddlOrderSequence()
         }
 
         // Ajax でリクエストを送信
@@ -263,14 +265,21 @@
                     self.ErrorMessage(data.error);
                 }
                 else {
-                    // 結果格納
-                    self.Result(data.message);
+                    if (data.noRecords) {
+                        self.Result(data.noRecords);
+                        self.isMessage(true);
+                    }
+                    else {
+                        // 結果格納
+                        self.Result(data.message);
+                    }
                 }
                 self.isProgressLoading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 // エラーメッセージ格納
                 self.ErrorMessage(XMLHttpRequest.responseText);
+                self.isProgressLoading(false);
             }
         });
     };
@@ -303,8 +312,14 @@
                     self.ErrorMessage(data.error);
                 }
                 else {
-                    // 結果格納
-                    self.Result(data.message);
+                    if (data.noRecords) {
+                        self.Result(data.noRecords);
+                        self.isMessage(true);
+                    }
+                    else {
+                        // 結果格納
+                        self.Result(data.message);
+                    }
                 }
                 self.isProgressLoading(false);
             },

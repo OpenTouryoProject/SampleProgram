@@ -29,6 +29,8 @@
 //*  ----------  ----------------  -------------------------------------------------
 //*  2015/03/15  Sandeep Nayak     Implemented code to perform INSERT/UPDATE/DELETE operation using Entity Framework
 //*  2015/04/26  Sandeep           Implemented select operation based static or dynamic execution 
+//*  2015/05/07  Sandeep           Implemented code of existence check for Update and Delete 
+//*  2015/05/07  Sandeep           Implemented code sort the list based on the values of ddlOrderColumn and ddlOrderSequence
 //**********************************************************************************
 
 // system
@@ -92,24 +94,44 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         public void Update(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
-            {
-                // Creating object to store the result set.
-                object dynObj;
+            {                
+                // Data existence check
+                bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
 
-                // Creating Shipper object.
-                Shipper objShipper = new Shipper();
+                if (!isExists)
+                {
+                    // If data does not exists
+                    // return 0
+                    param.Obj = Convert.ToInt32(isExists);
+                }
+                else
+                {
+                    // If data exists
 
-                // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
+                    // Creating object to store the result set.
+                    object dynObj;
 
-                // Set vlaues to the Shipper Entity.
-                objShipper.CompanyName = param.CompanyName;
-                objShipper.Phone = param.Phone;
+                    // Creating Shipper object.
+                    Shipper objShipper = new Shipper();
 
-                // Saves all changes made in the context object to the database.      
-                dynObj = context.SaveChanges();
+                    // Gets the Shipper record using Linq to Entities based on ShipperID
+                    objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
 
-                param.Obj = dynObj;
+                    // Set vlaues to the Shipper Entity.
+                    if (!string.IsNullOrWhiteSpace(param.CompanyName))
+                    {
+                        objShipper.CompanyName = param.CompanyName;
+                    }
+                    if (!string.IsNullOrWhiteSpace(param.Phone))
+                    {
+                        objShipper.Phone = param.Phone;
+                    }
+
+                    // Saves all changes made in the context object to the database.      
+                    dynObj = context.SaveChanges();
+
+                    param.Obj = dynObj;
+                }                
             }
         }
 
@@ -126,22 +148,36 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
-                // Creating object to store the result set.
-                object dynObj;
+                // Data existence check
+                bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
 
-                // Creating Shipper object.
-                Shipper objShipper = new Shipper();
+                if (!isExists)
+                {
+                    // If data does not exists
+                    // return 0
+                    param.Obj = Convert.ToInt32(isExists);
+                }
+                else
+                {
+                    // If data exists
 
-                // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
+                    // Creating object to store the result set.
+                    object dynObj;
 
-                // Deletes Shipper entity from the context object.
-                context.Shippers.Remove(objShipper);
+                    // Creating Shipper object.
+                    Shipper objShipper = new Shipper();
 
-                // Saves all changes made in the context object to the database.
-                dynObj = context.SaveChanges();
+                    // Gets the Shipper record using Linq to Entities based on ShipperID
+                    objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
 
-                param.Obj = dynObj;
+                    // Deletes Shipper entity from the context object.
+                    context.Shippers.Remove(objShipper);
+
+                    // Saves all changes made in the context object to the database.
+                    dynObj = context.SaveChanges();
+
+                    param.Obj = dynObj;
+                }
             }
         }
 
@@ -178,7 +214,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         /// <param name="param"></param>
         public void SelectByCondition(WebApiParams param)
         {
-            List<Shipper> shipperList = new List<Shipper>();            
+            List<Shipper> shipperList = new List<Shipper>();
 
             // Get Shipper data from database based on condition.
             IQueryable<Shipper> parentQuery = null;
@@ -289,17 +325,56 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
             using (NorthwindEntities context = new NorthwindEntities())
             {
                 switch (param.ddlMode2)
-                {
-                    // 静的SQL
+                {                    
                     case "static":
-                        // 静的SQL
-                        var staticQuery = (from shipper in context.Shippers
-                                     select new
-                                     {
-                                         ShipperID = shipper.ShipperID,
-                                         CompanyName = shipper.CompanyName,
-                                         Phone = shipper.Phone
-                                     }).ToList();
+                        // Execute static SQL
+
+                        List<Shipper> staticQuery = null;
+                        switch (param.ddlOrderColumn)
+                        {
+                            case "c1":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.ShipperID
+                                                   select shipper).ToList();
+                                }
+                                else
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.ShipperID descending
+                                                   select shipper).ToList();
+                                }
+                                break;
+                            case "c2":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.CompanyName
+                                                   select shipper).ToList();
+                                }
+                                else
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.CompanyName descending
+                                                   select shipper).ToList();
+                                }
+                                break;
+                            case "c3":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.Phone
+                                                   select shipper).ToList();
+                                }
+                                else
+                                {
+                                    staticQuery = (from shipper in context.Shippers
+                                                   orderby shipper.Phone descending
+                                                   select shipper).ToList();
+                                }
+                                break;
+                        }
 
                         foreach (var item in staticQuery)
                         {
@@ -310,10 +385,44 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                             shipperList.Add(shipperItem);
                         }
                         param.Obj = shipperList;
-                        break;
+                        break;                       
                     case "dynamic":
-                        var dynQuery = context.Shippers;
-                        
+                        // Execute dynamic SQL
+
+                        IQueryable<Shipper> dynQuery = null;
+                        switch (param.ddlOrderColumn)
+                        {
+                            case "c1":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    dynQuery = context.Shippers.OrderBy(o => o.ShipperID);
+                                }
+                                else
+                                {
+                                    dynQuery = context.Shippers.OrderByDescending(o => o.ShipperID);
+                                }
+                                break;
+                            case "c2":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    dynQuery = context.Shippers.OrderBy(o => o.CompanyName);
+                                }
+                                else
+                                {
+                                    dynQuery = context.Shippers.OrderByDescending(o => o.CompanyName);
+                                }
+                                break;
+                            case "c3":
+                                if (param.ddlOrderSequence == "A")
+                                {
+                                    dynQuery = context.Shippers.OrderBy(o => o.Phone);
+                                }
+                                else
+                                {
+                                    dynQuery = context.Shippers.OrderByDescending(o => o.Phone);
+                                }
+                                break;
+                        }
                         foreach (var item in dynQuery)
                         {
                             Shipper shipperItem = new Shipper();
@@ -327,7 +436,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                         break;
                 }
             }
-        }       
+        }
 
         #endregion
     }
