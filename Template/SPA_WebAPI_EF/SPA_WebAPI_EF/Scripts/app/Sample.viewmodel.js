@@ -223,8 +223,14 @@
                     self.ErrorMessage(data.error);
                 }
                 else {
-                    // 結果格納
-                    self.Result(data.message);
+                    if (data.noRecords) {
+                        self.Result(data.noRecords);
+                        self.isMessage(true);
+                    }
+                    else {
+                        // 結果格納
+                        self.Result(data.message);
+                    }
                 }
                 self.isProgressLoading(false);
             },

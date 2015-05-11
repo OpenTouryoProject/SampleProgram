@@ -69,17 +69,21 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 Shipper objShipper = new Shipper();
 
                 // Set vlaues to the Shipper Entity.
-                objShipper.CompanyName = param.CompanyName;
-                objShipper.Phone = param.Phone;
+                if (!string.IsNullOrWhiteSpace(param.CompanyName))
+                {
+                    objShipper.CompanyName = param.CompanyName;
+                    objShipper.Phone = param.Phone;
 
-                // Adds Shipper Entity to the context object.
-                context.Shippers.Add(objShipper);
+                    // Adds Shipper Entity to the context object.
+                    context.Shippers.Add(objShipper);
+                }
 
                 // Saves all changes made in the context object to the database.
                 dynObj = context.SaveChanges();
 
                 param.Obj = dynObj;
             }
+
         }
 
         #endregion
@@ -94,7 +98,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         public void Update(WebApiParams param)
         {
             using (NorthwindEntities context = new NorthwindEntities())
-            {                
+            {
                 // Data existence check
                 bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
 
@@ -131,7 +135,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                     dynObj = context.SaveChanges();
 
                     param.Obj = dynObj;
-                }                
+                }
             }
         }
 
@@ -325,7 +329,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
             using (NorthwindEntities context = new NorthwindEntities())
             {
                 switch (param.ddlMode2)
-                {                    
+                {
                     case "static":
                         // Execute static SQL
 
@@ -385,7 +389,7 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                             shipperList.Add(shipperItem);
                         }
                         param.Obj = shipperList;
-                        break;                       
+                        break;
                     case "dynamic":
                         // Execute dynamic SQL
 
