@@ -10,27 +10,21 @@
 <div style="width: 100%; border: solid 1px #000000; border-bottom: none;">
     <table class="lblBg" style="width: 96%; margin: 10px auto 5px auto;">
         <tr>
-            <th class="lblEFLeft">データアクセス制御クラス（データプロバイダ）を選択</th>
-            <td class="cmbEF fieldGap">
-                <select id="ddlDap" style="width: 100%"
-                    data-bind="options: ddlDapItems, optionsText: 'displayText', optionsValue: 'value', value: ddlDap">
-                </select>
-            </td>
-            <th class="lblEFRight">並び替え対象列</th>
-            <td class="cmbEF">
-                <select id="ddlOrderColumn" style="width: 100%"
-                    data-bind="options: ddlOrderColumnItems, optionsText: 'displayText', optionsValue: 'value', value: ddlOrderColumn">
-                </select>
-            </td>            
-        </tr>
-        <tr>
             <th class="lblEFLeft">静的、動的のクエリ モードを選択</th>
             <td class="cmbEF fieldGap">
                 <select id="ddlMode2" style="width: 100%"
                     data-bind="options: ddlMode2Items, optionsText: 'displayText', optionsValue: 'value', value: ddlMode2">
                 </select></td>
-            <th class="lblEFRight">昇順・降順</th>
+            <th class="lblEFRight">並び替え対象列</th>
             <td class="cmbEF">
+                <select id="ddlOrderColumn" style="width: 100%"
+                    data-bind="options: ddlOrderColumnItems, optionsText: 'displayText', optionsValue: 'value', value: ddlOrderColumn">
+                </select>
+            </td>
+        </tr>
+        <tr>            
+            <th class="lblEFLeft">昇順・降順</th>
+            <td class="cmbEF fieldGap">
                 <select id="ddlOrderSequence" style="width: 100%"
                     data-bind="options: ddlOrderSequenceItems, optionsText: 'displayText', optionsValue: 'value', value: ddlOrderSequence">
                 </select>
@@ -83,7 +77,7 @@
                 </div>
             </td>
             <td style="width: 70%; vertical-align: top">
-                <div style="width: 100%;">
+                <div style="width: 100%; position:relative;">                    
                     <table id="tblShippers" data-bind="style: { display: isVisibletblShippers() === false ? 'none' : 'block' }">
                         <thead>
                             <tr data-bind="if: dataLists().length">
@@ -100,16 +94,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="lblBg" style="width: 96%; margin: auto;" data-bind="if: Result,style : {display: isMessage()=== true ? 'block' : 'none'}">
+                    <table class="lblBg" style="width: 96%; margin: auto;" data-bind="if: Result, style: { display: isMessage() === true ? 'block' : 'none' }">
                         <tr>
                             <th>処理結果：</th>
                             <td>
                                 <input type="text" id="labelMessage" style="width: 100%;" data-bind="value: Result" /></td>
                         </tr>
                     </table>
-                    <table style="margin: auto; display: none" id="tblImageDeatail" data-bind="style : { display : isProgressLoading() === true ? 'block' : 'none'}">
+                    <table style="position:absolute; top:35%; left:40%; z-index:9999; margin: auto; display: none" id="tblImageDeatail" data-bind="style: { display: isProgressLoading() === true ? 'block' : 'none' }">
                         <tr>
-                            <td data-bind="ifnot : dataLists().length || Result">
+                            <td>
                                 <img alt="Loading.." src="../Image/LoadingBlue.gif" />
                             </td>
                         </tr>

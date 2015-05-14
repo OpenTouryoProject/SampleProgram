@@ -31,6 +31,8 @@
 //*  2015/04/26  Sandeep           Implemented select operation based static or dynamic execution 
 //*  2015/05/07  Sandeep           Implemented code of existence check for Update and Delete 
 //*  2015/05/07  Sandeep           Implemented code sort the list based on the values of ddlOrderColumn and ddlOrderSequence
+//*  2015/05/12  Sandeep           Replaced from the "Any" and "First" methods to "FirstOrDefault" method, to avoid the program 
+//*                                to perform twice the execution of the query
 //**********************************************************************************
 
 // system
@@ -102,40 +104,29 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 // Data existence check
                 bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
 
-                if (!isExists)
+                // Creating object to store the result set.
+                object dynObj;
+
+                // Creating Shipper object.
+                Shipper objShipper = new Shipper();
+
+                // Gets the Shipper record using Linq to Entities based on ShipperID
+                objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
+
+                // Set vlaues to the Shipper Entity.
+                if (!string.IsNullOrWhiteSpace(param.CompanyName))
                 {
-                    // If data does not exists
-                    // return 0
-                    param.Obj = Convert.ToInt32(isExists);
+                    objShipper.CompanyName = param.CompanyName;
                 }
-                else
+                if (!string.IsNullOrWhiteSpace(param.Phone))
                 {
-                    // If data exists
-
-                    // Creating object to store the result set.
-                    object dynObj;
-
-                    // Creating Shipper object.
-                    Shipper objShipper = new Shipper();
-
-                    // Gets the Shipper record using Linq to Entities based on ShipperID
-                    objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
-
-                    // Set vlaues to the Shipper Entity.
-                    if (!string.IsNullOrWhiteSpace(param.CompanyName))
-                    {
-                        objShipper.CompanyName = param.CompanyName;
-                    }
-                    if (!string.IsNullOrWhiteSpace(param.Phone))
-                    {
-                        objShipper.Phone = param.Phone;
-                    }
-
-                    // Saves all changes made in the context object to the database.      
-                    dynObj = context.SaveChanges();
-
-                    param.Obj = dynObj;
+                    objShipper.Phone = param.Phone;
                 }
+
+                // Saves all changes made in the context object to the database.      
+                dynObj = context.SaveChanges();
+
+                param.Obj = dynObj;
             }
         }
 
@@ -155,33 +146,25 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
                 // Data existence check
                 bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
 
-                if (!isExists)
+                // Creating object to store the result set.
+                object dynObj;
+
+                // Creating Shipper object.
+                Shipper objShipper = new Shipper();
+
+                // Gets the Shipper record using Linq to Entities based on ShipperID
+                objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
+
+                if (objShipper != null)
                 {
-                    // If data does not exists
-                    // return 0
-                    param.Obj = Convert.ToInt32(isExists);
-                }
-                else
-                {
-                    // If data exists
-
-                    // Creating object to store the result set.
-                    object dynObj;
-
-                    // Creating Shipper object.
-                    Shipper objShipper = new Shipper();
-
-                    // Gets the Shipper record using Linq to Entities based on ShipperID
-                    objShipper = context.Shippers.First(x => x.ShipperID == param.ShipperId);
-
                     // Deletes Shipper entity from the context object.
                     context.Shippers.Remove(objShipper);
+                }                
 
-                    // Saves all changes made in the context object to the database.
-                    dynObj = context.SaveChanges();
+                // Saves all changes made in the context object to the database.
+                dynObj = context.SaveChanges();
 
-                    param.Obj = dynObj;
-                }
+                param.Obj = dynObj;
             }
         }
 

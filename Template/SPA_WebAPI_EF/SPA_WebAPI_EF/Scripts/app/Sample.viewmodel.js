@@ -2,19 +2,6 @@
     // shippers テーブルのレコードリスト (JSON 形式)
     this.dataLists = ko.observableArray();
 
-    // データアクセス制御クラス
-    this.ddlDapItems = ko.observableArray([
-        { displayText: "SQL Server / SQL Client", value: "SQL" }, 
-        { displayText: "Multi-DB / OLEDB.NET", value: "OLE" },
-        { displayText: "Multi-DB / ODBC.NET", value: "ODB" },
-        { displayText: "Oracle / ODP.NET", value: "ODP" },
-        { displayText: "DB2 / DB2.NET", value: "DB2" },
-        { displayText: "HiRDB / HiRDB-DP", value: "HIR" },
-        { displayText: "MySQL Cnn/NET", value: "MCN" },
-        { displayText: "PostgreSQL / Npgsql", value: "NPS" }
-    ]);
-    this.ddlDap = ko.observable("SQL");
-
     // 静的、動的のクエリ モード
     this.ddlMode2Items = ko.observableArray([
         { displayText: "静的クエリ", value: "static" },
@@ -64,7 +51,6 @@
 
         // パラメタを JSON 形式で纏める
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2()
         }
 
@@ -105,7 +91,6 @@
 
         // パラメタを JSON 形式で纏める
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2(),
             ddlOrderColumn: this.ddlOrderColumn(),
             ddlOrderSequence: this.ddlOrderSequence()
@@ -150,7 +135,6 @@
 
         // パラメタを JSON 形式で纏める
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2(),
             shipperId: this.shipperId(),
             companyName: this.companyName(),
@@ -205,7 +189,6 @@
 
         // パラメタを JSON 形式で纏める
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2(),
             companyName: this.companyName(),
             phone: this.phone()
@@ -252,7 +235,6 @@
         this.ErrorMessage("");
 
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2(),
             shipperId: this.shipperId(),
             companyName: this.companyName(),
@@ -301,7 +283,6 @@
 
         // パラメタを JSON 形式で纏める
         var param = {
-            ddlDap: this.ddlDap(),
             ddlMode2: this.ddlMode2(),
             shipperId: this.shipperId()
         }
