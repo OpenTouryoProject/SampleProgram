@@ -101,26 +101,23 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
-                // Data existence check
-                bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
-
                 // Creating object to store the result set.
                 object dynObj;
 
-                // Creating Shipper object.
-                Shipper objShipper = new Shipper();
-
                 // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
+                Shipper objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
 
-                // Set vlaues to the Shipper Entity.
-                if (!string.IsNullOrWhiteSpace(param.CompanyName))
+                if (objShipper != null)
                 {
-                    objShipper.CompanyName = param.CompanyName;
-                }
-                if (!string.IsNullOrWhiteSpace(param.Phone))
-                {
-                    objShipper.Phone = param.Phone;
+                    // Set vlaues to the Shipper Entity.
+                    if (!string.IsNullOrWhiteSpace(param.CompanyName))
+                    {
+                        objShipper.CompanyName = param.CompanyName;
+                    }
+                    if (!string.IsNullOrWhiteSpace(param.Phone))
+                    {
+                        objShipper.Phone = param.Phone;
+                    }
                 }
 
                 // Saves all changes made in the context object to the database.      
@@ -143,17 +140,11 @@ namespace SPA_WebAPI_EF.Codes.Dao.EntityFrameWork
         {
             using (NorthwindEntities context = new NorthwindEntities())
             {
-                // Data existence check
-                bool isExists = context.Shippers.Any(x => x.ShipperID == param.ShipperId);
-
                 // Creating object to store the result set.
                 object dynObj;
 
-                // Creating Shipper object.
-                Shipper objShipper = new Shipper();
-
                 // Gets the Shipper record using Linq to Entities based on ShipperID
-                objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
+                Shipper objShipper = context.Shippers.FirstOrDefault(x => x.ShipperID == param.ShipperId);
 
                 if (objShipper != null)
                 {
