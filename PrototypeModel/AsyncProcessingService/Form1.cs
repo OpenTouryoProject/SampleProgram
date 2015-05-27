@@ -103,7 +103,10 @@ namespace AsyncProcessingService
         #endregion
 
         #region Button click
-        
+
+        /// <summary>Worker thread count (Thread-safe)</summary>
+        volatile uint WorkerThreadCount = 0;
+
         /// <summary>btnOnStop_Click</summary>
         private void btnOnStop_Click(object sender, EventArgs e)
         {
@@ -121,17 +124,18 @@ namespace AsyncProcessingService
             // This statement is necessary in order to clear the UIcontrol from other than UIThread.
             this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog), new object[] { "End main thread.\r\n" });
 
-            // Check the number of worker threads.
-            int workerThreads = 0;
-            int completionPortThreads = 0;
+            //// Check the number of worker threads.
+            //int workerThreads = 0;
+            //int completionPortThreads = 0;
 
-            // Get available threads.
-            ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
+            //// Get available threads.
+            //ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
 
-            while (workerThreads != (int)this.nudMaxWorkerThreadCount.Value)
+            //while (workerThreads != (int)this.nudMaxWorkerThreadCount.Value)
+            while (this.WorkerThreadCount != 0)
             {
-                // Get available threads.
-                ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
+                //// Get available threads.
+                //ThreadPool.GetAvailableThreads(out workerThreads, out completionPortThreads);
 
                 // Sleep(xxx msec leave the time slice.)
                 // wait for the completion of the worker thread.
@@ -140,7 +144,7 @@ namespace AsyncProcessingService
 
             // output the message log.
             // This statement is necessary in order to clear the UIcontrol from other than UIThread.
-            this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog), new object[] { "End worker thread.\r\n" });
+            this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog), new object[] { "End all of worker thread.\r\n" });
         }
 
         /// <summary>btnOnStart_Click</summary>
@@ -248,21 +252,30 @@ namespace AsyncProcessingService
         /// <param name="threadContext">parameter</param>
         private void WorkerThreadMethod(Object threadContext)
         {
-            object[] arryobj = (object[])threadContext;
+            this.WorkerThreadCount++;
 
-            // output the message log.
-            // This statement is necessary in order to clear the UIcontrol from other than UIThread.
-            this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog),
-                new object[] { string.Format("Start={0}\r\n", arryobj[1]) });
+            try
+            {
+                object[] arryobj = (object[])threadContext;
 
-            // Sleep(xxx sec leave the time slice.)
-            // wait for end of execution of the asynchronous task simulation.
-            Thread.Sleep(((int)arryobj[0]) * 1000); //
+                // output the message log.
+                // This statement is necessary in order to clear the UIcontrol from other than UIThread.
+                this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog),
+                    new object[] { string.Format("Start={0}\r\n", arryobj[1]) });
 
-            // output the message log.
-            // This statement is necessary in order to clear the UIcontrol from other than UIThread.
-            this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog),
-                new object[] { string.Format("End={0}\r\n", arryobj[1]) });
+                // Sleep(xxx sec leave the time slice.)
+                // wait for end of execution of the asynchronous task simulation.
+                Thread.Sleep(((int)arryobj[0]) * 1000); //
+
+                // output the message log.
+                // This statement is necessary in order to clear the UIcontrol from other than UIThread.
+                this.BeginInvoke(new ControlInvokeDelegate(this.OutPutMessageLog),
+                    new object[] { string.Format("End={0}\r\n", arryobj[1]) });
+            }
+            finally
+            {
+                this.WorkerThreadCount--;
+            }
         }
 
         #endregion
