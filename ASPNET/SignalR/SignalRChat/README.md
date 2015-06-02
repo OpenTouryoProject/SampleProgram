@@ -1,1 +1,0 @@
-Chat application that was developed in technology research.
