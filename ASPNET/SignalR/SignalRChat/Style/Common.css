@@ -1,0 +1,84 @@
+﻿  .container {
+            background-color: #99CCFF;
+            border: thick solid #808080;
+            width: 95%;
+        }
+
+        .table-discussion {
+            width: 100%;
+            text-align: center;
+        }
+
+        #login {
+            width: 25%;
+            border: 1px solid;
+            vertical-align: top;
+        }
+
+        #chatWindow {
+            border: 1px solid;
+        }
+
+        .divlogin {
+            width: 100%;
+            background-color: skyblue;
+            height: 28px;
+            font-size: x-large;
+            font-weight: bold;
+        }
+
+        .dv-margin-text {
+             width: 100%;
+            margin: 5px auto;
+            text-align: center;
+        }
+
+        .dvChatwindow{
+           border: 3px solid skyblue;
+           margin: auto; 
+           width: 96%; 
+           min-height: 350px;
+
+        }
+        .pad-left {
+            padding-left: 40px;
+            margin-top: 40px;
+        }
+
+        #message {
+            width: 45%;
+            height: 40px;
+            border: 2px solid #808080;
+        }
+
+        #sendmessage {
+            height: 36px;
+            width: 78px;
+            padding-left: 5px;
+            border-left-width: 2px;
+            margin-left: 21px;
+        }
+
+        .no-padding-left {
+            padding-left: -4px !important;
+        }
+
+        .td-width-border-send {
+            width: 50%;
+        }
+
+        .td-width-border-recv {
+            width: 50%;
+        }
+
+        .back-ground-colr-aquamarine {
+            background-color: #FFFFCC;
+        }
+
+        .back-ground-colr-coral {
+            background-color: #FFCCFF;
+        }
+
+        #senderDiscussion {
+            width: 641px;
+        }
