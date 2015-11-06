@@ -19,14 +19,9 @@
         var encodedName = '';
         var encodedMsg = '';
 
-        function SubmitClick() {
-            if (event.keyCode == 13) {
-                document.getElementById('btnLogin').click();
-            }
-        }
-
         function SendClick() {
             if (event.keyCode == 13) {
+                event.preventDefault();
                 document.getElementById('sendmessage').click();
             }
         }
@@ -68,7 +63,7 @@
 
                 <table class="table-discussion">
                     <tr>
-                        <td id="login" runat="server">
+                        <td id="login" runat="server" style="display: block;">
                             <div class="divlogin">
                                 Login
                             </div>
@@ -78,12 +73,12 @@
                                 <asp:HiddenField ID="displayname" runat="server" />
                             </div>
                             <div style="margin: 5px auto;">
-                                <asp:Button ID="btnLogin" runat="server" Text="btnLogin" OnClick="btnLogin_Click"></asp:Button>
+                                <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click"></asp:Button>
                             </div>
                         </td>
                         <td id="chatWindow" runat="server">
                             <div style="width: 60%; margin-left: 20%">
-                                <div class="dvChatwindow">
+                                <div class="dvChatwindow" style="overflow: scroll;">
                                     <div id="discussion" style="height: 80%; width: 100%">
                                     </div>
                                 </div>

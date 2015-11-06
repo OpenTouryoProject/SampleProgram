@@ -19,61 +19,40 @@
 #endregion
 
 // ************************************************ **********************************
-// * Class name: ChatWindow
+// * Class name: ChatHub
 // *
 // * Author: Supragyan
 // * Update history:
 // *
 // * Date and time update's content
 // * ---------- ---------------- --------------------- -------------------------------
-//*  2015/05/21  Supragyan       Created Signin,Signout method authenticate users. 
+//*  2015/05/21  Supragyan       Created Send method and implemented code to send response. 
 //**********************************************************************************
-//system
+// system
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+
+// SignalR
+using Microsoft.AspNet.SignalR;
 
 namespace SignalRChat
 {
-    public partial class ChatWindow : System.Web.UI.Page
+    /// <summary>
+    /// ChatHub class
+    /// </summary>
+    public class ChatHub : Hub
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {
-                Page.FindControl("chatWindow").Visible = false;
-            }
-        }
-
         /// <summary>
-        /// To login to the chat screen
+        /// Sends response to all connected clients.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnLogin_Click(object sender, EventArgs e)
+        /// <param name="name"></param>
+        /// <param name="message"></param>
+        public void Send(string name, string message)
         {
-            if (this.txtUserName.Value != "")
-            {
-                login.Attributes.Add("style", "display: none;");
-                Page.FindControl("chatWindow").Visible = true;
-                displayname.Value = txtUserName.Value;
-            }
-        }
-
-        /// <summary>
-        /// To logout the Chat.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            FormsAuthentication.SignOut();
-            login.Attributes.Add("style", "display: block;");
-            Page.FindControl("chatWindow").Visible = false;
+            // Call the broadcastMessage method to update clients.
+            Clients.All.broadcastMessage(name, message);
         }
     }
 }
