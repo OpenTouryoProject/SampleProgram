@@ -19,6 +19,12 @@
         var encodedName = '';
         var encodedMsg = '';
 
+        function SubmitClick() {
+            if (event.keyCode == 13) {
+                document.getElementById('btnLogin').click();
+            }
+        }
+
         function SendClick() {
             if (event.keyCode == 13) {
                 event.preventDefault();
