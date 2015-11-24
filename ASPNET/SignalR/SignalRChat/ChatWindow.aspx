@@ -19,6 +19,8 @@
         var encodedName = '';
         var encodedMsg = '';
 
+        $(document).ready(function () { $('#txtUserName').focus(); });
+
         function SubmitClick() {
             if (event.keyCode == 13) {
                 document.getElementById('btnLogin').click();
