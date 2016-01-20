@@ -26,7 +26,7 @@
 // *
 // * Date and time update's content
 // * ---------- ---------------- --------------------- -------------------------------
-//*  2015/01/22	 Sandeep         Added AssemblyInfo setting.
+//*  2015/11/12	 Sandeep         Added AssemblyInfo setting.
 //**********************************************************************************
 
 using System.Reflection;

@@ -26,7 +26,7 @@
 // *
 // * Date & time update's       content
 // * ----------  -------------- --------------------- -------------------------------
-// * 2015/04/16  Sandeep        Implemented code to access the claims and display it
+// * 2015/11/12  Sandeep        Implemented code to access the claims and display it
 //**********************************************************************************
 
 // System
