@@ -66,7 +66,7 @@ namespace OpenIDConnect_sample
                 // Assigning user Identity name to the label
                 this.lblLoggedInUser.Text = Context.User.Identity.Name;
 
-                // TODO: Coding the logic after the authentication process has been completed.
+                // TODO: Please implement the processing after the authentication.
                 // ...
             }
         }
