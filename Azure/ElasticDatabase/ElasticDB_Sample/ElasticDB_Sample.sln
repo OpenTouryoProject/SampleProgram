@@ -1,12 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticScaleStarterKit", "ElasticScaleStarterKit\ElasticScaleStarterKit.csproj", "{576E2FB9-A842-457C-BA5B-5E53A2FA11A9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{33AF7A53-A66B-4667-9C05-EE040AFA812B}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\..\..\USERS\INSPANDA03\APPDATA\LOCAL\MICROSOFT\VWDEXPRESS\11.0\EXTENSIONS\141M0CDP.Z00\description.html = ..\..\..\..\USERS\INSPANDA03\APPDATA\LOCAL\MICROSOFT\VWDEXPRESS\11.0\EXTENSIONS\141M0CDP.Z00\description.html
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{96471CF6-CB3C-4EB7-9AEA-BA980377F10F}"
 	ProjectSection(SolutionItems) = preProject
