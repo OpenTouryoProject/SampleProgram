@@ -10,8 +10,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{155A98
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamSqlDbWithMultiShard", "..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Public\Db\DamSqlDbWithMultiShard\DamSqlDbWithMultiShard\DamSqlDbWithMultiShard.csproj", "{1AD61B64-54D8-476E-BFE7-4CBC2E4A135B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,10 +20,6 @@ Global
 		{CCA65B04-7653-4AF2-AB76-D317EFD7E8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCA65B04-7653-4AF2-AB76-D317EFD7E8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCA65B04-7653-4AF2-AB76-D317EFD7E8C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AD61B64-54D8-476E-BFE7-4CBC2E4A135B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AD61B64-54D8-476E-BFE7-4CBC2E4A135B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AD61B64-54D8-476E-BFE7-4CBC2E4A135B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AD61B64-54D8-476E-BFE7-4CBC2E4A135B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
