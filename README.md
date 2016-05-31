@@ -10,32 +10,38 @@ ASP.NET WebFormのサンプルを格納している。
 ### [Mobile](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/WebForm/Mobile/)
 ASP.NET WebFormでモバイル・アプリケーション（ガラケー等）を開発する際のサンプルを格納している。
 
+#### [ResponseFilter](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/WebForm/Mobile/ResponseFilter)
+レスポンスフィルターのサンプル（Decorator パターンのストリームをレスポンスフィルターに設定する）
+
+#### [VwS_HdnToSsn]()
+ViewStateをSessionに変換するサンプル（これにより、画面のデータ・サイズを削減することができる）
+
 ### [jqGridandWCF](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/WebForm/jqGridandWCF/)
 - ASP.NET WebFormでjqGridを使用するサンプル。
 - jqGridに表示するデータは、WCFを使用してJSONで取得する。
+
+## WWW-Authentication
+Web認証関係のサンプル。
+
+### [ID-Federation](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/ID-Federation/)
+認証連携（WS-Federation, SAML）のサンプル
+
+#### [ClaimsWeb_sample](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/ID-Federation/ClaimsWeb_sample)
+- WS-Federation, SAMLでクレームベース認証をするサンプル。
+- Idpとのフェデレーション信頼の確立方法は[コチラ](http://techinfoofmicrosofttech.osscons.jp/index.php?WIF#x7272b98)
+
+### [OpenID Connect](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/OpenID_Connect/)
+OpenID Connectのサンプル
+
+#### [OpenIDConnect_sample](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/OpenID_Connect/OpenIDConnect_sample)
+- Microsoft.Owin.SecurityでOpenID Connectの認証・認可をするサンプル。
+- Idpへの登録とサンプルの設定方法は[コチラ](http://techinfoofmicrosofttech.osscons.jp/index.php?OpenID%20Connect#i4f26644)
 
 ## [SignalR](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/SignalR/)
 SignalRのサンプル
 
 ## [MS Translator API](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/MSTranslatorAPI/)
 MS Translator APIのサンプル
-
-# Authentication
-認証関係のサンプル。
-
-## [ID-Federation](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/ID-Federation/)
-認証連携（WS-Federation, SAML）のサンプル
-
-### [ClaimsWeb_sample](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/ID-Federation/ClaimsWeb_sample)
-- WS-Federation, SAMLでクレームベース認証をするサンプル。
-- Idpとのフェデレーション信頼の確立方法は[コチラ](http://techinfoofmicrosofttech.osscons.jp/index.php?WIF#x7272b98)
-
-## [OpenID Connect](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/OpenID_Connect/)
-OpenID Connectのサンプル
-
-### [OpenIDConnect_sample](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/OpenID_Connect/OpenIDConnect_sample)
-- Microsoft.Owin.SecurityでOpenID Connectの認証・認可をするサンプル。
-- Idpへの登録とサンプルの設定方法は[コチラ](http://techinfoofmicrosofttech.osscons.jp/index.php?OpenID%20Connect#i4f26644)
 
 # [Azure](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Azure/)
 
@@ -53,6 +59,8 @@ Nunitのサンプル
 Publicのテストコード開発のためのサンプル
 
 # Template
+see : https://github.com/OpenTouryoProject/SampleProgram/issues/3
+
 ## [Single-page Application + Entity Framework](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Template/SPA_WebAPI_EF/)
 Single-page Application + Entity Frameworkのフレームワークを使用したテンプレート
 
@@ -85,8 +93,9 @@ WPFのデータ・バインディングのサンプル。
 アニメーションのサンプル
 
 # Other
-
 ## Interoperability
+相互運用に関するのサンプル
+
 ### [DotNETBridge](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/DotNETBridge/)
 アンマネージコード(VC, VB, VBSなど)からマネージコード(.NET)を呼び出す。
 
@@ -94,6 +103,7 @@ WPFのデータ・バインディングのサンプル。
 名前付きパイプ、UDP, TCP, 共有メモリ などを使用したプロセス間通信処理のサンプル。
 
 ## [VC_Samples](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/VC_Samples)
+VC++のサンプル
 
 ### [VC_AutoWrap](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/VC_Samples/VC_AutoWrap)
 VC++からオフィス・オートメーション（レイトバインド）を実行するサンプル
@@ -104,12 +114,11 @@ VC++からオフィス・オートメーション（レイトバインド）を�
 ## [PipesFamilyHouse](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/PipesFamilyHouse)
 パイプによる親子プロセス間のプロセス間通信
 
-#[PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel)
+# [PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel)
+各種プロトタイプ（Open棟梁の機能開発のためのプロトタイプ）
 
 ## [Asynchronous](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/Asynchronous)
-非同期呼び出しフレームワーク のプロトタイプ
+棟梁に実装されている 非同期呼び出しフレームワーク のプロトタイプ
 
 ##[AsyncProcessingService](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel/AsyncProcessingService/)
-非同期処理サービスのプロトタイプ
-
-
+棟梁に実装されている 非同期処理サービス のプロトタイプ
