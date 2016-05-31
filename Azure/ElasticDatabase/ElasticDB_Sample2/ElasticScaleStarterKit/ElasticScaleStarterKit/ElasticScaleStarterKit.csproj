@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,9 +42,6 @@
     <Reference Include="Business">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Business.dll</HintPath>
     </Reference>
-    <Reference Include="DamSqlDbWithMultiShard">
-      <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\DamSqlDbWithMultiShard.dll</HintPath>
-    </Reference>
     <Reference Include="Framework">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Framework.dll</HintPath>
     </Reference>
@@ -50,10 +49,10 @@
       <HintPath>..\packages\Microsoft.Azure.SqlDatabase.ElasticScale.Client.1.2.0\lib\net45\Microsoft.Azure.SqlDatabase.ElasticScale.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling">
-      <HintPath>..\..\..\ElasticScaleStarterKit2\ElasticScaleStarterKit2\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data">
-      <HintPath>..\..\..\ElasticScaleStarterKit2\ElasticScaleStarterKit2\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
     </Reference>
     <Reference Include="Public">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Public.dll</HintPath>
@@ -83,13 +82,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="InitializeShard.sql" />
     <Content Include="Sql\CustomersDeleteDDR.sql" />
     <Content Include="Sql\CustomersSelectDDR.sql" />
     <Content Include="Sql\Customers_Orders_DDRInsert.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Public\Db\DamSqlDbWithMultiShard\DamSqlDbWithMultiShard\DamSqlDbWithMultiShard.csproj">
+      <Project>{1ad61b64-54d8-476e-bfe7-4cbc2e4a135b}</Project>
+      <Name>DamSqlDbWithMultiShard</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
