@@ -27,7 +27,7 @@ namespace ElasticScaleStarterKit
         public static bool TryConnectToSqlDatabase()
         {
             string connectionString =
-                MultiShardConfiguration.GetConnectionStringByMasterDatabase();
+                MultiShardConfiguration.GetConnectionStringForMasterDatabase();
 
             try
             {
@@ -59,7 +59,7 @@ namespace ElasticScaleStarterKit
         public static bool DatabaseExists(string server, string db)
         {
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
-                MultiShardConfiguration.GetConnectionStringByMasterDatabase(),
+                MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
                 SqlRetryPolicy,
                 SqlRetryPolicy))
             {
@@ -85,7 +85,7 @@ namespace ElasticScaleStarterKit
         public static bool DatabaseIsOnline(string server, string db)
         {
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
-                MultiShardConfiguration.GetConnectionStringByMasterDatabase(),
+                MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
                 SqlRetryPolicy,
                 SqlRetryPolicy))
             {
@@ -111,7 +111,7 @@ namespace ElasticScaleStarterKit
         {
             ConsoleUtils.WriteInfo("Creating database {0}", db);
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
-                MultiShardConfiguration.GetConnectionStringByMasterDatabase(),
+                MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
                 SqlRetryPolicy,
                 SqlRetryPolicy))
             {
@@ -165,7 +165,7 @@ namespace ElasticScaleStarterKit
         {
             ConsoleUtils.WriteInfo("Dropping database {0}", db);
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
-                MultiShardConfiguration.GetConnectionStringByMasterDatabase(),
+                MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
                 SqlRetryPolicy,
                 SqlRetryPolicy))
             {

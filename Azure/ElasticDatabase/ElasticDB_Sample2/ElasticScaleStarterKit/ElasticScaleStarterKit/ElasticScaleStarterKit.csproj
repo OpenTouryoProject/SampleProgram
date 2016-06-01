@@ -13,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,20 +42,20 @@
     <Reference Include="Business">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Business.dll</HintPath>
     </Reference>
-    <Reference Include="DamSqlDbWithMultiShard">
-      <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\DamSqlDbWithMultiShard.dll</HintPath>
-    </Reference>
     <Reference Include="Framework">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Framework.dll</HintPath>
     </Reference>
+    <Reference Include="DamSqlDbWithMultiShard">
+       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\DamSqlDbWithMultiShard.dll</HintPath>
+     </Reference>
     <Reference Include="Microsoft.Azure.SqlDatabase.ElasticScale.Client">
       <HintPath>..\packages\Microsoft.Azure.SqlDatabase.ElasticScale.Client.1.2.0\lib\net45\Microsoft.Azure.SqlDatabase.ElasticScale.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling">
-      <HintPath>..\..\..\ElasticScaleStarterKit2\ElasticScaleStarterKit2\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data">
-      <HintPath>..\..\..\ElasticScaleStarterKit2\ElasticScaleStarterKit2\bin\Debug\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
+      <HintPath>..\packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45\Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling.Data.dll</HintPath>
     </Reference>
     <Reference Include="Public">
       <HintPath>..\..\..\..\..\..\OpenTouryoTemplates\root_VS2012\programs\C#\Frameworks\Infrastructure\Build\Public.dll</HintPath>
@@ -83,7 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="InitializeShard.sql" />
