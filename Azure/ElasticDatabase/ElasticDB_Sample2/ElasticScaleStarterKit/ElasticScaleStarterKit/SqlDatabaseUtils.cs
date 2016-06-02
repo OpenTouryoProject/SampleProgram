@@ -206,7 +206,7 @@ namespace ElasticScaleStarterKit
         {
             ConsoleUtils.WriteInfo("Executing script {0}", schemaFile);
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
-                MultiShardConfiguration.GetConnectionStringBySelectedDatabase(db),
+                MultiShardConfiguration.GetConnectionStringForSelectedDatabase(db),
                 SqlRetryPolicy,
                 SqlRetryPolicy))
             {
