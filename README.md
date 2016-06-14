@@ -93,7 +93,7 @@ WPFのデータ・バインディングのサンプル。
 アニメーションのサンプル
 
 ## [Other](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/DotNETBridge/)
-P/Invoke, COM呼び出しで、.NET ( manage ) <---> VC, VB6 ( unmanage ) 間の相互運用のサンプル。
+P/Invoke, COM呼び出しで、.NET ( manage ) <---> VC, VB6 ( unmanage ) 間の相互運用をするサンプル。
 
 ### [InteropWithUnmanage](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/InteropWithUnmanage/)
 Win32 DLL と C++/CLIのブリッジDLLを使用して、 アンマネージコードからマネージコードを呼び出すサンプル。
