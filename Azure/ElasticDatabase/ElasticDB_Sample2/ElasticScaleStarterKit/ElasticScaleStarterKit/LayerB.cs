@@ -48,7 +48,7 @@ public class LayerB : MyFcBaseLogic
     /// <param name="testParameter">引数クラス</param>
     private void UOC_Insert(TestParameterValue testParameter)
     {
-        // 戻り値クラスを生成して、事前に戻り地に設定しておく。
+        // 戻り値クラスを生成して、事前に戻り値に設定しておく。
         TestReturnValue testReturn = new TestReturnValue();
         this.ReturnValue = testReturn;
 
@@ -66,7 +66,7 @@ public class LayerB : MyFcBaseLogic
     /// <param name="testParameter">引数クラス</param>
     private void UOC_SelectAll_DR(TestParameterValue testParameter)
     {
-        // 戻り値クラスを生成して、事前に戻り地に設定しておく。
+        // 戻り値クラスを生成して、事前に戻り値に設定しておく。
         TestReturnValue testReturn = new TestReturnValue();
         this.ReturnValue = testReturn;
 

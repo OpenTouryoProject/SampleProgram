@@ -24,7 +24,7 @@ namespace ElasticScaleStarterKit
         /// </summary>
         public static void WriteWarning(string format, params object[] args)
         {
-            WriteColor(ConsoleColor.Yellow, format, args);
+            WriteColor(ConsoleColor.Yellow, "\t" + format, args);
         }
 
         /// <summary>

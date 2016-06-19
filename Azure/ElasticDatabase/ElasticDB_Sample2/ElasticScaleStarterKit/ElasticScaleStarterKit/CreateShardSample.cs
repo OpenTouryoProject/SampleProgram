@@ -58,7 +58,7 @@ namespace ElasticScaleStarterKit
 
                 // Only create the database if it doesn't already exist. It might already exist if
                 // we tried to create it previously but hit a transient fault.
-                if (!SqlDatabaseUtils.DatabaseExists(MultiShardConfiguration.ShardMapManagerServerName, databaseName))
+                if (!SqlDatabaseUtils.ExistsDatabase(MultiShardConfiguration.ShardMapManagerServerName, databaseName))
                 {
                     SqlDatabaseUtils.CreateDatabase(MultiShardConfiguration.ShardMapManagerServerName, databaseName);
                 }

@@ -56,7 +56,7 @@ namespace ElasticScaleStarterKit
         /// <param name="server">server</param>
         /// <param name="db">db</param>
         /// <returns>true or false</returns>
-        public static bool DatabaseExists(string server, string db)
+        public static bool ExistsDatabase(string server, string db)
         {
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
                 MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
@@ -82,7 +82,7 @@ namespace ElasticScaleStarterKit
         /// <param name="server">server</param>
         /// <param name="db">db</param>
         /// <returns>true or false</returns>
-        public static bool DatabaseIsOnline(string server, string db)
+        public static bool IsDatabaseOnline(string server, string db)
         {
             using (ReliableSqlConnection conn = new ReliableSqlConnection(
                 MultiShardConfiguration.GetConnectionStringForMasterDatabase(),
@@ -128,7 +128,7 @@ namespace ElasticScaleStarterKit
                     // Azure SQL DB
                     SqlRetryPolicy.ExecuteAction(() =>
                         {
-                            if (!DatabaseExists(server, db))
+                            if (!ExistsDatabase(server, db))
                             {
                                 // Begin creation (which is async for Standard/Premium editions)
                                 cmd.CommandText = string.Format(
@@ -141,7 +141,7 @@ namespace ElasticScaleStarterKit
                         });
 
                     // Wait for the operation to complete
-                    while (!DatabaseIsOnline(server, db))
+                    while (!IsDatabaseOnline(server, db))
                     {
                         ConsoleUtils.WriteInfo("Waiting for database {0} to come online...", db);
                         Thread.Sleep(TimeSpan.FromSeconds(5));

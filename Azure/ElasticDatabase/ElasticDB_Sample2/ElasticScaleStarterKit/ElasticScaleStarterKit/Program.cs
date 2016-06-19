@@ -252,7 +252,7 @@ namespace ElasticScaleStarterKit
             }
 
             // Create shard map manager database
-            if (!SqlDatabaseUtils.DatabaseExists(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
+            if (!SqlDatabaseUtils.ExistsDatabase(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
             {
                 SqlDatabaseUtils.CreateDatabase(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName);
             }
@@ -387,7 +387,7 @@ namespace ElasticScaleStarterKit
                 }
             }
 
-            if (SqlDatabaseUtils.DatabaseExists(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
+            if (SqlDatabaseUtils.ExistsDatabase(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
             {
                 // Drop shard map manager database
                 SqlDatabaseUtils.DropDatabase(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName);

@@ -33,9 +33,7 @@
 
 // System
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Linq;
 // Microsoft
 using Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement;
@@ -62,21 +60,17 @@ namespace ElasticScaleStarterKit
         public static void ExecuteMultiShardQuery(RangeShardMap<int> shardMap)
         {
             // Get the Shards from Shard Map manager
-            IEnumerable<Shard> shards = shardMap.GetShards();
-
-            MultiShardConfiguration.Shards = shards;
-
+            MultiShardConfiguration.Shards = shardMap.GetShards();
             TestParameterValue testParameterValue
            = new TestParameterValue(
                "MultiShard", "ExecMultiShard", "SelectAll_DR",
                "SqlDbWithMultiShard" + "%"
                + "individual" + "%"
-               + "static" + "%"
                + "-",
              new MyUserInfo("MultiShard", "MultiShard"));
 
             // 分離レベルの設定
-            DbEnum.IsolationLevelEnum iso = DbEnum.IsolationLevelEnum.DefaultTransaction;
+            DbEnum.IsolationLevelEnum iso = DbEnum.IsolationLevelEnum.NoTransaction;
 
             // B層を生成
             LayerB myBusiness = new LayerB();
@@ -86,55 +80,41 @@ namespace ElasticScaleStarterKit
                 (TestReturnValue)myBusiness.DoBusinessLogic(
                     (BaseParameterValue)testParameterValue, iso);
 
-            //Converts DataTable data to DataReader to display the data in screen
-            DataTable dt = (DataTable)testReturnValue.Obj;
-            DbDataReader reader = dt.CreateDataReader();
-            int rows = 0;
-            // Get the column names
-            TableFormatter formatter = new TableFormatter(GetColumnNames(reader).ToArray());
-
-            while (reader.Read())
+            string strErrorMsg = "";
+            if (testReturnValue.ErrorFlag == true)
             {
-                // Read the values using standard DbDataReader methods
-                object[] values = new object[reader.FieldCount];
-                reader.GetValues(values);
+                // 結果（業務続行可能なエラー）
+                strErrorMsg = "ErrorMessageID:" + testReturnValue.ErrorMessageID + "\r\n";
+                strErrorMsg += "ErrorMessage:" + testReturnValue.ErrorMessage + "\r\n";
+                strErrorMsg += "ErrorInfo:" + testReturnValue.ErrorInfo + "\r\n";
 
-                // Extract just database name from the $ShardLocation pseudocolumn to make the output formater cleaner.
-                // Note that the $ShardLocation pseudocolumn is always the last column
-                int shardLocationOrdinal = values.Length - 1;
-                values[shardLocationOrdinal] = ExtractDatabaseName(values[shardLocationOrdinal].ToString());
-
-                // Add values to output formatter
-                formatter.AddRow(values);
-
-                rows++;
+                Console.WriteLine("Inserted failed for Error message : {0}", strErrorMsg);
             }
-            Console.WriteLine(formatter.ToString());
-            Console.WriteLine("({0} rows returned)", rows);
-        }
-
-        /// <summary>
-        /// Gets the column names from a data reader.
-        /// </summary>
-        private static IEnumerable<string> GetColumnNames(DbDataReader reader)
-        {
-            List<string> columnNames = new List<string>();
-            foreach (DataRow r in reader.GetSchemaTable().Rows)
+            else
             {
-                columnNames.Add(r[SchemaTableColumn.ColumnName].ToString());
+                //Converts Return value object to dataTable data to display the data in screen
+                DataTable dtTable = (DataTable)testReturnValue.Obj;
+
+                int rows = 0;
+
+                // Get the column names
+                TableFormatter formatter = new TableFormatter(ShardManagementUtils.GetColumnNames(dtTable).ToArray());
+
+                foreach (DataRow dr in dtTable.Rows)
+                {
+                    // Extract just database name from the $ShardLocation pseudocolumn to make the output formater cleaner.
+                    // Note that the $ShardLocation pseudocolumn is always the last column
+                    int shardLocationOrdinal = dr.ItemArray.Length - 1;
+                    dr.ItemArray[shardLocationOrdinal] = ShardManagementUtils.ExtractDatabaseName(dr.ItemArray[shardLocationOrdinal].ToString());
+
+                    // Add values to output formatter
+                    formatter.AddRow(dr.ItemArray);
+
+                    rows++;
+                }
+                Console.WriteLine(formatter.ToString());
+                Console.WriteLine("({0} rows returned)", rows);
             }
-
-            return columnNames;
-        }
-
-        /// <summary>
-        /// Extracts the database name from the provided shard location string.
-        /// </summary>
-        private static string ExtractDatabaseName(string shardLocationString)
-        {
-            string[] pattern = new[] { "[", "DataSource=", "Database=", "]" };
-            string[] matches = shardLocationString.Split(pattern, StringSplitOptions.RemoveEmptyEntries);
-            return matches[0];
         }
     }
 }
