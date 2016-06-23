@@ -1,6 +1,11 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+// System
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 // Microsoft
 using Microsoft.Azure.SqlDatabase.ElasticScale.ShardManagement;
 // Touryo
@@ -18,7 +23,7 @@ namespace ElasticScaleStarterKit
         /// </summary>
         public static ShardMapManager TryGetShardMapManager()
         {
-            if (!SqlDatabaseUtils.DatabaseExists(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
+            if (!SqlDatabaseUtils.ExistsDatabase(MultiShardConfiguration.ShardMapManagerServerName, MultiShardConfiguration.ShardMapManagerDatabaseName))
             {
                 // Shard Map Manager database has not yet been created
                 return null;
@@ -104,6 +109,32 @@ namespace ElasticScaleStarterKit
                 ConsoleUtils.WriteInfo("Added shard {0} to the Shard Map", shardLocation.Database);
             }
             return shard;
+        }
+
+        /// <summary>
+        /// Gets the column names from a data reader.
+        /// </summary>
+        public static IEnumerable<string> GetColumnNames(DataTable dtTable)
+        {
+            DbDataReader dr = dtTable.CreateDataReader();
+
+            List<string> columnNames = new List<string>();
+            foreach (DataRow r in dr.GetSchemaTable().Rows)
+            {
+                columnNames.Add(r[SchemaTableColumn.ColumnName].ToString());
+            }
+
+            return columnNames;
+        }
+
+        /// <summary>
+        /// Extracts the database name from the provided shard location string.
+        /// </summary>
+        public static string ExtractDatabaseName(string shardLocationString)
+        {
+            string[] pattern = new[] { "[", "DataSource=", "Database=", "]" };
+            string[] matches = shardLocationString.Split(pattern, StringSplitOptions.RemoveEmptyEntries);
+            return matches[0];
         }
     }
 }

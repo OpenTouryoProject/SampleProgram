@@ -96,40 +96,29 @@ public class LayerD : MyBaseDao
 
         string commandText = "";
 
-        if ((testParameter.ActionType.Split('%'))[2] == "static")
-        {
-            // 静的SQL
-            commandText = "SELECT c.CustomerId,c.Name AS CustomerName,COUNT(o.OrderID) AS OrderCount FROM dbo.Customers AS c INNER JOIN dbo.Orders AS o ON c.CustomerID = o.CustomerID GROUP BY c.CustomerId,c.Name ORDER BY OrderCount";
-        }
-        else if ((testParameter.ActionType.Split('%'))[2] == "dynamic")
-        {
-            // 動的SQL
-            commandText =
-                "<?xml version=\"1.0\" encoding=\"shift_jis\" ?><ROOT>SELECT c.CustomerId,c.Name AS CustomerName,COUNT(o.OrderID) AS OrderCount FROM dbo.Customers AS c INNER JOIN dbo.Orders AS o ON c.CustomerID = o.CustomerID GROUP BY c.CustomerId,c.Name ORDER BY OrderCount</ROOT>";
-            // 通常、動的SQLをSetSqlByCommandで直接指定するような使い方はしない。
-        }
+        // 静的SQL
+        commandText = "SELECT c.CustomerId,c.Name AS CustomerName,COUNT(o.OrderID) AS OrderCount FROM dbo.Customers AS c INNER JOIN dbo.Orders AS o ON c.CustomerID = o.CustomerID GROUP BY c.CustomerId,c.Name ORDER BY OrderCount";
 
         //   -- 直接指定する場合。
         this.SetSqlByCommand(commandText);
 
-        // 戻り値 dt
+        // 戻り値 DataTable
         DataTable dt = new DataTable();
 
-        // ３列生成
-        dt.Columns.Add("c1", System.Type.GetType("System.String"));
-        dt.Columns.Add("c2", System.Type.GetType("System.String"));
-        dt.Columns.Add("c3", System.Type.GetType("System.String"));
+        //// ３列生成
+        dt.Columns.Add("c1", typeof(string));
+        dt.Columns.Add("c2", typeof(string));
+        dt.Columns.Add("c3", typeof(string));
 
         //   -- 一覧を返すSELECTクエリを実行する
         IDataReader idr = (IDataReader)this.ExecSelect_DR();
-
         while (idr.Read())
         {
-            // DRから読む
+            // DataReaderから読む
             object[] objArray = new object[3];
             idr.GetValues(objArray);
 
-            // DTに設定する。
+            // DataTableに設定する。
             DataRow dr = dt.NewRow();
             dr.ItemArray = objArray;
             dt.Rows.Add(dr);
@@ -153,16 +142,8 @@ public class LayerD : MyBaseDao
 
         string filename = "";
 
-        if ((testParameter.ActionType.Split('%'))[2] == "static")
-        {
-            // 静的SQL
-            filename = "CustomersSelectDDR.sql";
-        }
-        else if ((testParameter.ActionType.Split('%'))[2] == "dynamic")
-        {
-            // 動的SQL
-            filename = "CustomersSelectDDR.sql";
-        }
+        // 静的SQL
+        filename = "CustomersSelectDDR.sql";
 
         //   -- ファイルから読み込む場合。
         this.SetSqlByFile2(filename);
@@ -173,9 +154,9 @@ public class LayerD : MyBaseDao
         // 戻り値 dt
         DataTable dt = new DataTable();
         // ３列生成
-        dt.Columns.Add("c1", System.Type.GetType("System.String"));
-        dt.Columns.Add("c2", System.Type.GetType("System.String"));
-        dt.Columns.Add("c3", System.Type.GetType("System.String"));
+        dt.Columns.Add("c1", typeof(string));
+        dt.Columns.Add("c2", typeof(string));
+        dt.Columns.Add("c3", typeof(string));
 
         //   -- 一覧を返すSELECTクエリを実行する
         IDataReader idr = (IDataReader)this.ExecSelect_DR();
@@ -213,16 +194,8 @@ public class LayerD : MyBaseDao
 
         string filename = "";
 
-        if ((testParameter.ActionType.Split('%'))[2] == "static")
-        {
-            // 静的SQL
-            filename = "CustomersDeleteDDR.sql";
-        }
-        else if ((testParameter.ActionType.Split('%'))[2] == "dynamic")
-        {
-            // 動的SQL
-            filename = "CustomersDeleteDDR.sql";
-        }
+        // 静的SQL
+        filename = "CustomersDeleteDDR.sql";
 
         //   -- ファイルから読み込む場合。
         this.SetSqlByFile2(filename);
