@@ -18,13 +18,20 @@
         var receivedElement = parentElement.querySelector('.received');
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
-    };
+    }
 
     function onPause() {
         // TODO: このアプリケーションは中断されました。ここで、アプリケーションの状態を保存します。
-    };
+    }
 
     function onResume() {
         // TODO: このアプリケーションが再アクティブ化されました。ここで、アプリケーションの状態を復元します。
-    };
-} )();
+    }
+
+})();
+
+
+function hogehogehoge() {
+    alert("fadsfasf");
+    window.open('http://10.0.2.2/WebApplication1/Home/', '_self');
+}

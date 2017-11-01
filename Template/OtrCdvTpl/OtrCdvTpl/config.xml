@@ -78,4 +78,12 @@
     <splash src="res/screens/ios/screen-iphone-portrait-736h.png" width="1242" height="2208" />
     <splash src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
   </platform>
+  <preference name="ShowTitle" value="True" />
+  <preference name="OverrideUserAgent" value="OtrCdvTpl" />
+  <preference name="AppendUserAgent" value="" />
+  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
+  <!--vs:plugin name="cordova-plugin-customurlscheme">
+    <param name="URL_SCHEME" value="otrcdvtpl" />
+  </vs:plugin-->
+  <plugin name="cordova-plugin-customurlscheme" version="" />
 </widget>
