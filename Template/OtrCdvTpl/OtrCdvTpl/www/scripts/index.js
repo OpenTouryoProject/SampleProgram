@@ -33,5 +33,11 @@
 
 function hogehogehoge() {
     alert("fadsfasf");
-    window.open('http://10.0.2.2/WebApplication1/Home/', '_self');
+    window.open('http://10.0.2.2:81/', '_self');
+}
+
+function handleOpenURL(url) {
+    setTimeout(function () {
+        alert("received url: " + url);
+    }, 0);
 }
