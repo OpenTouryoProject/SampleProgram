@@ -56,6 +56,7 @@ namespace WebApplication.Controllers
         /// <returns>IActionResult</returns>
         public IActionResult OAuth2Redirect()
         {
+            //return View("Index");
             return View();
         }
 
