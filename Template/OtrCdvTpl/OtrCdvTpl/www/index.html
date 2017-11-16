@@ -25,6 +25,8 @@
         必要に応じて、次のメタ タグでコンテンツ セキュリティ ポリシーをカスタマイズします。default-src に 'unsafe-inline' を追加して、インライン JavaScript を有効にします。
         詳細については、http://go.microsoft.com/fwlink/?LinkID=617521 を参照してください。
     --> 
+        <meta http-equiv="Content-Security-Policy" content="default-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
@@ -39,11 +41,17 @@
                 <p class="event listening">デバイスに接続しています</p>
                 <p class="event received">デバイスの準備が完了しました</p>
             </div>
+            
+            <a id="signin" href="" target="_self">signin（外部）</a><br />
+            <a id="signup" href="" target="_self">sign-up（外部）</a><br />
+            <a id="signout" href="javascript:void(0)" onclick="SignOut();">sign-out</a><br />
+
+            <!--<a href="javascript:void(0)" onclick="OpenInternally();">Starter（内部）</a><br />-->
+
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+        <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="scripts/index.js"></script>
-        <a href="http://10.0.2.2:81/HOME/OAuth2Starter" target="_self">Starter（外部）</a><br />
-        <a href="index2.html" target="_self">index2（内部）</a><br />
     </body>
 </html>
