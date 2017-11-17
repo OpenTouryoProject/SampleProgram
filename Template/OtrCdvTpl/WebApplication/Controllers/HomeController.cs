@@ -31,28 +31,23 @@ namespace WebApplication.Controllers
     /// <summary>認証用サンプル アプリ・コントローラ</summary>
     public class HomeController : Controller
     {
-        /// <summary>
-        /// Index
-        /// </summary>
+        /// <summary>Index</summary>
         /// <returns>IActionResult</returns>
         public IActionResult Index()
         {
             return View();
         }
 
-        /// <summary>
-        /// OAuth2Starter
-        /// </summary>
+        /// <summary>OAuth2Starter</summary>
+        /// <param name="state">string</param>
         /// <returns>IActionResult</returns>
-        public IActionResult OAuth2Starter()
+        public IActionResult OAuth2Starter(string state)
         {
-            return Redirect("http://10.0.2.2/MultiPurposeAuthSite/Account/OAuthAuthorize?client_id=40319c0100f94ff3aab3004c8bdb5e52&response_type=token&scope=profile%20email%20phone%20address%20userid&state=xAk2xv64R0");
+            return Redirect("http://10.0.2.2/MultiPurposeAuthSite/Account/OAuthAuthorize?client_id=40319c0100f94ff3aab3004c8bdb5e52&response_type=token&scope=profile%20email%20phone%20address%20userid&state=" + state);
             //return View();
         }
 
-        /// <summary>
-        /// OAuth2Redirect
-        /// </summary>
+        /// <summary>OAuth2Redirect</summary>
         /// <returns>IActionResult</returns>
         public IActionResult OAuth2Redirect()
         {
@@ -60,9 +55,7 @@ namespace WebApplication.Controllers
             return View();
         }
 
-        /// <summary>
-        /// Error
-        /// </summary>
+        /// <summary>Error</summary>
         /// <returns>IActionResult</returns>
         public IActionResult Error()
         {

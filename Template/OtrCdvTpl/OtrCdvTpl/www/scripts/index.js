@@ -18,7 +18,8 @@
 // 2. アプリを起動し、ブレークポイントを設定します。
 // 3. 次に、JavaScript コンソールで "window.location.reload()" を実行します。
 
-var SignInEndPoint = "http://10.0.2.2:81/HOME/OAuth2Starter";
+var SignInEndPoint = "http://10.0.2.2:81/HOME/OAuth2Starter?state=";
+var SignUpEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/Account/Register";
 var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
 
 // ---------------------------------------------------------------
@@ -51,31 +52,50 @@ var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
         receivedElement.setAttribute('style', 'display:block;');
 
         // 開発中
-        //localStorage.removeItem('token');
+        //alert('開発中');
+        localStorage.removeItem('state');
+        localStorage.removeItem('token');
 
-        // 初期化
-        document.getElementById('signin').href = SignInEndPoint;
-        document.getElementById('signup').href = SignInEndPoint;
+        // state
+        //alert('state');
+        var state = localStorage.getItem('state');
 
-        // localStorageのtokenを確認する。
+        // stateが・・・
+        if (state)
+        {
+            // ある場合
+        }
+        else
+        {
+            // ない場合
+            state = GetState(12);
+            //alert("state: " + state);
+            localStorage.setItem('state', state);
+        }
+
+        // Starterの初期化
+        document.getElementById('signin').href = SignInEndPoint + state;
+        document.getElementById('signup').href = SignUpEndPoint;
+
+        // token
+        //alert('token');
         var token = localStorage.getItem('token');
 
+        // tokenが・・・
         if (token)
         {
-            //alert('token is not null');
-            //alert('token: ' + token);
+            alert('token is not null');
+            alert('token: ' + token);
 
-            // tokenがある場合、/userinfoにリクエスト。
-            CallOAuthAPI(UserInfoEndPoint, token, 'get', null);
+            // ある場合、/userinfoにリクエスト。
+            CallOAuthAPI(UserInfoEndPoint, token, 'get', null); // → SignIn()
         }
         else
         {
             //alert('token is null');
 
-            // tokenがない場合、サインイン、サインアップボタンを表示
-            document.getElementById('signin').style.visibility = "visible";
-            document.getElementById('signup').style.visibility = "visible";
-            document.getElementById('signout').style.visibility = "hidden";
+            // ない場合、
+            SignOut();
         }
     }
 
@@ -105,18 +125,6 @@ function OpenInternally() {
 */
 
 // ---------------------------------------------------------------
-// SignOut
-// ---------------------------------------------------------------
-// 引数    －
-// 戻り値  －
-// ---------------------------------------------------------------
-function SignOut() {
-    localStorage.removeItem('token');
-    document.getElementById('signin').style.visibility = "visible";
-    document.getElementById('signup').style.visibility = "visible";
-    document.getElementById('signout').style.visibility = "hidden";
-}
-// ---------------------------------------------------------------
 // cordova-plugin-customurlschemeのコールバック
 // ---------------------------------------------------------------
 // 引数    url
@@ -129,14 +137,31 @@ function handleOpenURL(url) {
         var token = url.substring(url.indexOf('://') + 3);
         //alert("token: " + token);
 
-        CallOAuthAPI(UserInfoEndPoint, token, 'get', null);
+        var payload = DecBase64(token.split('.')[1]);
+        //alert("payload: " + payload);
+
+        payload = JSON.parse(payload);
+        var state = localStorage.getItem('state');
+
+        //alert('nonce: ' + payload.nonce);
+        //alert('state: ' + state);
+
+        if (payload.nonce == state) {
+            // 一致する。
+            CallOAuthAPI(UserInfoEndPoint, token, 'get', null);
+        }
+        else {
+            // 一致しない。
+            SignOut();
+        }
+
     }, 0);
 }
 
 // ---------------------------------------------------------------
-// cordova-plugin-customurlschemeのコールバック
+// /userinfoにリクエスト
 // ---------------------------------------------------------------
-// 引数    url
+// 引数    url, token, httpMethod, postdata
 // 戻り値  －
 // ---------------------------------------------------------------
 function CallOAuthAPI(url, token, httpMethod, postdata) {
@@ -163,22 +188,97 @@ function CallOAuthAPI(url, token, httpMethod, postdata) {
             //alert("userinfo: " + JSON.stringify(userinfo));
 
             if (userinfo.sub) {
-                alert('sub is ' + userinfo.sub);
-                localStorage.setItem("token", token);
-                document.getElementById('signin').style.visibility = "hidden";
-                document.getElementById('signup').style.visibility = "hidden";
-                document.getElementById('signout').style.visibility = "visible";
+                //alert('sub is ' + userinfo.sub);
+                SignIn(token, userinfo.sub);
             }
             else {
                 //alert('sub is null');
-                localStorage.removeItem('token');
-                document.getElementById('signin').style.visibility = "visible";
-                document.getElementById('signup').style.visibility = "visible";
-                document.getElementById('signout').style.visibility = "hidden";
+                SignOut();
             }
         },
         error: function (responseData, textStatus, errorThrown) {
-            alert(textStatus + ', ' + errorThrown.message);
+            //alert(textStatus + ', ' + errorThrown.message);
+            SignOut();
         }
     });
+}
+
+// ---------------------------------------------------------------
+// SignIn
+// ---------------------------------------------------------------
+// 引数    －
+// 戻り値  －
+// ---------------------------------------------------------------
+function SignIn(token, sub) {
+    // tokenを保持
+    localStorage.setItem("token", token);
+
+    // サインイン、サインアップボタンを非表示
+    document.getElementById('signin').style.visibility = "hidden";
+    document.getElementById('signup').style.visibility = "hidden";
+    document.getElementById('signout').style.visibility = "visible";
+    document.getElementById('sub').style.visibility = "visible";
+    document.getElementById('sub').innerHTML = sub;
+}
+
+// ---------------------------------------------------------------
+// SignOut
+// ---------------------------------------------------------------
+// 引数    －
+// 戻り値  －
+// ---------------------------------------------------------------
+function SignOut() {
+    // tokenを破棄
+    localStorage.removeItem('token');
+
+    // stateの事前更新・保存
+    var state = GetState(12);
+    localStorage.setItem('state', state);
+    document.getElementById('signin').href = SignInEndPoint + state;
+
+    // サインイン、サインアップボタンを表示
+    document.getElementById('signin').style.visibility = "visible";
+    document.getElementById('signup').style.visibility = "visible";
+    document.getElementById('signout').style.visibility = "hidden";
+    document.getElementById('sub').style.visibility = "hidden";
+    document.getElementById('sub').innerHTML = "";
+}
+
+// ---------------------------------------------------------------
+// stateを取得する。
+// ---------------------------------------------------------------
+// 引数    l(len)
+// 戻り値  ランダム文字列
+// ---------------------------------------------------------------
+function GetState(l) {
+    // https://qiita.com/ryounagaoka/items/4736c225bdd86a74d59c
+    // 生成する文字列に含める文字セット
+    var c = "abcdefghijklmnopqrstuvwxyz0123456789";
+    var cl = c.length;
+    var r = "";
+    for (var i = 0; i < l; i++) {
+        r += c[Math.floor(Math.random() * cl)];
+    }
+    return r;
+}
+
+// ---------------------------------------------------------------
+// Base64/Base64Urlのどちらでもデコード
+// https://www.g200kg.com/archives/2014/12/base64encdec.html
+//   Licensed under WTFPLv2
+// ---------------------------------------------------------------
+// 引数    x : Base64/Base64Url String
+// 戻り値  Decoded String
+// ---------------------------------------------------------------
+function DecBase64(x) {
+    x = x.split("=")[0];
+    var tab = "-_ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    var r = [], d = 0, bits = 0, l = x.length;
+    for (var i = 0; i < l; ++i) {
+        d = (d << 6) + ((tab.indexOf(x[i]) - 2) & 0x3f);
+        if ((bits += 6) >= 8)
+            r.push((d >> (bits -= 8)) & 0xff);
+    }
+
+    return String.fromCharCode.apply(null, r);
 }
