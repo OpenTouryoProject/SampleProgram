@@ -3,7 +3,7 @@
   <metadata>
     <id>OssCons.DotNetSubcommittee.TestClassLibrary1</id>
     <title>OssCons.DotNetSubcommittee.TestClassLibrary1</title>
-    <version>0.0.6</version>
+    <version>0.0.7</version>
     <authors>OSS Consortium .net subcommittee</authors>
     <owners>daisukenishino77</owners>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</licenseUrl>
@@ -21,13 +21,11 @@
   </metadata>
   <files>
     <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.dll" target="lib\net46" />
-    <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.pdb" target="lib\net46" />
+    <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.pdb" target="pdb\net46" />
     <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.XML" target="lib\net46" />
     
     <file src="TestClassLibrary1\bin\Debug\net47\OssCons.DotNetSubcommittee.TestClassLibrary1.dll" target="lib\net47" />
-    <file src="TestClassLibrary1\bin\Debug\net47\OssCons.DotNetSubcommittee.TestClassLibrary1.pdb" target="lib\net47" />
+    <file src="TestClassLibrary1\bin\Debug\net47\OssCons.DotNetSubcommittee.TestClassLibrary1.pdb" target="pdb\net47" />
     <file src="TestClassLibrary1\bin\Debug\net47\OssCons.DotNetSubcommittee.TestClassLibrary1.xml" target="lib\net47" />
-    
-    <file src="TestClassLibrary1\**\*.cs" target="src" />
   </files>
 </package>

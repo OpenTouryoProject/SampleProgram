@@ -2,9 +2,9 @@ setlocal
 @echo off
 
 @rem SymbolPackage‚Ì¶¬
-..\nuget.exe pack OssCons.DotNetSubcommittee.TestClassLibrary1.nuspec -OutputDirectory pkg -Symbols
+..\nuget.exe pack SymbolPackage.nuspec -OutputDirectory pkg -Symbols
 
 @rem PrimaryPackage‚Ì¶¬iã‘‚«j
-..\nuget.exe pack OssCons.DotNetSubcommittee.TestClassLibrary1.nuspec -OutputDirectory pkg
+..\nuget.exe pack PrimaryPackage.nuspec -OutputDirectory pkg
 
 pause
