@@ -81,9 +81,8 @@
   <preference name="ShowTitle" value="True" />
   <preference name="OverrideUserAgent" value="OtrCdvTpl" />
   <preference name="AppendUserAgent" value="" />
-  <plugin name="cordova-plugin-inappbrowser" spec="~1.7.1" />
-  <!--vs:plugin name="cordova-plugin-customurlscheme">
+  <vs:plugin name="cordova-plugin-customurlscheme">
     <param name="URL_SCHEME" value="otrcdvtpl" />
-  </vs:plugin-->
+  </vs:plugin>
   <plugin name="cordova-plugin-customurlscheme" version="" />
 </widget>

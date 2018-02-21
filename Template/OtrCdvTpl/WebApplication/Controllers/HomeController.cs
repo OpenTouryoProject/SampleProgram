@@ -40,19 +40,30 @@ namespace WebApplication.Controllers
 
         /// <summary>OAuth2Starter</summary>
         /// <param name="state">string</param>
+        /// <param name="code_challenge">string</param>
         /// <returns>IActionResult</returns>
-        public IActionResult OAuth2Starter(string state)
+        public IActionResult OAuth2Starter(string state, string code_challenge)
         {
-            return Redirect("http://10.0.2.2/MultiPurposeAuthSite/Account/OAuthAuthorize?client_id=40319c0100f94ff3aab3004c8bdb5e52&response_type=token&scope=profile%20email%20phone%20address%20userid&state=" + state);
+            return Redirect(
+                "http://10.0.2.2/MultiPurposeAuthSite/Account/OAuthAuthorize"
+                + "?client_id=40319c0100f94ff3aab3004c8bdb5e52&response_type=code"
+                + "&scope=profile%20email%20phone%20address%20userid"
+                + "&state=" + state
+                + "&code_challenge=" + code_challenge
+                + "&code_challenge_method=plain");
+
             //return View();
         }
 
-        /// <summary>OAuth2Redirect</summary>
+        /// <summary>ConvertCodeToToken</summary>
+        /// <param name="code">string</param>
+        /// <param name="code_challenge">string</param>
         /// <returns>IActionResult</returns>
-        public IActionResult OAuth2Redirect()
+        public IActionResult ConvertCodeToToken(string code, string code_challenge)
         {
-            //return View("Index");
-            return View();
+            // PKCEのアクセストークン・リクエスト
+
+            return new JsonResult(new Dictionary<string, string>(){ { "token", "hogehoge" } });
         }
 
         /// <summary>Error</summary>

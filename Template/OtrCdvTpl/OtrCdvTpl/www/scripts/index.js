@@ -18,8 +18,9 @@
 // 2. アプリを起動し、ブレークポイントを設定します。
 // 3. 次に、JavaScript コンソールで "window.location.reload()" を実行します。
 
-var SignInEndPoint = "http://10.0.2.2:81/HOME/OAuth2Starter?state=";
+var SignInEndPoint = "http://10.0.2.2:81/HOME/OAuth2Starter";
 var SignUpEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/Account/Register";
+var ConvertCodeToTokenEndPoint = "http://10.0.2.2:81/HOME/ConvertCodeToToken";
 var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
 
 // ---------------------------------------------------------------
@@ -32,97 +33,132 @@ var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
     "use strict";
 
     // devicereadyイベントのハンドラ登録
-    document.addEventListener( 'deviceready', onDeviceReady.bind( this ), false );
+    document.addEventListener('deviceready', onDeviceReady.bind(this), false);
 
+    // ---------------------------------------------------------------
     // devicereadyイベントのハンドラ
+    // ---------------------------------------------------------------
     function onDeviceReady() {
         // Cordova の一時停止を処理し、イベントを再開します
+
+        MyAlert("onDeviceReady 1");
 
         // pauseイベントのハンドラ登録
         document.addEventListener('pause', onPause.bind(this), false);
         // resumeイベントのハンドラ登録
-        document.addEventListener( 'resume', onResume.bind( this ), false );
-        
+        document.addEventListener('resume', onResume.bind(this), false);
+
+        MyAlert("onDeviceReady 2");
+
         // TODO: Cordova が読み込まれました。
-        // ここで、Cordova を必要とする初期化を実行します。
-        var parentElement = document.getElementById('deviceready');
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
 
-        // 開発中
-        //alert('開発中');
-        localStorage.removeItem('state');
-        localStorage.removeItem('token');
+        // 初期化
+        InitCordova();
 
-        // state
-        //alert('state');
-        var state = localStorage.getItem('state');
+        MyAlert("onDeviceReady 3");
 
-        // stateが・・・
-        if (state)
-        {
-            // ある場合
-        }
-        else
-        {
-            // ない場合
-            state = GetState(12);
-            //alert("state: " + state);
-            localStorage.setItem('state', state);
-        }
+        InitStatus();
 
-        // Starterの初期化
-        document.getElementById('signin').href = SignInEndPoint + state;
-        document.getElementById('signup').href = SignUpEndPoint;
+        MyAlert("onDeviceReady 4");
 
-        // token
-        //alert('token');
+        // tokenチェック
         var token = localStorage.getItem('token');
 
-        // tokenが・・・
-        if (token)
-        {
+        // tokenが、
+        if (token) {
             alert('token is not null');
             alert('token: ' + token);
 
             // ある場合、/userinfoにリクエスト。
             CallOAuthAPI(UserInfoEndPoint, token, 'get', null); // → SignIn()
+
+            MyAlert("onDeviceReady 5");
         }
-        else
-        {
-            //alert('token is null');
+        else {
+            alert('token is null');
 
             // ない場合、
             SignOut();
+
+            MyAlert("onDeviceReady 6");
         }
     }
 
+    // ---------------------------------------------------------------
     // pauseイベントのハンドラ
+    // ---------------------------------------------------------------
     function onPause() {
         // TODO: このアプリケーションは中断されました。ここで、アプリケーションの状態を保存します。
     }
 
+    // ---------------------------------------------------------------
     // resumeイベントのハンドラ
+    // ---------------------------------------------------------------
     function onResume() {
         // TODO: このアプリケーションが再アクティブ化されました。ここで、アプリケーションの状態を復元します。
     }
 
 })();
 
-/*
 // ---------------------------------------------------------------
-// cordova-plugin-inappbrowser適用後、
-// 外部サイト（http://, https:// ）を内部（WebView）で開くための実装
+// MyAlert
+// ---------------------------------------------------------------
+function MyAlert(msg) {
+
+    if (msg.indexOf('onDeviceReady') !== -1) {
+    }
+    else if (msg.indexOf('handleOpenURL') !== -1) {
+    }
+    else if (msg.indexOf('CallConvertCodeToToken') !== -1) {
+    }
+    else {
+        alert(msg);
+    }
+
+    //alert(msg);
+}
+
+// ---------------------------------------------------------------
+// Cordovaの初期化
 // ---------------------------------------------------------------
 // 引数    －
 // 戻り値  －
 // ---------------------------------------------------------------
-function OpenInternally() {
-    window.open(SignInEndPoint, '_self');
+function InitCordova() {
+    // ここで、Cordova を必要とする初期化を実行します。
+    var parentElement = document.getElementById('deviceready');
+    var listeningElement = parentElement.querySelector('.listening');
+    var receivedElement = parentElement.querySelector('.received');
+    listeningElement.setAttribute('style', 'display:none;');
+    receivedElement.setAttribute('style', 'display:block;');
 }
-*/
+
+// ---------------------------------------------------------------
+// 状態の初期化
+// ---------------------------------------------------------------
+// 引数    －
+// 戻り値  －
+// ---------------------------------------------------------------
+function InitStatus()
+{
+    localStorage.removeItem('state');
+    localStorage.removeItem('code_challenge');
+
+    // state
+    var state = GetRandomString(12);
+    localStorage.setItem('state', state);
+
+    // code_challenge
+    var code_challenge = GetRandomString(64);
+    localStorage.setItem('code_challenge', code_challenge);
+
+    // Starterの初期化
+    document.getElementById('signin').href = SignInEndPoint
+        + "?state=" + state
+        + "&code_challenge=" + code_challenge;
+
+    document.getElementById('signup').href = SignUpEndPoint;
+}
 
 // ---------------------------------------------------------------
 // cordova-plugin-customurlschemeのコールバック
@@ -133,29 +169,73 @@ function OpenInternally() {
 function handleOpenURL(url) {
     setTimeout(function () {
 
-        //alert("received url: " + url);
-        var token = url.substring(url.indexOf('://') + 3);
-        //alert("token: " + token);
+        MyAlert("handleOpenURL 1");
 
-        var payload = DecBase64(token.split('.')[1]);
-        //alert("payload: " + payload);
+        MyAlert("handleOpenURL received url: " + url);
 
-        payload = JSON.parse(payload);
-        var state = localStorage.getItem('state');
+        // 逆だとNG
+        var state = url.substring(url.indexOf('&state=') + '&state='.length);
+        MyAlert("handleOpenURL state: " + state);
 
-        //alert('nonce: ' + payload.nonce);
-        //alert('state: ' + state);
+        var code = url.substring(url.indexOf('?code=') + '?code='.length, url.indexOf('&state='));
+        MyAlert("handleOpenURL code: " + code);
 
-        if (payload.nonce == state) {
+        var code_challenge = localStorage.getItem('code_challenge');
+        MyAlert("handleOpenURL code_challenge: " + code_challenge);
+
+        MyAlert("handleOpenURL 2");
+
+        if (localStorage.getItem('state') === state) {
             // 一致する。
-            CallOAuthAPI(UserInfoEndPoint, token, 'get', null);
+            CallConvertCodeToToken(ConvertCodeToTokenEndPoint, 'post', code, code_challenge);
+
+            MyAlert("handleOpenURL 3");
         }
         else {
             // 一致しない。
-            SignOut();
+            MyAlert("handleOpenURL 4");
         }
-
     }, 0);
+}
+
+// ---------------------------------------------------------------
+// /ConvertCodeToTokenにリクエスト
+// ---------------------------------------------------------------
+// 引数    url, token, httpMethod, code, code_challenge
+// 戻り値  －
+// ---------------------------------------------------------------
+function CallConvertCodeToToken(url, httpMethod, code, code_challenge) {
+    //alert(
+    //    '<httpMethod>' + '\n' + httpMethod + '\n' +
+    //    '<url>' + '\n' + url + '\n' +
+    //    '<token>' + '\n' + token);
+
+    $.ajax({
+        type: httpMethod,
+        url: url,
+        crossDomain: true,
+        headers: null,
+        data: {
+            "code": code,
+            "code_challenge": code_challenge
+        },
+        xhrFields: {
+            withCredentials: true
+        },
+        success: function (responseData, textStatus, jqXHR) {
+            
+            MyAlert("CallConvertCodeToToken responseData: " + JSON.stringify(responseData));
+
+            var token = responseData.token;
+
+            MyAlert("CallConvertCodeToToken token: " + responseData.token);
+
+            CallUserInfo(UserInfoEndPoint, token, 'get', null);
+        },
+        error: function (responseData, textStatus, errorThrown) {
+            MyAlert("CallConvertCodeToToken " + textStatus + ', ' + errorThrown.message);
+        }
+    });
 }
 
 // ---------------------------------------------------------------
@@ -164,7 +244,7 @@ function handleOpenURL(url) {
 // 引数    url, token, httpMethod, postdata
 // 戻り値  －
 // ---------------------------------------------------------------
-function CallOAuthAPI(url, token, httpMethod, postdata) {
+function CallUserInfo(url, token, httpMethod, postdata) {
     //alert(
     //    '<httpMethod>' + '\n' + httpMethod + '\n' +
     //    '<url>' + '\n' + url + '\n' +
@@ -228,14 +308,9 @@ function SignIn(token, sub) {
 // 戻り値  －
 // ---------------------------------------------------------------
 function SignOut() {
-    // tokenを破棄
-    localStorage.removeItem('token');
-
-    // stateの事前更新・保存
-    var state = GetState(12);
-    localStorage.setItem('state', state);
-    document.getElementById('signin').href = SignInEndPoint + state;
-
+    // 初期化
+    InitStatus();
+    
     // サインイン、サインアップボタンを表示
     document.getElementById('signin').style.visibility = "visible";
     document.getElementById('signup').style.visibility = "visible";
@@ -245,12 +320,12 @@ function SignOut() {
 }
 
 // ---------------------------------------------------------------
-// stateを取得する。
+// ランダム文字列を取得する。
 // ---------------------------------------------------------------
 // 引数    l(len)
 // 戻り値  ランダム文字列
 // ---------------------------------------------------------------
-function GetState(l) {
+function GetRandomString(l) {
     // https://qiita.com/ryounagaoka/items/4736c225bdd86a74d59c
     // 生成する文字列に含める文字セット
     var c = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -262,6 +337,7 @@ function GetState(l) {
     return r;
 }
 
+// ↓ 要らなくなったけど、取っておく予定。
 // ---------------------------------------------------------------
 // Base64/Base64Urlのどちらでもデコード
 // https://www.g200kg.com/archives/2014/12/base64encdec.html
