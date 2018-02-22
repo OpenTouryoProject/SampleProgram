@@ -39,7 +39,7 @@ var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
     // devicereadyイベントのハンドラ
     // ---------------------------------------------------------------
     function onDeviceReady() {
-        // Cordova の一時停止を処理し、イベントを再開します
+        // Cordova の一時停止を処理し、イベントを再開します。
 
         MyAlert("onDeviceReady 1");
 
@@ -66,18 +66,18 @@ var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
 
         // tokenが、
         if (token) {
-            alert('token is not null');
-            alert('token: ' + token);
+            MyAlert('onDeviceReady token is not null');
+            MyAlert('onDeviceReady token: ' + token);
 
-            // ある場合、/userinfoにリクエスト。
-            CallOAuthAPI(UserInfoEndPoint, token, 'get', null); // → SignIn()
+            // ある場合、/userinfoにリクエストして、サインイン
+            CallUserInfo(token); // → SignIn()
 
             MyAlert("onDeviceReady 5");
         }
         else {
-            alert('token is null');
+            MyAlert('onDeviceReady token is null');
 
-            // ない場合、
+            // ない場合、サインアウト
             SignOut();
 
             MyAlert("onDeviceReady 6");
@@ -111,6 +111,8 @@ function MyAlert(msg) {
     }
     else if (msg.indexOf('CallConvertCodeToToken') !== -1) {
     }
+    else if (msg.indexOf('CallUserInfo') !== -1) {
+    }
     else {
         alert(msg);
     }
@@ -142,20 +144,20 @@ function InitCordova() {
 function InitStatus()
 {
     localStorage.removeItem('state');
-    localStorage.removeItem('code_challenge');
+    localStorage.removeItem('code_verifier');
 
     // state
     var state = GetRandomString(12);
     localStorage.setItem('state', state);
 
-    // code_challenge
-    var code_challenge = GetRandomString(64);
-    localStorage.setItem('code_challenge', code_challenge);
+    // code_verifier
+    var code_verifier = GetRandomString(64);
+    localStorage.setItem('code_verifier', code_verifier);
 
     // Starterの初期化
     document.getElementById('signin').href = SignInEndPoint
         + "?state=" + state
-        + "&code_challenge=" + code_challenge;
+        + "&code_verifier=" + code_verifier;
 
     document.getElementById('signup').href = SignUpEndPoint;
 }
@@ -167,6 +169,7 @@ function InitStatus()
 // 戻り値  －
 // ---------------------------------------------------------------
 function handleOpenURL(url) {
+
     setTimeout(function () {
 
         MyAlert("handleOpenURL 1");
@@ -174,20 +177,22 @@ function handleOpenURL(url) {
         MyAlert("handleOpenURL received url: " + url);
 
         // 逆だとNG
-        var state = url.substring(url.indexOf('&state=') + '&state='.length);
+        var state = url.substring(
+            url.indexOf('&state=') + '&state='.length);
         MyAlert("handleOpenURL state: " + state);
 
-        var code = url.substring(url.indexOf('?code=') + '?code='.length, url.indexOf('&state='));
+        var code = url.substring(
+            url.indexOf('?code=') + '?code='.length, url.indexOf('&state='));
         MyAlert("handleOpenURL code: " + code);
 
-        var code_challenge = localStorage.getItem('code_challenge');
-        MyAlert("handleOpenURL code_challenge: " + code_challenge);
+        var code_verifier = localStorage.getItem('code_verifier');
+        MyAlert("handleOpenURL code_verifier: " + code_verifier);
 
         MyAlert("handleOpenURL 2");
 
         if (localStorage.getItem('state') === state) {
             // 一致する。
-            CallConvertCodeToToken(ConvertCodeToTokenEndPoint, 'post', code, code_challenge);
+            CallConvertCodeToToken(code, code_verifier);
 
             MyAlert("handleOpenURL 3");
         }
@@ -201,36 +206,30 @@ function handleOpenURL(url) {
 // ---------------------------------------------------------------
 // /ConvertCodeToTokenにリクエスト
 // ---------------------------------------------------------------
-// 引数    url, token, httpMethod, code, code_challenge
+// 引数    code, code_verifier
 // 戻り値  －
 // ---------------------------------------------------------------
-function CallConvertCodeToToken(url, httpMethod, code, code_challenge) {
-    //alert(
-    //    '<httpMethod>' + '\n' + httpMethod + '\n' +
-    //    '<url>' + '\n' + url + '\n' +
-    //    '<token>' + '\n' + token);
+function CallConvertCodeToToken(code, code_verifier) {
 
     $.ajax({
-        type: httpMethod,
-        url: url,
+        type: 'post',
+        url: ConvertCodeToTokenEndPoint,
         crossDomain: true,
         headers: null,
         data: {
             "code": code,
-            "code_challenge": code_challenge
+            "code_verifier": code_verifier
         },
         xhrFields: {
             withCredentials: true
         },
         success: function (responseData, textStatus, jqXHR) {
             
-            MyAlert("CallConvertCodeToToken responseData: " + JSON.stringify(responseData));
-
             var token = responseData.token;
 
-            MyAlert("CallConvertCodeToToken token: " + responseData.token);
+            MyAlert("CallConvertCodeToToken token: " + token);
 
-            CallUserInfo(UserInfoEndPoint, token, 'get', null);
+            CallUserInfo(token);
         },
         error: function (responseData, textStatus, errorThrown) {
             MyAlert("CallConvertCodeToToken " + textStatus + ', ' + errorThrown.message);
@@ -241,43 +240,39 @@ function CallConvertCodeToToken(url, httpMethod, code, code_challenge) {
 // ---------------------------------------------------------------
 // /userinfoにリクエスト
 // ---------------------------------------------------------------
-// 引数    url, token, httpMethod, postdata
+// 引数    token
 // 戻り値  －
 // ---------------------------------------------------------------
-function CallUserInfo(url, token, httpMethod, postdata) {
-    //alert(
-    //    '<httpMethod>' + '\n' + httpMethod + '\n' +
-    //    '<url>' + '\n' + url + '\n' +
-    //    '<token>' + '\n' + token);
+function CallUserInfo(token) {
 
     $.ajax({
-        type: httpMethod,
-        url: url,
+        type: 'get',
+        url: UserInfoEndPoint,
         crossDomain: true,
         headers: {
             'Authorization': 'Bearer ' + token
         },
-        data: postdata,
+        data: null,
         xhrFields: {
             withCredentials: true
         },
         success: function (responseData, textStatus, jqXHR) {
-            //alert(textStatus + ', ' + JSON.stringify(responseData));
 
             var userinfo = responseData;
-            //alert("userinfo: " + JSON.stringify(userinfo));
+
+            MyAlert("CallUserInfo userinfo: " + JSON.stringify(userinfo));
 
             if (userinfo.sub) {
-                //alert('sub is ' + userinfo.sub);
+                MyAlert("CallUserInfo sub: " + userinfo.sub);
                 SignIn(token, userinfo.sub);
             }
             else {
-                //alert('sub is null');
+                MyAlert("CallUserInfo sub is null");
                 SignOut();
             }
         },
         error: function (responseData, textStatus, errorThrown) {
-            //alert(textStatus + ', ' + errorThrown.message);
+            MyAlert("CallUserInfo " + textStatus + ', ' + errorThrown.message);
             SignOut();
         }
     });
