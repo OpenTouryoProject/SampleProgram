@@ -27,7 +27,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace WebApplication
+namespace CordovaBackend
 {
     /// <summary>Program</summary>
     public class Program

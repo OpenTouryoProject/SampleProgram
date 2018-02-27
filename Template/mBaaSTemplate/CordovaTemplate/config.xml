@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myappc103c4" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="ja-JP">
-  <name>OtrCdvTpl</name>
+  <name>CordovaTemplate</name>
   <description>A template project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS.</description>
   <author href="https://www.osscons.jp/dotNetDevelopmentInfrastructure/" email="ws-dotNetDevInfra-contact@osscons.jp">OSS Consortium .net subcommittee</author>
   <content src="index.html" />
@@ -79,10 +79,10 @@
     <splash src="res/screens/ios/screen-iphone-landscape-736h.png" width="2208" height="1242" />
   </platform>
   <preference name="ShowTitle" value="True" />
-  <preference name="OverrideUserAgent" value="OtrCdvTpl" />
+  <preference name="OverrideUserAgent" value="CordovaTemplate" />
   <preference name="AppendUserAgent" value="" />
-  <vs:plugin name="cordova-plugin-customurlscheme">
-    <param name="URL_SCHEME" value="otrcdvtpl" />
+  <vs:plugin name="cordova-plugin-customurlscheme" source="npm">
+    <param name="URL_SCHEME" value="cordovatemplate" />
   </vs:plugin>
   <plugin name="cordova-plugin-customurlscheme" version="" />
 </widget>

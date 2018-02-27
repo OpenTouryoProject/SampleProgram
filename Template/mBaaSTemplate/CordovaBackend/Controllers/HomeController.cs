@@ -18,7 +18,7 @@
 //*  20xx/xx/xx  ＸＸ ＸＸ         ＸＸＸＸ
 //**********************************************************************************
 
-using WebApplication.Models;
+using CordovaBackend.Models;
 
 using System;
 using System.Text;
@@ -35,7 +35,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Newtonsoft.Json;
 
-namespace WebApplication.Controllers
+namespace CordovaBackend.Controllers
 {
     /// <summary>認証用サンプル アプリ・コントローラ</summary>
     public class HomeController : Controller
@@ -50,7 +50,7 @@ namespace WebApplication.Controllers
         public string ClientSecret = "m7VUuKLCK1nODl3xrLSoitw1x8N7sike9d5cXWa9_lg";
 
         /// <summary>RedirectUri</summary>
-        public string RedirectUri = "otrcdvtpl://";
+        public string RedirectUri = "CordovaTemplate://";
         
         /// <summary>Index</summary>
         /// <returns>IActionResult</returns>

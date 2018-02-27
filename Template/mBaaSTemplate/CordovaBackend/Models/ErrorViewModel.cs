@@ -20,7 +20,7 @@
 
 using System;
 
-namespace WebApplication.Models
+namespace CordovaBackend.Models
 {
     public class ErrorViewModel
     {

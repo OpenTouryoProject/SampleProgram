@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApplication
+namespace CordovaBackend
 {
     /// <summary>Startup</summary>
     public class Startup

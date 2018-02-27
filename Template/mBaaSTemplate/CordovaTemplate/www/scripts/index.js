@@ -11,7 +11,7 @@
 //*
 //**********************************************************************************
 
-// 空白のテンプレートの概要については、次のドキュメントを参照してください:
+// Visual Studio Tools for Apache Cordovaにおける開発方法につては、次のドキュメントを参照してください:
 // http://go.microsoft.com/fwlink/?LinkID=397704
 // ページ上のコードをデバッグするには、
 // 1. Ripple で読み込むか、Android デバイス/エミュレーターで読み込みます。
@@ -50,8 +50,10 @@ var UserInfoEndPoint = "http://10.0.2.2/MultiPurposeAuthSite/userinfo";
 
         MyAlert("onDeviceReady 2");
 
-        // TODO: Cordova が読み込まれました。
-
+        // Cordova の読込が完了するので、
+        // 以降のステップで、Deviceプラグインのテストなどが行える。
+        // alert(device.platform);
+  
         // 初期化
         InitCordova();
 
