@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files\NUnit 2.6.3\bin\nunit.exe</StartProgram>
-    <StartArguments>Public.Test.dll</StartArguments>
+    <StartProgram>.\packages\NUnit.Runners.2.6.3\tools\nunit.exe</StartProgram>
   </PropertyGroup>
 </Project>
