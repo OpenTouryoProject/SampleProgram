@@ -84,5 +84,4 @@
   <vs:plugin name="cordova-plugin-customurlscheme" source="npm">
     <param name="URL_SCHEME" value="cordovatemplate" />
   </vs:plugin>
-  <plugin name="cordova-plugin-customurlscheme" version="" />
 </widget>
