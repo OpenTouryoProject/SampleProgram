@@ -199,3 +199,17 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+   
+   ====================================================================
+
+   - SamplePrograms SubComponent :
+   
+     - The OSS included in the source code such as JavaScript / CSS
+       - jQuery
+       - jQuery.UI.Combined
+       - jQuery.Validation
+       - jquery.jqGrid (4.6.0)
+       - knockoutjs
+       - angularjs
+       - Modernizr
+       - Microsoft.AspNet.SignalR.JS
