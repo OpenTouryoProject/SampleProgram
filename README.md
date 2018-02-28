@@ -3,7 +3,7 @@
 
 ### 技術検証/実現性可否プログラム
 
-#### PrototypeModel
+#### [PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel/)
 将来的に OpenTouryoリポジトリに含める前の技術検証/実現性可否を目的としたプログラムを格納
 
 #### [Template](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Template/)
@@ -11,7 +11,7 @@
 
 ### その他サンプル
 以下のフォルダは、今後の Open 棟梁のエンハンス (機能追加／改善など)を目的とした、技術要素ごとのサンプルを格納しています。
-このため、Open 棟梁を使用したサンプルにはなっていないものもあります。Open 棟梁を使用したサンプルは、xxx をご覧ください。
+このため、Open 棟梁を使用したサンプルにはなっていないものもあります。Open 棟梁を使用したサンプルは、[OpenTouryoTemplatesリポジトリのSamplesフォルダ](https://github.com/OpenTouryoProject/OpenTouryoTemplates/tree/master/root_VS2015/programs/C%23/Samples) をご覧ください。
 
 #### [ASPNET](https://github.com/OpenTouryoProject/SampleProgram/tree/master/ASPNET/)
 ASPNET関連のサンプル
