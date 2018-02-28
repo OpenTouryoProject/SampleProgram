@@ -213,3 +213,7 @@
        - angularjs
        - Modernizr
        - Microsoft.AspNet.SignalR.JS
+
+     - The following *.exe is bundled in order to run the build system.
+       - nuget.exe
+         https://github.com/NuGet/NuGet.Client/blob/dev/LICENSE.txt
