@@ -11,7 +11,7 @@
 //*
 //**********************************************************************************
 
-// Visual Studio Tools for Apache Cordovaにおける開発方法につては、次のドキュメントを参照してください:
+// Visual Studio Tools for Apache Cordovaにおける開発方法については、次のドキュメントを参照してください:
 // http://go.microsoft.com/fwlink/?LinkID=397704
 // ページ上のコードをデバッグするには、
 // 1. Ripple で読み込むか、Android デバイス/エミュレーターで読み込みます。
