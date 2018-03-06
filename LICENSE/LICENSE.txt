@@ -200,25 +200,20 @@
    See the License for the specific language governing permissions and
    limitations under the License.
    
-====================================================================
+   ====================================================================
 
-SamplePrograms SubComponent: 
+   - SamplePrograms SubComponent :
+   
+     - The OSS included in the source code such as JavaScript / CSS
+       - jQuery
+       - jQuery.UI.Combined
+       - jQuery.Validation
+       - jquery.jqGrid (4.6.0)
+       - knockoutjs
+       - angularjs
+       - Modernizr
+       - Microsoft.AspNet.SignalR.JS
 
-- For the testing framework components:
- ├NUnit.2.6.3
- ├NUnit.Runners.2.6.3
- ├NUnitTestAdapter
- ├OpenCover.4.5.2506
- ├OpenCoverToCoberturaConverter.0.1.1.0
- └ReportGenerator.1.9.1.0
-
-  - See the following path. 
-    ./Testing Frameworks/ 
-
-  - NUnit 2.6.3
-      NUnit 2.6.3 assemblies distributed with this sample are subject to the the NUnit license.
-      Copyright © 2002-2014 Charlie Poole
-      Copyright © 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov
-      Copyright © 2000-2002 Philip A. Craig
-
-- ・・・
+     - The following *.exe is bundled in order to run the build system.
+       - nuget.exe
+         https://github.com/NuGet/NuGet.Client/blob/dev/LICENSE.txt
