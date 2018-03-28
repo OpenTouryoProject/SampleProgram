@@ -3,5 +3,22 @@
     "version": "1.0.0",
     "private": true,
     "dependencies": {
+        "cordova-android": "^7.0.0",
+        "cordova-plugin-customurlscheme": "^4.3.0",
+        "cordova-plugin-whitelist": "^1.3.3"
+    },
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-whitelist": {},
+            "cordova-plugin-customurlscheme": {
+                "URL_SCHEME": "cordovatemplate",
+                "ANDROID_SCHEME": " ",
+                "ANDROID_HOST": " ",
+                "ANDROID_PATHPREFIX": "/"
+            }
+        },
+        "platforms": [
+            "android"
+        ]
     }
 }
