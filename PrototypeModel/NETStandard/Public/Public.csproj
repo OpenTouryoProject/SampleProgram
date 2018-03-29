@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>OpenTouryoStd.Public</AssemblyName>
-    <RootNamespace>Touryo.Standard.Public</RootNamespace>
+    <RootNamespace>Touryo.Infrastructure.Public</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,13 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0-preview1-26216-02" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
     <PackageReference Include="System.Data.Odbc" Version="4.5.0-preview1-26216-02" />
     <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
   </ItemGroup>
