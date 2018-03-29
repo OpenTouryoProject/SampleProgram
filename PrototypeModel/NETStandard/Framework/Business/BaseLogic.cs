@@ -29,19 +29,9 @@
 //*  ----------  ----------------  -------------------------------------------------
 //*  2007/xx/xx  西野 大介         新規作成
 //*  2009/01/28  西野 大介         モジュール追加により、コメントなどを修正。
-//*  2009/01/28  西野 大介         GetDam()のメンバ アクセス修飾子をprotectedに変更。
-//*  2009/04/17  西野 大介         トランザクション手動制御を可能に。
-//*  2009/04/17  西野 大介         UOC_ConnectionOpenの戻りをvoidに（SetDam()利用に統一）。
-//*  2009/04/17  西野 大介         データアクセス制御クラスを配列化。
-//*  2009/04/17  西野 大介         トランザクション制御部品による制御。
-//*  2009/04/17  西野 大介         トランザクションパターンとグループの概念を追加。
-//*  2010/03/11  西野 大介         自動振り分け対応でpublicメソッド直呼びをエラーにする。
-//*  2010/09/24  西野 大介         ジェネリック対応（Dictionary、List、Queue、Stack<T>）
-//*                                nullチェック方法、Contains → ContainsKeyなどに注意
-//*  2010/11/16  西野 大介         DoBusinessLogicのIsolationLevelEnum無しオーバーロード
-//*  2012/06/18  西野 大介         OriginalStackTrace（ログ出力）の品質向上
-//*  2017/02/14  西野 大介         DoBusinessLogicの非同期バージョン（DoBusinessLogicAsync）を追加
+//*                                ・・・
 //*  2017/02/28  西野 大介         ExceptionDispatchInfoを取り入れ、OriginalStackTraceを削除
+//*  2018/03/29  西野 大介         .NET Standard対応で、削除機能に関連するクラスを削除
 //**********************************************************************************
 
 using System;
@@ -58,20 +48,6 @@ namespace Touryo.Infrastructure.Framework.Business
     /// <remarks>業務コード親クラス２、業務コード クラス、画面コード クラスから利用する。</remarks>
     public abstract class BaseLogic
     {
-        #region グローバル変数
-        // 2009/03/13---トランザクション制御部品による制御（ここから）
-
-        /// <summary>トランザクション制御シングルトン クラス</summary>
-        /// <remarks>
-        /// 初期化は起動時の１回のみであり、
-        /// 読み取り専用のデータを保持する場合
-        /// のみに適用するデザインパターンとする。
-        /// </remarks>
-        private static TransactionControl TC = new TransactionControl();
-
-        // 2009/03/13---トランザクション制御部品による制御（ここまで）
-        #endregion
-
         #region インスタンス変数
 
         /// <summary>
@@ -601,30 +577,6 @@ namespace Touryo.Infrastructure.Framework.Business
         /// <remarks>派生の業務コード親クラス２でオーバーライドする。</remarks>
         protected virtual void UOC_ABEND(BaseParameterValue parameterValue, ref BaseReturnValue returnValue, Exception ex) { }
 
-        #endregion
-
-        #region トランザクション制御部品
-        // 2009/03/13---トランザクション制御部品による制御（ここから）
-
-        /// <summary>トランザクション グループIDからトランザクション パターンIDを取得する。</summary>
-        /// <param name="TransactionGroupID">トランザクション グループID</param>
-        /// <param name="TransactionPatternID">トランザクション パターンID（配列）</param>
-        /// <remarks>派生の業務コード親クラス２、業務コード クラスから利用する。</remarks>
-        protected static void GetTransactionPatterns(string TransactionGroupID, out string[] TransactionPatternID)
-        {
-            BaseLogic.TC.GetTransactionPatterns(TransactionGroupID, out TransactionPatternID);
-        }
-
-        /// <summary>データアクセス制御クラス（DAM）を初期化する</summary>
-        /// <param name="TransactionPatternID">トランザクション パターンID</param>
-        /// <param name="dam">データアクセス制御クラス（DAM）インスタンス</param>
-        /// <remarks>派生の業務コード親クラス２、業務コード クラスから利用する。</remarks>
-        protected static void InitDam(string TransactionPatternID, BaseDam dam)
-        {
-            BaseLogic.TC.InitDam(TransactionPatternID, dam);
-        }
-
-        // 2009/03/13---トランザクション制御部品による制御（ここまで）
         #endregion
 
         #endregion

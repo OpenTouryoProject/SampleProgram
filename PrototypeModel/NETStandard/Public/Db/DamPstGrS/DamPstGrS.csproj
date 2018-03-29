@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>OpenTouryoStd.Public.DamPstGrS</AssemblyName>
+    <RootNamespace>Touryo.Infrastructure.Public.Db</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="3.2.7" />

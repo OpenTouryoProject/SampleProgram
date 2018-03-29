@@ -29,6 +29,7 @@
 //*  ----------  ----------------  -------------------------------------------------
 //*  2017/09/07  西野 大介         新規作成
 //*  2017/11/29  西野 大介         DateTimeOffset.ToUnixTimeSecondsの前方互換メソッドの使用
+//*  2018/03/28  西野 大介         .NET Standard対応で、幾らか、I/F変更あり。
 //**********************************************************************************
 
 using System;
@@ -36,13 +37,12 @@ using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 
-using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.AspNetCore.WebUtilities;
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 using Touryo.Infrastructure.Public.Security;
-using Touryo.Infrastructure.Public.Util;
 
 namespace Touryo.Infrastructure.Framework.Authentication
 {
@@ -80,8 +80,7 @@ namespace Touryo.Infrastructure.Framework.Authentication
 
             if (jwtRS256.Verify(jwtAccessToken))
             {
-                Base64UrlTextEncoder base64UrlEncoder = new Base64UrlTextEncoder();
-                string jwtPayload = Encoding.UTF8.GetString(base64UrlEncoder.Decode(jwtAccessToken.Split('.')[1]));
+                string jwtPayload = Encoding.UTF8.GetString(Base64UrlTextEncoder.Decode(jwtAccessToken.Split('.')[1]));
                 jobj = ((JObject)JsonConvert.DeserializeObject(jwtPayload));
 
                 //string nonce = (string)jobj["nonce"];
@@ -102,11 +101,7 @@ namespace Touryo.Infrastructure.Framework.Authentication
                 }
 
                 long unixTimeSeconds = 0;
-#if NET45
-                unixTimeSeconds = PubCmnFunction.ToUnixTime(DateTimeOffset.Now);
-#else
                 unixTimeSeconds = DateTimeOffset.Now.ToUnixTimeSeconds();
-#endif
 
                 if (iss == OAuth2AndOIDCParams.Isser &&
                     aud　== OAuth2AndOIDCParams.ClientID &&
