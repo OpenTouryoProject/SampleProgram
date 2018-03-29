@@ -20,7 +20,7 @@
 
 //**********************************************************************************
 //* クラス名        ：SessionExtensions
-//* クラス日本語名  ：System.Web.HttpSessionのポーティング用クラス
+//* クラス日本語名  ：System.Web.SessionState.HttpSessionStateのポーティング用クラス
 //*
 //* 作成者          ：生技 西野
 //* 更新履歴        ：
@@ -36,10 +36,10 @@ using Newtonsoft.Json;
 
 namespace Touryo.Infrastructure.Framework.Migration
 {
-    /// <summary>ISessionの拡張クラス</summary>
+    /// <summary>System.Web.SessionState.HttpSessionStateのポーティング用クラス</summary>
     public static class SessionExtensions
     {
-        /// <summary>SetObjectAsJson</summary>
+        /// <summary>SetObjectAsJson拡張メソッド</summary>
         /// <param name="session">ISession</param>
         /// <param name="key">string</param>
         /// <param name="value">object</param>
@@ -48,7 +48,7 @@ namespace Touryo.Infrastructure.Framework.Migration
             session.SetString(key, JsonConvert.SerializeObject(value));
         }
 
-        /// <summary>GetObjectFromJson</summary>
+        /// <summary>GetObjectFromJson拡張メソッド</summary>
         /// <typeparam name="T">type</typeparam>
         /// <param name="session">ISession</param>
         /// <param name="key">string</param>

@@ -29,6 +29,7 @@
 //*  ----------  ----------------  -------------------------------------------------
 //*  2007/xx/xx  西野 大介         新規作成
 //*  2013/12/23  西野 大介         アクセス修飾子をすべてpublicに変更した。
+//*  2018/03/29  西野 大介         .NET Standard対応で、削除機能に関連するリテラルを削除
 //**********************************************************************************
 
 namespace Touryo.Infrastructure.Framework.Util
@@ -38,8 +39,5 @@ namespace Touryo.Infrastructure.Framework.Util
     {
         /// <summary>セッションタイムアウト検出用クッキーのキー</summary>
         public const string SESSION_TIMEOUT = "SessionTimeOut";
-
-        /// <summary>子画面表示機能の戻るボタン対策用クッキーのキー</summary>
-        public const string BACK_BUTTON_CONTROL = "BackButtonControl";
     }
 }

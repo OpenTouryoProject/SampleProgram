@@ -32,15 +32,19 @@
 //*                                ・・・
 //*  2018/01/31  西野 大介         ネストしたユーザ コントロールに対応（senderで親UCを確認する）
 //*  2018/03/29  西野 大介         .NET Standard対応で、削除機能に関連するメソッドを削除
+//*  2018/03/29  西野 大介         .NET Standard対応で、HttpCookieのポーティング
 //**********************************************************************************
+
+using Touryo.Infrastructure.Framework.Migration;
+using Touryo.Infrastructure.Framework.Exceptions;
+using Touryo.Infrastructure.Public.Util;
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using Touryo.Infrastructure.Framework.Migration;
-using Touryo.Infrastructure.Framework.Exceptions;
-using Touryo.Infrastructure.Public.Util;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Touryo.Infrastructure.Framework.Util
 {
@@ -200,6 +204,75 @@ namespace Touryo.Infrastructure.Framework.Util
 
             // 再構築したキューを返す。
             return tempQueue;
+        }
+
+        #endregion
+
+        #region セッションタイムアウト検出用クッキー
+
+        /// <summary>セッションタイムアウト検出用Cookieを生成</summary>
+        /// <returns>セッションタイムアウト検出用Cookie（データ有）</returns>
+        public static void CreateCookieForSessionTimeoutDetection()
+        {
+            // Cookie生成（デバッグしやすいように都度、値を変更する）
+            IResponseCookies responseCookies = MyHttpContext.Current.Response.Cookies;
+            CookieOptions cookieOptions = new CookieOptions();
+
+            // Path属性を設定
+            string applicationPath = PlatformServices.Default.Application.ApplicationBasePath;
+            if (applicationPath == "/")
+            {
+                // 「//」になってしまうので、「/」になるよう修正
+                cookieOptions.Path = "/";
+            }
+            else
+            {
+                // 例えば「/ProjectX_sample」+「/」＝「/ProjectX_sample/」となる。
+                cookieOptions.Path = applicationPath + "/";
+            }
+
+            // ※ Request.ApplicationPathは、URLのホスト名以上のパス情報を含まず、
+            // アプリケーション・ディレクトリより下のパス情報を含まない。
+
+            // HttpOnly属性を設定
+            cookieOptions.HttpOnly = true;
+
+            // 設定
+            responseCookies.Set(
+                FxHttpCookieIndex.SESSION_TIMEOUT,
+                Environment.TickCount.ToString(),
+                cookieOptions);
+        }
+
+        /// <summary>セッションタイムアウト検出用Cookieを削除</summary>
+        /// <returns>セッションタイムアウト検出用Cookie（データ空）</returns>
+        public static void DeleteCookieForSessionTimeoutDetection()
+        {
+            // Cookie生成（削除時は、空の値を指定）
+            IResponseCookies responseCookies = MyHttpContext.Current.Response.Cookies;
+            CookieOptions cookieOptions = new CookieOptions();
+            
+            // Path属性を設定
+            string applicationPath = PlatformServices.Default.Application.ApplicationBasePath;
+            if (applicationPath == "/")
+            {
+                // 「//」になってしまうので、「/」になるよう修正
+                cookieOptions.Path = "/";
+            }
+            else
+            {
+                // 例えば「/ProjectX_sample」+「/」＝「/ProjectX_sample/」となる。
+                cookieOptions.Path = applicationPath + "/";
+            }
+
+            // ※ Request.ApplicationPathは、URLのホスト名以上のパス情報を含まず、
+            // アプリケーション・ディレクトリより下のパス情報を含まない。
+
+            // HttpOnly属性を設定
+            cookieOptions.HttpOnly = true;
+
+            // 設定
+            responseCookies.Set(FxHttpCookieIndex.SESSION_TIMEOUT, "", cookieOptions);
         }
 
         #endregion
