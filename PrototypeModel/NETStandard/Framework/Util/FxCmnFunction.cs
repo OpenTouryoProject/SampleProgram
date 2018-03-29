@@ -38,6 +38,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using Touryo.Infrastructure.Framework.Migration;
 using Touryo.Infrastructure.Framework.Exceptions;
 using Touryo.Infrastructure.Public.Util;
 
@@ -202,6 +203,5 @@ namespace Touryo.Infrastructure.Framework.Util
         }
 
         #endregion
-
     }
 }
