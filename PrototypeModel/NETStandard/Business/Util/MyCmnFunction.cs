@@ -38,18 +38,15 @@
 //*  2012/06/14  西野 大介         コントロール検索の再帰処理性能の集約＆効率化。
 //*  2014/05/16  西野 大介         キャスト可否チェックのロジックを見直した。
 //*  2017/01/31  西野 大介         System.Webを使用しているCalculateSessionSizeメソッドをPublicから移動
+//*  2018/03/29  西野 大介         .NET Standard対応で、削除機能に関連するメソッドを削除
+//*  2018/03/29  西野 大介         .NET Standard対応で、HttpSessionのポーティング
 //**********************************************************************************
 
-using System;
-using System.Collections.Generic;
-
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-using Touryo.Infrastructure.Framework.Util;
 using Touryo.Infrastructure.Public.IO;
-using Touryo.Infrastructure.Public.Util;
+using Touryo.Infrastructure.Framework.Migration;
+
+using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Touryo.Infrastructure.Business.Util
 {
@@ -85,10 +82,10 @@ namespace Touryo.Infrastructure.Business.Util
             long size = 0;
 
             // SessionのオブジェクトをBinarySerializeしてサイズを取得。
-            foreach (string key in HttpContext.Current.Session.Keys)
+            foreach (string key in MyHttpContext.Current.Session.Keys)
             {
                 // 当該キーのオブジェクト・サイズを足しこむ。
-                size += BinarySerialize.ObjectToBytes(HttpContext.Current.Session[key]).Length;
+                size += BinarySerialize.ObjectToBytes(MyHttpContext.Current.Session.GetString(key)).Length;
             }
 
             // Sessionサイズ（バイト）
@@ -96,175 +93,5 @@ namespace Touryo.Infrastructure.Business.Util
         }
 
         #endregion
-
-        // 2009/07/21-start
-
-        #region コントロール取得＆イベントハンドラ設定
-
-        /// <summary>コントロール取得＆イベントハンドラ設定（下位互換）</summary>
-        /// <param name="ctrl">コントロール</param>
-        /// <param name="prefix">プレフィックス</param>
-        /// <param name="eventHandler">イベント ハンドラ</param>
-        /// <param name="controlHt">ディクショナリ</param>
-        internal static void GetCtrlAndSetClickEventHandler(
-            Control ctrl, string prefix, object eventHandler, Dictionary<string, Control> controlHt)
-        {
-            #region チェック処理
-
-            // コントロール指定が無い場合
-            if (ctrl == null)
-            {
-                // 何もしないで戻る。
-                return;
-            }
-
-            // プレフィックス指定が無い場合
-            if (prefix == null || prefix == "")
-            {
-                // 何もしないで戻る。
-                return;
-            }
-
-            #endregion
-
-            #region コントロール取得＆イベントハンドラ設定
-
-            // コントロールのIDチェック
-            if (ctrl.ID == null)
-            {
-                // コントロールID無し
-            }
-            else
-            {
-                // コントロールID有り
-
-                // コントロールのID長確認
-                if (prefix.Length <= ctrl.ID.Length)
-                {
-                    // 指定のプレフィックス
-                    if (prefix == ctrl.ID.Substring(0, prefix.Length))
-                    {
-                        // イベントハンドラを設定する。
-                        if (prefix == GetConfigParameter.GetConfigValue(MyLiteral.PREFIX_OF_CHECK_BOX))
-                        {
-                            // CHECK BOX
-                            CheckBox checkBox = FxCmnFunction.CastByAsOperator<CheckBox>(ctrl, prefix);
-
-                            // ハンドラをキャストして設定
-                            checkBox.CheckedChanged += (EventHandler)eventHandler;
-
-                            // ディクショナリに格納
-                            // ControlHt.Add(ctrl.ID, ctrl);
-                            // ControlHt[ctrl.ID] = ctrl;
-                            FxCmnFunction.AddControlToDic(ctrl, controlHt); // 2011/02/12
-                        }
-                    }
-                }
-            }
-
-            #endregion
-
-            #region 再帰
-
-            // 子コントロールがある場合、
-            if (ctrl.HasControls())
-            {
-                // 子コントロール毎に
-                foreach (Control childCtrl in ctrl.Controls)
-                {
-                    // 再帰する。
-                    MyCmnFunction.GetCtrlAndSetClickEventHandler(childCtrl, prefix, eventHandler, controlHt);
-                }
-            }
-
-            #endregion
-        }
-
-        /// <summary>コントロール取得＆イベントハンドラ設定</summary>
-        /// <param name="ctrl">コントロール</param>
-        /// <param name="prefixAndEvtHndHt">プレフィックスとイベント ハンドラのディクショナリ</param>
-        /// <param name="controlHt">コントロールのディクショナリ</param>
-        internal static void GetCtrlAndSetClickEventHandler2(
-            Control ctrl, Dictionary<string, object> prefixAndEvtHndHt, Dictionary<string, Control> controlHt)
-        {
-            // ループ
-            foreach (string prefix in prefixAndEvtHndHt.Keys)
-            {
-                object eventHandler = prefixAndEvtHndHt[prefix];
-
-                #region チェック処理
-
-                // コントロール指定が無い場合
-                if (ctrl == null)
-                {
-                    // 何もしないで戻る。
-                    return;
-                }
-
-                // プレフィックス指定が無い場合
-                if (prefix == null || prefix == "")
-                {
-                    // 何もしないで戻る。
-                    return;
-                }
-
-                #endregion
-
-                #region コントロール取得＆イベントハンドラ設定
-
-                // コントロールのIDチェック
-                if (ctrl.ID == null)
-                {
-                    // コントロールID無し
-                }
-                else
-                {
-                    // コントロールID有り
-
-                    // コントロールのID長確認
-                    if (prefix.Length <= ctrl.ID.Length)
-                    {
-                        // 指定のプレフィックス
-                        if (prefix == ctrl.ID.Substring(0, prefix.Length))
-                        {
-                            // イベントハンドラを設定する。
-                            if (prefix == GetConfigParameter.GetConfigValue(MyLiteral.PREFIX_OF_CHECK_BOX))
-                            {
-                                // CHECK BOX
-                                CheckBox checkBox = FxCmnFunction.CastByAsOperator<CheckBox>(ctrl, prefix);
-
-                                // ハンドラをキャストして設定
-                                checkBox.CheckedChanged += (EventHandler)eventHandler;
-
-                                // ディクショナリに格納
-                                controlHt[ctrl.ID] = ctrl;
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                #endregion
-            }
-
-            #region 再帰
-
-            // 子コントロールがある場合、
-            if (ctrl.HasControls())
-            {
-                // 子コントロール毎に
-                foreach (Control childCtrl in ctrl.Controls)
-                {
-                    // 再帰する。
-                    MyCmnFunction.GetCtrlAndSetClickEventHandler2(childCtrl, prefixAndEvtHndHt, controlHt);
-                }
-            }
-
-            #endregion
-        }
-
-        #endregion
-
-        // 2009/07/21-end
     }
 }

@@ -167,19 +167,11 @@ namespace Touryo.Infrastructure.Business.Business
 
                 if (parameterValue.ActionType.Split('%')[0] == "SQL")
                 {
-                // SQL Server / SQL Client用のDamを生成
-                dam = new DamSqlSvr();
-
-                // 接続文字列をロード
-                connstring = GetConfigParameter.GetConnectionString("ConnectionString_SQL");
-                }
-                else if (parameterValue.ActionType.Split('%')[0] == "OLE")
-                {
-                    // OLEDB.NET用のDamを生成
-                    dam = new DamOLEDB();
+                    // SQL Server / SQL Client用のDamを生成
+                    dam = new DamSqlSvr();
 
                     // 接続文字列をロード
-                    connstring = GetConfigParameter.GetConnectionString("ConnectionString_OLE");
+                    connstring = GetConfigParameter.GetConnectionString("ConnectionString_SQL");
                 }
                 else if (parameterValue.ActionType.Split('%')[0] == "ODB")
                 {
@@ -189,38 +181,6 @@ namespace Touryo.Infrastructure.Business.Business
                     // 接続文字列をロード
                     connstring = GetConfigParameter.GetConnectionString("ConnectionString_ODBC");
                 }
-                //else if (parameterValue.ActionType.Split('%')[0] == "ORA")
-                //{
-                //    // Oracle / Oracle Client用のDamを生成
-                //    dam = new DamOraClient();
-
-                //    // 接続文字列をロード
-                //    connstring = GetConfigParameter.GetConnectionString("ConnectionString_ORA");
-                //}
-                else if (parameterValue.ActionType.Split('%')[0] == "ODP")
-                {
-                    // Oracle / ODP.NET用のDamを生成
-                    dam = new DamManagedOdp();
-
-                    // 接続文字列をロード
-                    connstring = GetConfigParameter.GetConnectionString("ConnectionString_ODP");
-                }
-                //else if (parameterValue.ActionType.Split('%')[0] == "DB2")
-                //{
-                //    // DB2.NET用のDamを生成
-                //    dam = new DamDB2();
-
-                //    // 接続文字列をロード
-                //    connstring = GetConfigParameter.GetConnectionString("ConnectionString_DB2");
-                //}
-                //else if (parameterValue.ActionType.Split('%')[0] == "HIR")
-                //{
-                //    // HiRDBデータプロバイダ用のDamを生成
-                //    dam = new DamHiRDB();
-
-                //    // 接続文字列をロード
-                //    connstring = GetConfigParameter.GetConnectionString("ConnectionString_HIR");
-                //}
                 else if (parameterValue.ActionType.Split('%')[0] == "MCN")
                 {
                     // MySQL Cnn/NET用のDamを生成

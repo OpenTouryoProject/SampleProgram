@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>OpenTouryoStd.Business</AssemblyName>
+    <RootNamespace>Touryo.Infrastructure.Business</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj" />
+    <ProjectReference Include="..\Public\Db\DamMySQL\DamMySQL.csproj" />
+    <ProjectReference Include="..\Public\Db\DamPstGrS\DamPstGrS.csproj" />
+    <ProjectReference Include="..\Public\Public.csproj" />
+  </ItemGroup>
 
 </Project>
