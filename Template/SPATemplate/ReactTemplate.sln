@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2015
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReactTemplate", "ReactTemplate\ReactTemplate.csproj", "{34581897-3663-4C2E-94CF-99EB2699FACC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{34581897-3663-4C2E-94CF-99EB2699FACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34581897-3663-4C2E-94CF-99EB2699FACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34581897-3663-4C2E-94CF-99EB2699FACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34581897-3663-4C2E-94CF-99EB2699FACC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E0B8FCF-F33C-401F-8F1E-6F7893E4A0C1}
+	EndGlobalSection
+EndGlobal
