@@ -4,6 +4,14 @@ import Menu from './Menu.js';
 import './App.css';
 
 class App extends Component {
+  // コンストラクタ
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: 'red';
+    };
+  }
+  
   render() {
     return (
       <div className="App">
@@ -12,7 +20,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <h1>ここはAppコンポーネントですよ！</h1>
-        <Menu/>
+        <Menu color={this.state.color} />
       </div>
     );
   }
