@@ -1,34 +1,34 @@
 class Menu extends Component {
 
-  // ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+  // ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
   constructor(props) {
     super(props);
-    // State’è‹`
+    // Stateå®šç¾©
     this.state = {
-      name: "ŠHì—´”V‰î",
-      book: "“mqt"
+      name: "èŠ¥å·é¾ä¹‹ä»‹",
+      book: "æœå­æ˜¥",
       count: 0
     };
-    // "this"‚ÉƒAƒNƒZƒX‚·‚éƒƒ\ƒbƒh‚ğBind‚·‚é
+    // "this"ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’Bindã™ã‚‹
     this.onClickButton = this.onClickButton.bind(this);
   }
 
-  // •`‰æƒƒ\ƒbƒh
+  // æç”»ãƒ¡ã‚½ãƒƒãƒ‰
   render() {
     return (
       <div className="MenuComponent">
-        <h1>‚±‚±‚ÍMenuƒRƒ“ƒ|[ƒlƒ“ƒg‚Å‚·‚æI</h1>
-        ’˜Ò: {this.state.name}<br/>
-        ì•i: {this.state.book}
-        ƒJƒEƒ“ƒ^: {this.state.count}<br/>
+        <h1>ã“ã“ã¯Menuã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã§ã™ã‚ˆï¼</h1>
+        è‘—è€…: {this.state.name}<br/>
+        ä½œå“: {this.state.book}
+        ã‚«ã‚¦ãƒ³ã‚¿: {this.state.count}<br/>
         <button onClick={this.onClickButton}>PUSH</button>
       </div>
     );
   }
 
-  // ƒ{ƒ^ƒ“‰Ÿ‰º‚Ìˆ—
+  // ãƒœã‚¿ãƒ³æŠ¼ä¸‹æ™‚ã®å‡¦ç†
   onClickButton() {
-    // Stete‚ğXV(ƒJƒEƒ“ƒ^‚ğ‰ÁZ)
+    // Steteã‚’æ›´æ–°(ã‚«ã‚¦ãƒ³ã‚¿ã‚’åŠ ç®—)
     this.setState({
       count: this.state.count + 1
     });
