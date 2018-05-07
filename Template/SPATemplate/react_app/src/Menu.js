@@ -11,7 +11,7 @@ class Menu extends Component {
       book: "杜子春",
       count: 0
     };
-    // "this"にアクセスするメソッドをBindする
+    // Stateにアクセスするのでthis を指定のオブジェクトに束縛しておく。
     this.onClickButton = this.onClickButton.bind(this);
   }
 
