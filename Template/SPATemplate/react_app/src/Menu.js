@@ -19,7 +19,7 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <h1>ここはMenuコンポーネントですよ！</h1>
+        <h1><font color={this.props.color}>ここはMenuコンポーネントですよ！</font></h1>
         著者: {this.state.name}<br/>
         作品: {this.state.book}<br/>
         カウンタ: {this.state.count}<br/>
