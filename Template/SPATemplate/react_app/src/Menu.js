@@ -18,7 +18,7 @@ class Menu extends Component {
   // 描画メソッド
   render() {
     return (
-      <div className="MenuComponent">
+      <div>
         <h1>ここはMenuコンポーネントですよ！</h1>
         著者: {this.state.name}<br/>
         作品: {this.state.book}<br/>
