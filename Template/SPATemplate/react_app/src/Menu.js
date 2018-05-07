@@ -21,7 +21,7 @@ class Menu extends Component {
       <div className="MenuComponent">
         <h1>ここはMenuコンポーネントですよ！</h1>
         著者: {this.state.name}<br/>
-        作品: {this.state.book}
+        作品: {this.state.book}<br/>
         カウンタ: {this.state.count}<br/>
         <button onClick={this.onClickButton}>PUSH</button>
       </div>
