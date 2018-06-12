@@ -6,13 +6,12 @@ export class Counter extends React.Component {
         this.state = { currentCount: 0 };
     }
     render() {
-        return React.createElement("div", null,
-            React.createElement("h1", null, "Counter"),
-            React.createElement("p", null, "This is a simple example of a React component."),
-            React.createElement("p", null,
-                "Current count: ",
-                React.createElement("strong", null, this.state.currentCount)),
-            React.createElement("button", { className: 'btn', onClick: () => { this.incrementCounter(); } }, "Increment"));
+        return <div>
+            <h1>Counter</h1>
+            <p>This is a simple example of a React component.</p>
+            <p>Current count: <strong>{ this.state.currentCount }</strong></p>
+            <button className='btn' onClick={ () => { this.incrementCounter() } }>Increment</button>
+        </div>;
     }
     incrementCounter() {
         this.setState({
