@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Menu extends Component {
+class Menu1 extends Component {
 
   // コンストラクタ
   constructor(props) {
@@ -9,7 +9,7 @@ class Menu extends Component {
     this.state = {
       name: "芥川龍之介",
       book: "杜子春",
-      count: 0
+      count: props.count
     };
     // Stateにアクセスするのでthis を指定のオブジェクトに束縛しておく。
     this.onClickButton = this.onClickButton.bind(this);
@@ -19,7 +19,7 @@ class Menu extends Component {
   render() {
     return (
       <div>
-        <h1><font color={this.props.color}>ここはMenuコンポーネントですよ！</font></h1>
+        <h1><font color={this.props.color}>ここはMenu1コンポーネントですよ！</font></h1>
         著者: {this.state.name}<br/>
         作品: {this.state.book}<br/>
         カウンタ: {this.state.count}<br/>
@@ -35,6 +35,11 @@ class Menu extends Component {
       count: this.state.count + 1
     });
   }
+
+  componentWillReceiveProps(newProps) {
+    //JSON.stringify(newProps);
+    this.setState({count: newProps.count});
+  }
 }
 
-export default Menu;
+export default Menu1;
