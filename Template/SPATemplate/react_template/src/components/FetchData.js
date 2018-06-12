@@ -1,10 +1,11 @@
 import * as React from 'react';
 import 'isomorphic-fetch';
+
 export class FetchData extends React.Component {
     constructor() {
         super();
         this.state = { forecasts: [], loading: true };
-        fetch('api/SampleData/WeatherForecasts')
+        fetch('http://localhost:5000/hoge1.json')
             .then(response => response.json())
             .then(data => {
             this.setState({ forecasts: data, loading: false });
@@ -17,7 +18,8 @@ export class FetchData extends React.Component {
             : FetchData.renderForecastsTable(this.state.forecasts);
         return React.createElement("div", null,
             React.createElement("h1", null, "Weather forecast"),
-            React.createElement("p", null, "This component demonstrates fetching data from the server."),
+            React.createElement("p", { className: 'text-primary' }, "This component demonstrates fetching data from the server."),
+            //React.createElement("p", null, JSON.stringify(this.state.forecasts)),
             contents);
     }
     static renderForecastsTable(forecasts) {
@@ -28,10 +30,11 @@ export class FetchData extends React.Component {
                     React.createElement("th", null, "Temp. (C)"),
                     React.createElement("th", null, "Temp. (F)"),
                     React.createElement("th", null, "Summary"))),
-            React.createElement("tbody", null, forecasts.map(forecast => React.createElement("tr", { key: forecast.dateFormatted },
-                React.createElement("td", null, forecast.dateFormatted),
-                React.createElement("td", null, forecast.temperatureC),
-                React.createElement("td", null, forecast.temperatureF),
-                React.createElement("td", null, forecast.summary)))));
+            React.createElement("tbody", null, forecasts.map(forecast =>
+                React.createElement("tr", { key: forecast.DateFormatted },
+                React.createElement("td", null, forecast.DateFormatted),
+                React.createElement("td", null, forecast.TemperatureC),
+                React.createElement("td", null, forecast.TemperatureF),
+                React.createElement("td", null, forecast.Summary)))));
     }
 }

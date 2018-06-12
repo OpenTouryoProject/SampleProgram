@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+
 export class NavMenu extends React.Component {
     render() {
         return React.createElement("div", { className: 'navbar-collapse collapse' },

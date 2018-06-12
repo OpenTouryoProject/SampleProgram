@@ -1,0 +1,32 @@
+[
+    {
+        "DateFormatted": "2018/06/13",
+        "TemperatureC": 39,
+        "Summary": "Cool",
+        "TemperatureF": 102
+    },
+    {
+        "DateFormatted": "2018/06/14",
+        "TemperatureC": -6,
+        "Summary": "Scorching",
+        "TemperatureF": 22
+    },
+    {
+        "DateFormatted": "2018/06/15",
+        "TemperatureC": -6,
+        "Summary": "Scorching",
+        "TemperatureF": 22
+    },
+    {
+        "DateFormatted": "2018/06/16",
+        "TemperatureC": 49,
+        "Summary": "Chilly",
+        "TemperatureF": 120
+    },
+    {
+        "DateFormatted": "2018/06/17",
+        "TemperatureC": 27,
+        "Summary": "Balmy",
+        "TemperatureF": 80
+    }
+]
