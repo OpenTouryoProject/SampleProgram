@@ -12,7 +12,7 @@ export class Counter extends React.Component {
             React.createElement("p", null,
                 "Current count: ",
                 React.createElement("strong", null, this.state.currentCount)),
-            React.createElement("button", { onClick: () => { this.incrementCounter(); } }, "Increment"));
+            React.createElement("button", { className: 'btn', onClick: () => { this.incrementCounter(); } }, "Increment"));
     }
     incrementCounter() {
         this.setState({

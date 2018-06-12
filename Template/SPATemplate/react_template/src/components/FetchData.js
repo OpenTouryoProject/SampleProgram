@@ -11,30 +11,37 @@ export class FetchData extends React.Component {
             this.setState({ forecasts: data, loading: false });
         });
     }
+
     render() {
         let contents = this.state.loading
-            ? React.createElement("p", null,
-                React.createElement("em", null, "Loading..."))
+            ? <p><em>Loading...</em></p>
             : FetchData.renderForecastsTable(this.state.forecasts);
-        return React.createElement("div", null,
-            React.createElement("h1", null, "Weather forecast"),
-            React.createElement("p", { className: 'text-primary' }, "This component demonstrates fetching data from the server."),
-            //React.createElement("p", null, JSON.stringify(this.state.forecasts)),
-            contents);
+        return <div>
+            <h1>Weather forecast</h1>
+            <p>This component demonstrates fetching data from the server.</p>
+            { contents }
+        </div>;
     }
     static renderForecastsTable(forecasts) {
-        return React.createElement("table", { className: 'table' },
-            React.createElement("thead", null,
-                React.createElement("tr", null,
-                    React.createElement("th", null, "Date"),
-                    React.createElement("th", null, "Temp. (C)"),
-                    React.createElement("th", null, "Temp. (F)"),
-                    React.createElement("th", null, "Summary"))),
-            React.createElement("tbody", null, forecasts.map(forecast =>
-                React.createElement("tr", { key: forecast.DateFormatted },
-                React.createElement("td", null, forecast.DateFormatted),
-                React.createElement("td", null, forecast.TemperatureC),
-                React.createElement("td", null, forecast.TemperatureF),
-                React.createElement("td", null, forecast.Summary)))));
+        return <table className='table'>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Temp. (C)</th>
+                    <th>Temp. (F)</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+            <tbody>
+            {forecasts.map(forecast =>
+                <tr key={ forecast.DateFormatted }>
+                    <td>{ forecast.DateFormatted }</td>
+                    <td>{ forecast.TemperatureC }</td>
+                    <td>{ forecast.TemperatureF }</td>
+                    <td>{ forecast.Summary }</td>
+                </tr>
+            )}
+            </tbody>
+        </table>;
     }
 }

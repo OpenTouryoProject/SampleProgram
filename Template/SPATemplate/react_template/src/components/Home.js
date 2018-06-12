@@ -1,7 +1,10 @@
 import * as React from 'react';
+
 export class Home extends React.Component {
     render() {
-        return React.createElement("div", null,
-            React.createElement("h1", null, "Hello, world!"));
+        return <div>
+            <h1>Hello, world!</h1>
+            <p>Welcome to your new single-page application, built with:</p>
+        </div>;
     }
 }
