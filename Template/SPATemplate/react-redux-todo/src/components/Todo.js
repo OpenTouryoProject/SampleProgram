@@ -6,7 +6,8 @@ export default class Todo extends React.Component {
   }
 
   render() {
-    console.log(this.props);
+    console.log("components/Todo.props: " + JSON.stringify(this.props));
+    console.log("components/Todo.state: " + JSON.stringify(this.state));
 
     // StoreのTodoからリストを生成
     const list = this.props.todo.todoList.map((todo, index) => <li key={index}>{todo}</li>)

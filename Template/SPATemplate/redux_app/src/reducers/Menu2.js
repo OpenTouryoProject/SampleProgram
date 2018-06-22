@@ -11,9 +11,10 @@ const Menu2 = (state = initialState, action) => {
 
       // stateを複製してpayloadを処理・追加
       newState = Object.assign({}, state);
-      newState.counter = state.counter + action.payload.amount;
+      newState = { counter: state.counter + action.payload.amount };
 
       console.log("reducers/Menu2.ADD_MENU2.newState: " + JSON.stringify(newState));
+      
       return newState;
 
     case 'ADD_MENU2TO1':
@@ -21,7 +22,7 @@ const Menu2 = (state = initialState, action) => {
 
       // stateを複製してpayloadを処理・追加
       newState = Object.assign({}, state);
-      newState.counter = state.counter + action.payload.amount;
+      newState = { counter: state.counter + action.payload.amount };
 
       console.log("reducers/Menu2.ADD_MENU2TO1.newState: " + JSON.stringify(newState));
 

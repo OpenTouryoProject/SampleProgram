@@ -22,8 +22,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <h1>ここはAppコンポーネントですよ！</h1>
-        <Menu1 counter={0} color={this.state.color1} />
-        <Menu2 counter={0} color={this.state.color2}/>
+        <Menu1 color={this.state.color1} />
+        <Menu2 color={this.state.color2} />
       </div>
     );
   }

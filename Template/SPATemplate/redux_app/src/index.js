@@ -9,6 +9,9 @@ import createStore from './createStore';
 
 const store = createStore();
 
+// ★★★★★★★★★★
+console.log(JSON.stringify(store.getState()));
+
 ReactDOM.render(
     <Provider store={store}>
         <App />

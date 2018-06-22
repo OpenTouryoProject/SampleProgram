@@ -4,13 +4,13 @@ import Menu2 from '../components/Menu2';
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter,
+    counter: state.Menu2.counter
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    ADD_MENU1: (amount) => dispatch(actions.ADD_MENU2(amount)),
+    ADD_MENU2: (amount) => dispatch(actions.ADD_MENU2(amount)),
   }
 }
 

@@ -6,12 +6,12 @@ import Menu2 from './reducers/Menu2';
 export default function createStore() {
   const store = reduxCreateStore(
     combineReducers({
-        Menu1,
-        Menu2
-    })/*,
+      Menu1: Menu1,
+      Menu2: Menu2
+    }),
     applyMiddleware(
       logger,
-    )*/
+    )
   );
 
   return store;

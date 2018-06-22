@@ -4,7 +4,7 @@ import Menu1 from '../components/Menu1';
 
 const mapStateToProps = state => {
   return {
-    counter: state.counter,
+    counter: state.Menu1.counter
   }
 }
 
