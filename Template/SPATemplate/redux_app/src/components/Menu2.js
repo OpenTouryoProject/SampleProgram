@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 export default class Menu2 extends Component {
   state = {
     name: "芥川龍之介",
-    book: "杜子春",
-    counter: 0
+    book: "杜子春"
   };
 
   // 描画メソッド
@@ -19,7 +18,7 @@ export default class Menu2 extends Component {
         作品: {this.state.book}<br/>
         カウンタ: {this.props.counter}<br/>
         <button onClick={e => this.props.ADD_MENU2(1)}>PUSH + 1</button>
-        <button onClick={e => this.props.ADD_MENU2(2)}>PUSH + 2</button>
+        <button onClick={e => this.props.ADD_MENU2TO1(1)}>PUSH + 1 -> Menu1</button>
       </div>
     );
   }

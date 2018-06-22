@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
 import logo from './logo.svg';
-import Menu1 from './containers/Menu1';
-import Menu2 from './containers/Menu2';
+//import Menu1 from './containers/Menu1';
+//import Menu2 from './containers/Menu2';
+import Menu12 from './containers/Menu12';
 import './App.css';
 
 class App extends Component {
@@ -22,8 +23,11 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <h1>ここはAppコンポーネントですよ！</h1>
+        {/*
         <Menu1 color={this.state.color1} />
         <Menu2 color={this.state.color2} />
+        */}
+        <Menu12 counter1={0} counter2={0} color={this.state} />
       </div>
     );
   }
