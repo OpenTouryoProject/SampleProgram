@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import logo from './logo.svg';
-import Menu1 from './Menu1';
-import Menu2 from './Menu2';
+import Menu1 from './containers/Menu1';
+import Menu2 from './containers/Menu2';
 import './App.css';
 
 class App extends Component {
@@ -9,18 +9,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0,
       color1: 'red',
       color2: 'blue'
     };
-  }
-
-  // 子（Menu2）のイベントを受ける
-  receive (data) {
-    //alert(data.name + ' :: ' + data.type + ' :: ' + data.value)
-    // this.state.countを更新すると、
-    // 子（Menu1）のcomponentWillReceivePropsが実行される。
-    this.setState({count: data.value});
   }
 
   render() {
@@ -31,8 +22,8 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <h1>ここはAppコンポーネントですよ！</h1>
-        <Menu1 count={this.state.count} color={this.state.color1} />
-        <Menu2 count={this.state.count} color={this.state.color2} onEventCallback={e => this.receive(e)}/>
+        <Menu1 counter={0} color={this.state.color1} />
+        <Menu2 counter={0} color={this.state.color2}/>
       </div>
     );
   }
