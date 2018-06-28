@@ -6,15 +6,19 @@ export default class FetchData extends React.Component {
     componentWillMount() {
         // 初回実行
         console.log("this.props.match: " + JSON.stringify(this.props.match));
-        let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
+        let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 1;
         this.props.GET_DATA_ASYNC(startDateIndex);
     }
 
     componentWillReceiveProps(nextProps) {
         // route paramsなど、param変更時
         console.log("nextProps.match: " + JSON.stringify(nextProps.match));
-        let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
-        //this.props.GET_DATA_ASYNC(startDateIndex);
+        let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 1;
+
+        // 無限ループ（stack overflow）防止
+        if(startDateIndex != nextProps.startDateIndex) {
+            this.props.GET_DATA_ASYNC(startDateIndex);
+        }
     }
 
     render() {

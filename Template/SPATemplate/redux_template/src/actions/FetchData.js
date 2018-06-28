@@ -1,9 +1,11 @@
+// fetchの開始前
 export const GET_POSTS_REQUEST = () => {
   return {
     type: 'GET_POSTS_REQUEST'
   }
 };
 
+// fetchの成功
 export const GET_POSTS_SUCCESS = (data, startDateIndex) => {
   return {
     type: 'GET_POSTS_SUCCESS',
@@ -12,6 +14,7 @@ export const GET_POSTS_SUCCESS = (data, startDateIndex) => {
   }
 };
 
+// fetchの失敗
 export const GET_POSTS_FAILURE = (error) => {
   return {
     type: 'GET_POSTS_FAILURE',
@@ -19,6 +22,7 @@ export const GET_POSTS_FAILURE = (error) => {
   }
 };
 
+// fetchのルート
 export const GET_DATA_ASYNC = (startDateIndex) => {
   return (dispatch) => {
 
