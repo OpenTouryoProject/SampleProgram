@@ -4,13 +4,15 @@ import FetchData from '../components/FetchData';
 
 const mapStateToProps = state => {
   return {
-    counter: state.FetchDataReducer.counter
+    isLoading: state.FetchDataReducer.isLoading,
+    forecasts: state.FetchDataReducer.forecasts,
+    startDateIndex: state.FetchDataReducer.startDateIndex
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    GET_DATA: (amount) => dispatch(actions.GET_DATA(amount)),
+    GET_DATA_ASYNC: (startDateIndex) => dispatch(actions.GET_DATA_ASYNC(startDateIndex)),
   }
 }
 

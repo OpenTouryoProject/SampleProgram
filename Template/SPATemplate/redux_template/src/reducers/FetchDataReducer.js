@@ -1,4 +1,6 @@
-const initialState = {counter: 0};
+const initialState = {
+  isLoading: false,
+}
 
 const FetchDataReducer = (state = initialState, action) => {
 
@@ -6,19 +8,44 @@ const FetchDataReducer = (state = initialState, action) => {
   
   switch (action.type) {
     
-    case 'GET_DATA':
-      console.log("reducers/FetchDataReducer.GET_DATA.state: " + JSON.stringify(state));
-
-      // stateを複製してpayloadを処理・追加
+    case 'GET_POSTS_REQUEST':
+      // stateを複製して
       newState = Object.assign({}, state);
-      newState = { counter: state.counter + action.payload.amount };
+      // isLoadingをtrueにする
+      newState = {
+        isLoading: true,
+      };
 
-      console.log("reducers/FetchDataReducer.GET_DATA.newState: " + JSON.stringify(newState));
+      return newState;
+      
+    case 'GET_POSTS_SUCCESS':
+    
+      console.log("GET_POSTS_SUCCESS: " + JSON.stringify(action.forecasts));
+
+      // stateを複製して
+      newState = Object.assign({}, state);
+      // isLoadingをfalseにして、値をセット。
+      newState = {
+        isLoading: false,
+        forecasts: action.forecasts,
+        startDateIndex: action.startDateIndex
+      };
+
+      return newState;
+
+    case 'GET_POSTS_FAILURE':
+      // stateを複製して
+      newState = Object.assign({}, state);
+      // isLoadingをfalseにして、値をセット。
+      newState = {
+        isLoading: false,
+        error: action.error
+      };
 
       return newState;
 
     default:
-      return state;
+      return state
   }
 };
     

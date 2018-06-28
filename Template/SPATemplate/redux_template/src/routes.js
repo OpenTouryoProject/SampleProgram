@@ -6,8 +6,6 @@ import Home from './components/Home';
 import Counter from './containers/Counter';
 import FetchData from './containers/FetchData';
 
-
-
 export const routes = 
         <Router>
             <Layout>

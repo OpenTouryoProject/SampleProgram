@@ -6,9 +6,6 @@ export default class Counter extends React.Component {
         this.state = { currentCount: 0 };
     }
     render() {
-        console.log("components/Counter.props: " + JSON.stringify(this.props));
-        console.log("components/Counter.state: " + JSON.stringify(this.state));
-
         return <div>
             <h1>Counter</h1>
             <p>This is a simple example of a React component.</p>
