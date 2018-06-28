@@ -23,6 +23,8 @@ export class FetchData extends React.Component {
         </div>;
     }
     static renderForecastsTable(forecasts) {
+        console.log("components/FetchData.renderForecastsTable: " + JSON.stringify(forecasts));
+
         return <table className='table'>
             <thead>
                 <tr>
