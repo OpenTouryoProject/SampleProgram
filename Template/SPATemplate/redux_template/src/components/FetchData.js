@@ -1,25 +1,29 @@
 import * as React from 'react';
-import 'isomorphic-fetch';
+import { Link } from 'react-router-dom';
 
-export class FetchData extends React.Component {
-    constructor() {
-        super();
-        this.state = { forecasts: [], loading: true };
-        fetch('http://localhost:5000/hoge1.json')
-            .then(response => response.json())
-            .then(data => {
-            this.setState({ forecasts: data, loading: false });
-        });
+export default class FetchData extends React.Component {
+    componentWillMount() {
+        // 初回実行
+        console.log("this.props.match: " + JSON.stringify(this.props.match));
+        let startDateIndex = parseInt(this.props.match.params.startDateIndex) || 0;
+        this.props.GET_DATA(startDateIndex);
     }
 
+    /*componentWillReceiveProps(nextProps) {
+        // route paramsなど、param変更時
+        console.log("nextProps.match: " + JSON.stringify(nextProps.match));
+        let startDateIndex = parseInt(nextProps.match.params.startDateIndex) || 0;
+        this.props.GET_DATA(startDateIndex);
+    }*/
+
     render() {
-        let contents = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : FetchData.renderForecastsTable(this.state.forecasts);
         return <div>
             <h1>Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            { contents }
+            <p>This component demonstrates fetching data from the server and working with URL parameters.</p>
+            {/*}
+            { this.renderForecastsTable() }
+            { this.renderPagination() }
+            */} {this.props.counter}
         </div>;
     }
     static renderForecastsTable(forecasts) {
@@ -43,5 +47,16 @@ export class FetchData extends React.Component {
             )}
             </tbody>
         </table>;
+    }
+
+    static renderPagination() {
+        let prevStartDateIndex = (this.props.startDateIndex || 0) - 5;
+        let nextStartDateIndex = (this.props.startDateIndex || 0) + 5;
+
+        return <p className='clearfix text-center'>
+            <Link className='btn btn-default pull-left' to={ `/fetchdata/${ prevStartDateIndex }` }>Previous</Link>
+            <Link className='btn btn-default pull-right' to={ `/fetchdata/${ nextStartDateIndex }` }>Next</Link>
+            { this.props.isLoading ? <span>Loading...</span> : [] }
+        </p>;
     }
 }

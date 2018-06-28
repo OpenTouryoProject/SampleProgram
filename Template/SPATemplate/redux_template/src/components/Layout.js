@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import { NavMenu } from './NavMenu';
-import logo from './logo.svg';
 import './Layout.css';
 
 export class Layout extends React.Component {

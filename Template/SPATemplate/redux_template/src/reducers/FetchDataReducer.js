@@ -1,19 +1,19 @@
 const initialState = {counter: 0};
 
-const Menu1 = (state = initialState, action) => {
+const FetchDataReducer = (state = initialState, action) => {
 
   var newState = null;
   
   switch (action.type) {
     
-    case 'ADD_MENU1':
-      console.log("reducers/Menu1.ADD_MENU1.state: " + JSON.stringify(state));
+    case 'GET_DATA':
+      console.log("reducers/FetchDataReducer.GET_DATA.state: " + JSON.stringify(state));
 
       // stateを複製してpayloadを処理・追加
       newState = Object.assign({}, state);
       newState = { counter: state.counter + action.payload.amount };
 
-      console.log("reducers/Menu1.ADD_MENU1.newState: " + JSON.stringify(newState));
+      console.log("reducers/FetchDataReducer.GET_DATA.newState: " + JSON.stringify(newState));
 
       return newState;
 
@@ -22,4 +22,4 @@ const Menu1 = (state = initialState, action) => {
   }
 };
     
-export default Menu1;
+export default FetchDataReducer;
