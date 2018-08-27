@@ -11,7 +11,7 @@
     <iconUrl>https://opentouryo.osscons.jp/OpenTouryo.ico</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>Test of NuGet by the OssCons.DotNetSubcommittee.</summary>
-    <description>Verification for the registation the package and symbol package to the nuget.org and symbolsource.org.</description>
+    <description>This package use to check the following. : Verify the sequence for to create the class library package and symbol package for net46 / net47 / netstandard2.0, and to register to nuget.org and symbolsource.org. And also check it can use for debug.</description>
     <releaseNotes>https://github.com/OpenTouryoProject/OpenTouryo/releases</releaseNotes>
     <copyright></copyright>
     <tags>OssCons</tags>
