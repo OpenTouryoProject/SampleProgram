@@ -1,13 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+
+using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 using ASPNETIdentity2Sample.Models;
 
 namespace ASPNETIdentity2Sample.Controllers
@@ -152,7 +152,28 @@ namespace ASPNETIdentity2Sample.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var roleManager = HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+                const string roleName = "Admin";
+
+                //Create Role Admin if it does not exist
+                var role = roleManager.FindByName(roleName);
+                if (role == null)
+                {
+                    role = new IdentityRole(roleName);
+                    var roleresult = roleManager.Create(role);
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                // Add user admin to Role Admin if not already added
+                var rolesForUser = userManager.GetRoles(user.Id);
+                if (!rolesForUser.Contains(role.Name))
+                {
+                    userManager.AddToRole(user.Id, role.Name);
+                }
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
