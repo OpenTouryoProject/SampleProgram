@@ -5,7 +5,11 @@
     <RootNamespace>OssCons.DotNetSubcommittee.TestClassLibrary1</RootNamespace>
     <AssemblyName>OssCons.DotNetSubcommittee.TestClassLibrary1</AssemblyName>
     <PackageId>OssCons.DotNetSubcommittee.TestClassLibrary1</PackageId>
-    <Version>0.0.8</Version>
+    <Version>0.1.1</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Git1\SampleProgram\NuGet\TestClassLibrary1\TestClassLibrary1\OssCons.DotNetSubcommittee.TestClassLibrary1.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
