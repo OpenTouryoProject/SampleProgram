@@ -80,7 +80,7 @@ namespace jose_jwt_Sample
             token = JWT.Encode(payload, privateKeyOfCng, JwsAlgorithm.ES256);
             Debug.WriteLine("JwsAlgorithm.ES256: " + token);
             Debug.WriteLine("Decoded: " + JWT.Decode(token, publicKeyOfCng));
-        #endregion
+            #endregion
 
             #endregion
 
