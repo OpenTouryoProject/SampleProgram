@@ -1,99 +1,103 @@
-‚±‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Í
-iƒRƒ“ƒ\[ƒ‹jÌParent.exeÌi“½–¼ƒpƒCƒv‚Ì“üo—ÍjÌChild.exe
-ŠÔ‚Å“½–¼ƒpƒCƒv‚ðŽg—p‚µ‚½ƒvƒƒZƒXŠÔ’ÊM‚ð‚µ‚Ü‚·B
+# æ¦‚è¦
+ã“ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã¯ã€
 
-EStdIOAndPipe
-@RedirectStandardXXXX‚ðtrue‚ÉÝ’è‚µA
-@ŽqƒvƒƒZƒX‚Å‚ÍConsoleŒo—R‚ÅŽg—pB
+ï¼ˆã‚³ãƒ³ã‚½ãƒ¼ãƒ«ï¼‰â‡”Parent.exeâ‡”ï¼ˆåŒ¿åãƒ‘ã‚¤ãƒ—ã®å…¥å‡ºåŠ›ï¼‰â‡”Child.exe
 
-EAnonymousPipe
-@AnonymousPipeXXXXStream‚ð’¼ÚŽg—p‚·‚éB
+é–“ã§åŒ¿åãƒ‘ã‚¤ãƒ—ã‚’ä½¿ç”¨ã—ãŸãƒ—ãƒ­ã‚»ã‚¹é–“é€šä¿¡ã‚’ã—ã¾ã™ã€‚
 
-ŽqƒvƒƒZƒXiChild.exej‚ÉƒfƒoƒbƒK‚ð
-ƒAƒ^ƒbƒ`iDebugj‚·‚éê‡‚Í‰º‹L‚ðŽQÆB
+- StdIOAndPipe  
+RedirectStandardXXXXã‚’trueã«è¨­å®šã—å­ãƒ—ãƒ­ã‚»ã‚¹ã§ã¯ConsoleçµŒç”±ã§ä½¿ç”¨ã€‚
+- AnonymousPipe  
+AnonymousPipeXXXXStreamã‚’ç›´æŽ¥ä½¿ç”¨ã™ã‚‹ã€‚
 
-E•û–@ : ƒfƒoƒbƒK‚ðŽ©“®“I‚É‹N“®‚·‚é
-@http://msdn.microsoft.com/ja-jp/library/a329t4ed(v=vs.80).aspx
-E”õ–Y˜^ Image File Execution Options
-@http://limejuicer.blog66.fc2.com/blog-entry-18.html
+## å®Ÿè¡Œæ–¹æ³•
+å­ãƒ—ãƒ­ã‚»ã‚¹ï¼ˆChild.exeï¼‰ã«ãƒ‡ãƒãƒƒã‚¬ã‚’ã‚¢ã‚¿ãƒƒãƒï¼ˆDebugï¼‰ã™ã‚‹å ´åˆã¯ä¸‹è¨˜ã‚’å‚ç…§ã€‚
 
+- æ–¹æ³• : ãƒ‡ãƒãƒƒã‚¬ã‚’è‡ªå‹•çš„ã«èµ·å‹•ã™ã‚‹  
+http://msdn.microsoft.com/ja-jp/library/a329t4ed(v=vs.80).aspx
+- å‚™å¿˜éŒ² Image File Execution Options  
+http://limejuicer.blog66.fc2.com/blog-entry-18.html
 
-ƒ—pŒêà–¾„
+## æ¨™æº–å…¥å‡ºåŠ›é–¢é€£ã®ç”¨èªž
+### ã‚·ã‚§ãƒ«
+CUIã®ã‚³ãƒžãƒ³ãƒ‰ã¯ã€ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã¨æ¨™æº–å…¥åŠ›çµŒç”±ã§ã‚„ã‚Šå–ã‚Šã™ã‚‹ã€‚
+ã€€
+### ï¼“ã¤ã®å…¥å‡ºåŠ›å…ˆ
+ãƒ—ãƒ­ã‚»ã‚¹ã«æ¨™æº–çš„ã«ç”¨æ„ã•ã‚Œã‚‹ï¼“ã¤ã®å…¥å‡ºåŠ›å…ˆ
+- æ¨™æº–å…¥åŠ›ï¼ˆCè¨€èªžã®scanfã€Win32ã®ReadFileãªã©ã§ã€Œèª­ã¿å–ã‚Šã€ï¼‰
+- æ¨™æº–å‡ºåŠ›ï¼ˆCè¨€èªžã®printfã€Win32ã®WriteFileãªã©ã§ã€Œæ›¸ãè¾¼ã¿ã€ï¼‰
+- æ¨™æº–ã‚¨ãƒ©ãƒ¼å‡ºåŠ›ï¼ˆæ¨™æº–å‡ºåŠ›ã¨åŒã˜ã€ãƒãƒ³ãƒ‰ãƒ«ã ã‘ç•°ãªã‚‹ï¼‰
 
-EƒVƒFƒ‹FƒRƒ“ƒ\[ƒ‹
-@iCUI‚ÌƒRƒ}ƒ“ƒhj
-@
-E•W€“üo—ÍFƒvƒƒZƒX‚É•W€“I‚É—pˆÓ‚³‚ê‚é‚R‚Â‚Ì“üo—Íæ
-@E•W€“ü—ÍiCŒ¾Œê‚ÌscanfAWin32‚ÌReadFile‚È‚Ç‚Åu“Ç‚ÝŽæ‚èvj
-@E•W€o—ÍiCŒ¾Œê‚ÌprintfAWin32‚ÌWriteFile‚È‚Ç‚Åu‘‚«ž‚Ývj
-@E•W€ƒGƒ‰[o—Íi•W€o—Í‚Æ“¯‚¶Aƒnƒ“ƒhƒ‹‚¾‚¯ˆÙ‚È‚éj
-@
-@EGetStdHandle ŠÖ”
-@@http://msdn.microsoft.com/ja-jp/library/cc429347.aspx
-@@ƒRƒ“ƒ\[ƒ‹‚Ö‚Ì“üo—ÍiƒVƒFƒ‹j‚ª•K—v‚ÈƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚Å—˜—pB
-@@ESTD_INPUT_HANDLEF•W€“ü—Íƒnƒ“ƒhƒ‹
-@@ESTD_OUTPUT_HANDLEF•W€o—Íƒnƒ“ƒhƒ‹
-@@ESTD_ERROR_HANDLEF•W€ƒGƒ‰[ƒnƒ“ƒhƒ‹
-@
-@@ã‹L‚ðAŽqƒvƒƒZƒX‹N“®ŽžA
-@@STARTUPINFO\‘¢‘Ì‚ÉÝ’è‚·‚éB
-@
-@ESTARTUPINFO structure (Windows)
-@@http://msdn.microsoft.com/ja-jp/library/ms686331.aspx
-@@EHANDLE hStdInput;
-@@EHANDLE hStdOutput;
-@@EHANDLE hStdError;
-@@
-@EPROCESS_INFORMATION structure (Windows)
-@@http://msdn.microsoft.com/ja-jp/library/ms684873.aspx
-@@
-EƒŠƒ_ƒCƒŒƒNƒgF•W€“üo—Í‚Ì•t‚¯‘Ö‚¦‚ðŽw‚·B
-@iã‹L‚Ìƒnƒ“ƒhƒ‹‚ðƒRƒ“ƒ\[ƒ‹ ¨ ƒtƒ@ƒCƒ‹A“½–¼ƒpƒCƒv‚È‚Ç‚Æ•ÏXj
-@
-@
-ƒŽQliCŒ¾Œê‚Å‚ÌŽÀ‘•j„
+### ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆ
+æ¨™æº–å…¥å‡ºåŠ›ã®ä»˜ã‘æ›¿ãˆã‚’æŒ‡ã™ã€‚
+ï¼ˆä¸‹è¨˜ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ã‚³ãƒ³ã‚½ãƒ¼ãƒ« â†’ ãƒ•ã‚¡ã‚¤ãƒ«ã€åŒ¿åãƒ‘ã‚¤ãƒ—ãªã©ã¨å¤‰æ›´ã™ã‚‹ã“ã¨ï¼‰
 
-ƒRƒ“ƒ\[ƒ‹ ƒvƒƒZƒX‚ð¶¬‚µ‚Ä
-•W€ƒnƒ“ƒhƒ‹‚ðƒŠƒ_ƒCƒŒƒNƒg‚·‚é•û–@
+### æ¨™æº–å…¥å‡ºåŠ›é–¢é€£ã®è­˜åˆ¥å­
+
+#### GetStdHandle é–¢æ•°  
+http://msdn.microsoft.com/ja-jp/library/cc429347.aspx
+
+ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã¨å…¥å‡ºåŠ›ãŒå¿…è¦ãªã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã§åˆ©ç”¨ã€‚
+
+- STD_INPUT_HANDLEï¼šæ¨™æº–å…¥åŠ›ãƒãƒ³ãƒ‰ãƒ«
+- STD_OUTPUT_HANDLEï¼šæ¨™æº–å‡ºåŠ›ãƒãƒ³ãƒ‰ãƒ«
+- STD_ERROR_HANDLEï¼šæ¨™æº–ã‚¨ãƒ©ãƒ¼ãƒãƒ³ãƒ‰ãƒ«
+ã€€
+ä¸Šè¨˜ã‚’ã€å­ãƒ—ãƒ­ã‚»ã‚¹èµ·å‹•æ™‚ã€STARTUPINFOæ§‹é€ ä½“ã«è¨­å®šã™ã‚‹ã€‚
+ã€€
+#### STARTUPINFO structure (Windows)
+http://msdn.microsoft.com/ja-jp/library/ms686331.aspx
+- HANDLE hStdInput;
+- HANDLE hStdOutput;
+- HANDLE hStdError;
+ã€€ã€€
+#### PROCESS_INFORMATION structure (Windows)
+http://msdn.microsoft.com/ja-jp/library/ms684873.aspx
+
+#### CreatePipe é–¢æ•°
+http://msdn.microsoft.com/ja-jp/library/cc429801.aspx
+
+åå‰ãªã—ãƒ‘ã‚¤ãƒ—ã‚’ä½œæˆã—ã€ãã®ãƒ‘ã‚¤ãƒ—ã®èª­å–å´ã¨æ›¸è¾¼å´ã®ä¸¡æ–¹ã®ãƒãƒ³ãƒ‰ãƒ«ã‚’å–å¾—ã™ã‚‹ï¼ˆå…¥åŠ›å´ã¨å‡ºåŠ›å´ãŒã®ãƒãƒ³ãƒ‰ãƒ«ãŒã‚ã‚‹ï¼‰
+ã€€
+#### DuplicateHandle é–¢æ•°
+http://msdn.microsoft.com/ja-jp/library/cc429766.aspx
+
+ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãƒãƒ³ãƒ‰ãƒ«ã®è¤‡è£½ã‚’ä½œæˆã™ã‚‹ã€‚
+- ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ—ãƒ­ã‚»ã‚¹é–“ã§å…±æœ‰ã•ã›ã‚‹å ´åˆ
+- ã‚¢ã‚¯ã‚»ã‚¹è¨±å¯ã®é•ã†ãƒãƒ³ãƒ‰ãƒ«ã‚’ä½œæˆã™ã‚‹å ´åˆ
+
+ã«åˆ©ç”¨ã™ã‚‹ã“ã¨ãŒã§ãã‚‹ã€‚
+ 
+## å‚è€ƒï¼ˆCè¨€èªžã§ã®å®Ÿè£…ï¼‰
+ã‚³ãƒ³ã‚½ãƒ¼ãƒ« ãƒ—ãƒ­ã‚»ã‚¹ã‚’ç”Ÿæˆã—ã¦æ¨™æº–ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒªãƒ€ã‚¤ãƒ¬ã‚¯ãƒˆã™ã‚‹æ–¹æ³•
 http://support.microsoft.com/kb/190351/ja
 
-@Ee‘¤
-@@EŽqƒvƒƒZƒX‚Éƒf[ƒ^‚ðo—Í‰Â”\‚È“½–¼ƒpƒCƒviŒp³‰Â”\j
-@@@hOutputReadTmpieƒvƒƒZƒX‚ÅŽg‚¤TmpjAhOutputWriteiŽqƒvƒƒZƒX‚É“n‚·j
-@@@
-@@EŽqƒvƒƒZƒX‚©‚çƒf[ƒ^‚ð“ü—Í‰Â”\‚È“½–¼ƒpƒCƒviŒp³‰Â”\j
-@@@hInputReadiŽqƒvƒƒZƒX‚É“n‚·jAhInputWriteTmpieƒvƒƒZƒX‚ÅŽg‚¤Tmpj
-@@@
-@@EeƒvƒƒZƒX‚ÅŽg‚¤“½–¼ƒpƒCƒvEƒnƒ“ƒhƒ‹
-@@@EŒp³•s‰Â‚ÌƒRƒs[‚ðì¬iDuplicateHandlejB
-@@@@EhOutputRead
-@@@@EhInputWrite
-@@@ETmp‚ðƒNƒ[ƒY‚·‚éiCloseHandlejB
-@@@@EhOutputReadTmp
-@@@@EhInputWriteTmp
-@@@
-@@EŽqƒvƒƒZƒX‚É“n‚·“½–¼ƒpƒCƒvEƒnƒ“ƒhƒ‹
-@@@ESTARTUPINFO\‘¢‘Ì‚ÉÝ’è‚µ‚ÄŽqƒvƒƒZƒX‚ð‹N“®B
-@@@Eƒnƒ“ƒhƒ‹‚ðƒNƒ[ƒY‚·‚éB
-@@@@EhOutputWrite
-@@@@EhInputRead
-@@@@
-@@EhOutputReadF•W€“ü—ÍiCŒ¾Œê‚ÌscanfAWin32‚ÌReadFile‚È‚Çj
-@@EhInputWriteF•W€o—ÍiCŒ¾Œê‚ÌprintfAWin32‚ÌWriteFile‚È‚Çj
-@@
-@EŽq‘¤
-@@EhOutputWriteF•W€“ü—ÍiCŒ¾Œê‚ÌscanfAWin32‚ÌReadFile‚È‚Çj
-@@EhInputReadF•W€o—ÍiCŒ¾Œê‚ÌprintfAWin32‚ÌWriteFile‚È‚Çj
-@@
-ECreatePipe ŠÖ”
-@http://msdn.microsoft.com/ja-jp/library/cc429801.aspx
-@–¼‘O‚È‚µƒpƒCƒv‚ðì¬‚µA‚»‚ÌƒpƒCƒv‚Ì
-@“ÇŽæ‘¤‚Æ‘ž‘¤‚Ì—¼•û‚Ìƒnƒ“ƒhƒ‹‚ðŽæ“¾‚·‚éB
-@i“ü—Í‘¤‚Æo—Í‘¤‚ª‚Ìƒnƒ“ƒhƒ‹‚ª‚ ‚éj
-@
-EDuplicateHandle ŠÖ”
-@http://msdn.microsoft.com/ja-jp/library/cc429766.aspx
-@ƒIƒuƒWƒFƒNƒgƒnƒ“ƒhƒ‹‚Ì•¡»‚ðì¬‚·‚éB
-@Eƒnƒ“ƒhƒ‹‚ðƒvƒƒZƒXŠÔ‚Å‹¤—L‚³‚¹‚éê‡
-@EƒAƒNƒZƒX‹–‰Â‚Ìˆá‚¤ƒnƒ“ƒhƒ‹‚ðì¬‚·‚éê‡
-@‚É—˜—p‚·‚é‚±‚Æ‚ª‚Å‚«‚éB
+### è¦ªå´
+- hOutputReadï¼šæ¨™æº–å…¥åŠ›ï¼ˆCè¨€èªžã®scanfã€Win32ã®ReadFileãªã©ï¼‰
+- hInputWriteï¼šæ¨™æº–å‡ºåŠ›ï¼ˆCè¨€èªžã®printfã€Win32ã®WriteFileãªã©ï¼‰
+
+#### å­ãƒ—ãƒ­ã‚»ã‚¹ã«ãƒ‡ãƒ¼ã‚¿ã‚’å‡ºåŠ›å¯èƒ½ãªåŒ¿åãƒ‘ã‚¤ãƒ—ï¼ˆç¶™æ‰¿å¯èƒ½ï¼‰  
+- hOutputReadTmpï¼ˆè¦ªãƒ—ãƒ­ã‚»ã‚¹ã§ä½¿ã†Tmpï¼‰
+- hOutputWriteï¼ˆå­ãƒ—ãƒ­ã‚»ã‚¹ã«æ¸¡ã™ï¼‰
+
+#### å­ãƒ—ãƒ­ã‚»ã‚¹ã‹ã‚‰ãƒ‡ãƒ¼ã‚¿ã‚’å…¥åŠ›å¯èƒ½ãªåŒ¿åãƒ‘ã‚¤ãƒ—ï¼ˆç¶™æ‰¿å¯èƒ½ï¼‰  
+- hInputReadï¼ˆå­ãƒ—ãƒ­ã‚»ã‚¹ã«æ¸¡ã™ï¼‰
+- hInputWriteTmpï¼ˆè¦ªãƒ—ãƒ­ã‚»ã‚¹ã§ä½¿ã†Tmpï¼‰
+ã€€ã€€ã€€
+#### è¦ªãƒ—ãƒ­ã‚»ã‚¹ã§ä½¿ã†åŒ¿åãƒ‘ã‚¤ãƒ—ãƒ»ãƒãƒ³ãƒ‰ãƒ«
+- ç¶™æ‰¿ä¸å¯ã®ã‚³ãƒ”ãƒ¼ã‚’ä½œæˆï¼ˆDuplicateHandleï¼‰ã€‚
+  - hOutputRead
+  - hInputWrite
+- Tmpã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ï¼ˆCloseHandleï¼‰ã€‚
+  - hOutputReadTmp
+  - hInputWriteTmp
+ã€€ã€€ã€€
+#### å­ãƒ—ãƒ­ã‚»ã‚¹ã«æ¸¡ã™åŒ¿åãƒ‘ã‚¤ãƒ—ãƒ»ãƒãƒ³ãƒ‰ãƒ«
+- STARTUPINFOæ§‹é€ ä½“ã«è¨­å®šã—ã¦å­ãƒ—ãƒ­ã‚»ã‚¹ã‚’èµ·å‹•ã€‚
+- ãƒãƒ³ãƒ‰ãƒ«ã‚’ã‚¯ãƒ­ãƒ¼ã‚ºã™ã‚‹ã€‚
+  - hOutputWrite
+  - hInputRead
+ã€€ã€€
+### å­å´
+- hOutputWriteï¼šæ¨™æº–å…¥åŠ›ï¼ˆCè¨€èªžã®scanfã€Win32ã®ReadFileãªã©ï¼‰
+- hInputReadï¼šæ¨™æº–å‡ºåŠ›ï¼ˆCè¨€èªžã®printfã€Win32ã®WriteFileãªã©ï¼‰
