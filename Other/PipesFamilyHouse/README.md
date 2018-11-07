@@ -43,7 +43,7 @@ http://msdn.microsoft.com/ja-jp/library/cc429347.aspx
 - STD_INPUT_HANDLE：標準入力ハンドル
 - STD_OUTPUT_HANDLE：標準出力ハンドル
 - STD_ERROR_HANDLE：標準エラーハンドル
-　
+
 上記を、子プロセス起動時、STARTUPINFO構造体に設定する。
 　
 #### STARTUPINFO structure (Windows)
@@ -58,7 +58,8 @@ http://msdn.microsoft.com/ja-jp/library/ms684873.aspx
 #### CreatePipe 関数
 http://msdn.microsoft.com/ja-jp/library/cc429801.aspx
 
-名前なしパイプを作成し、そのパイプの読取側と書込側の両方のハンドルを取得する（入力側と出力側がのハンドルがある）
+名前なしパイプを作成し、そのパイプの読取側と書込側の  
+両方のハンドルを取得する（入力側と出力側がのハンドルがある）
 　
 #### DuplicateHandle 関数
 http://msdn.microsoft.com/ja-jp/library/cc429766.aspx
@@ -70,7 +71,7 @@ http://msdn.microsoft.com/ja-jp/library/cc429766.aspx
 に利用することができる。
  
 ## 参考（C言語での実装）
-コンソール プロセスを生成して標準ハンドルをリダイレクトする方法
+コンソール プロセスを生成して標準ハンドルをリダイレクトする方法  
 http://support.microsoft.com/kb/190351/ja
 
 ### 親側
