@@ -12,10 +12,10 @@
     <None Include="..\..\..\..\..\root\files\resource\X509\SHA256RSA.pfx" Link="SHA256RSA.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\..\OpenTouryo\root\files\resource\X509\SHA256ECDSA.cer" Link="SHA256ECDSA.cer">
+    <None Include="..\..\..\..\..\root\files\resource\X509\SHA256ECDSA.cer" Link="SHA256ECDSA.cer">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="..\..\..\..\OpenTouryo\root\files\resource\X509\SHA256ECDSA.pfx" Link="SHA256ECDSA.pfx">
+    <None Include="..\..\..\..\..\root\files\resource\X509\SHA256ECDSA.pfx" Link="SHA256ECDSA.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
