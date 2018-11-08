@@ -22,6 +22,13 @@
 
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="2.4.0" />
+    <PackageReference Include="Touryo.Infrastructure.Public" Version="2.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="test.bat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
