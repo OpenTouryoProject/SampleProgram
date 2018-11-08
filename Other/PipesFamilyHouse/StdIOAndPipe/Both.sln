@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Child", "Child.csproj", "{2DFC8478-B64A-41EC-B795-9F6FC1B7271C}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parent", "Parent.csproj", "{AFFC6F22-E33A-401F-B9C8-1660558D7D17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Child", "Child\Child.csproj", "{2DFC8478-B64A-41EC-B795-9F6FC1B7271C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parent", "Parent\Parent.csproj", "{AFFC6F22-E33A-401F-B9C8-1660558D7D17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
