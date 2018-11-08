@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\..\..\..\root\files\resource\X509\SHA256DSA.cer" Link="SHA256DSA.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\..\..\..\..\root\files\resource\X509\SHA256DSA.pfx" Link="SHA256DSA.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\..\..\..\root\files\resource\X509\SHA256RSA.cer" Link="SHA256RSA.cer">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
