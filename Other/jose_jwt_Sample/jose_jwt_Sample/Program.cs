@@ -63,8 +63,6 @@ namespace jose_jwt_Sample
             publicX509Key = new X509Certificate2(publicX509Path, "", x509KS);
             Program.PrivateX509KeyInspector("RSA", privateX509Key);
             Program.PublicX509KeyInspector("RSA", publicX509Key);
-            //Program.MyWriteLine("RSA privateX509Key: " + ObjectInspector.Inspect(privateX509Key));
-            //Program.MyWriteLine("RSA publicX509Key: " + ObjectInspector.Inspect(publicX509Key));
             #endregion
 
             #region DSA
@@ -78,8 +76,6 @@ namespace jose_jwt_Sample
             DSA privateDSA = privateX509Key.GetDSAPrivateKey();
             Program.MyWriteLine("privateDSA: " + (privateDSA == null ? "is null" : "is not null"));
             DSA publicDSA = null; // publicX509Key.GetDSAPublicKey(); // Internal.Cryptography.CryptoThrowHelper.WindowsCryptographicException
-            //Program.MyWriteLine("DSA privateX509Key: " + ObjectInspector.Inspect(privateX509Key));
-            //Program.MyWriteLine("DSA publicX509Key: " + ObjectInspector.Inspect(publicX509Key));
             #endregion
 
             #region ECDsa
@@ -94,8 +90,6 @@ namespace jose_jwt_Sample
             Program.MyWriteLine("privateECDsa: " + (privateECDsa == null ? "is null" : "is not null"));
             ECDsa publicECDsa = publicX509Key.GetECDsaPublicKey();
             Program.MyWriteLine("publicECDsa: " + (publicECDsa == null ? "is null" : "is not null"));
-            //Program.MyWriteLine("ECDSA privateX509Key: " + ObjectInspector.Inspect(privateX509Key));
-            //Program.MyWriteLine("ECDSA publicX509Key: " + ObjectInspector.Inspect(publicX509Key));
             #endregion
 
             #endregion
@@ -164,8 +158,8 @@ namespace jose_jwt_Sample
                 try
                 {
                     token = "";
-                    token = JWT.Encode(payload, privateX509Key.PrivateKey, JwsAlgorithm.ES256);
-                    Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicX509Key.PublicKey);
+                    token = JWT.Encode(payload, privateX509Key.GetECDsaPrivateKey(), JwsAlgorithm.ES256);
+                    Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicX509Key.GetECDsaPublicKey());
                 }
                 catch (Exception ex)
                 {
@@ -397,10 +391,17 @@ namespace jose_jwt_Sample
                 Program.MyWriteLine(lbl + " privateSignatureAlgorithm: " + ex.GetType().ToString() + ", " + ex.Message);
             }
 
-            if (privateX509Key.HasPrivateKey)
+            try
             {
-                Program.MyWriteLine(lbl + " privateX509Key.PrivateKey: " + (
-                    privateX509Key.PrivateKey == null ? "is null" : "is " + privateX509Key.PrivateKey.ToString()));
+                if (privateX509Key.HasPrivateKey)
+                {
+                    Program.MyWriteLine(lbl + " privateX509Key.PrivateKey: " + (
+                        privateX509Key.PrivateKey == null ? "is null" : "is " + privateX509Key.PrivateKey.ToString()));
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.MyWriteLine(lbl + " privateX509Key.PrivateKey: " + ex.GetType().ToString() + ", " + ex.Message);
             }
         }
 
