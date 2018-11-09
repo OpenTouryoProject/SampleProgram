@@ -25,7 +25,7 @@ namespace jose_jwt_Sample
         {
             #region Variables
 
-            OperatingSystem os = Environment.OSVersion;
+            //OperatingSystem os = Environment.OSVersion;
             X509KeyStorageFlags x509KS = X509KeyStorageFlags.DefaultKeySet;
 
             string token = "";
@@ -136,37 +136,37 @@ namespace jose_jwt_Sample
             #region ES- * family
             // ES256, ES384, ES512 ECDSA signatures
             // https://github.com/dvsekhvalnov/jose-jwt#es---family
-            if (os.Platform == PlatformID.Win32NT)
+            //if (os.Platform == PlatformID.Win32NT)
+            //{
+            //    x = new byte[] { 4, 114, 29, 223, 58, 3, 191, 170, 67, 128, 229, 33, 242, 178, 157, 150, 133, 25, 209, 139, 166, 69, 55, 26, 84, 48, 169, 165, 67, 232, 98, 9 };
+            //    y = new byte[] { 131, 116, 8, 14, 22, 150, 18, 75, 24, 181, 159, 78, 90, 51, 71, 159, 214, 186, 250, 47, 207, 246, 142, 127, 54, 183, 72, 72, 253, 21, 88, 53 };
+            //    d = new byte[] { 42, 148, 231, 48, 225, 196, 166, 201, 23, 190, 229, 199, 20, 39, 226, 70, 209, 148, 29, 70, 125, 14, 174, 66, 9, 198, 80, 251, 95, 107, 98, 206 };
+
+            //    privateKeyOfCng = EccKey.New(x, y, d);
+            //    publicKeyOfCng = EccKey.New(x, y);
+            //    token = "";
+            //    token = JWT.Encode(payload, privateKeyOfCng, JwsAlgorithm.ES256);
+            //    Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicKeyOfCng);
+            //}
+            //else // == PlatformID.Unix
+            //{ 
+            privateX509Path = @"SHA256ECDSA.pfx";
+            publicX509Path = @"SHA256ECDSA.cer";
+            privateX509Key = new X509Certificate2(privateX509Path, "test");
+            publicX509Key = new X509Certificate2(publicX509Path, "");
+
+            try
             {
-                x = new byte[] { 4, 114, 29, 223, 58, 3, 191, 170, 67, 128, 229, 33, 242, 178, 157, 150, 133, 25, 209, 139, 166, 69, 55, 26, 84, 48, 169, 165, 67, 232, 98, 9 };
-                y = new byte[] { 131, 116, 8, 14, 22, 150, 18, 75, 24, 181, 159, 78, 90, 51, 71, 159, 214, 186, 250, 47, 207, 246, 142, 127, 54, 183, 72, 72, 253, 21, 88, 53 };
-                d = new byte[] { 42, 148, 231, 48, 225, 196, 166, 201, 23, 190, 229, 199, 20, 39, 226, 70, 209, 148, 29, 70, 125, 14, 174, 66, 9, 198, 80, 251, 95, 107, 98, 206 };
-
-                privateKeyOfCng = EccKey.New(x, y, d);
-                publicKeyOfCng = EccKey.New(x, y);
                 token = "";
-                token = JWT.Encode(payload, privateKeyOfCng, JwsAlgorithm.ES256);
-                Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicKeyOfCng);
+                token = JWT.Encode(payload, privateX509Key.GetECDsaPrivateKey(), JwsAlgorithm.ES256);
+                Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicX509Key.GetECDsaPublicKey());
             }
-            else // == PlatformID.Unix
-            { 
-                privateX509Path = @"SHA256ECDSA.pfx";
-                publicX509Path = @"SHA256ECDSA.cer";
-                privateX509Key = new X509Certificate2(privateX509Path, "test");
-                publicX509Key = new X509Certificate2(publicX509Path, "");
+            catch (Exception ex)
+            {
+                Program.MyWriteLine("JwsAlgorithm.ES256: " + ex.GetType().ToString() + ", " + ex.Message);
+            }
 
-                try
-                {
-                    token = "";
-                    token = JWT.Encode(payload, privateX509Key.GetECDsaPrivateKey(), JwsAlgorithm.ES256);
-                    Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicX509Key.GetECDsaPublicKey());
-                }
-                catch (Exception ex)
-                {
-                    Program.MyWriteLine("JwsAlgorithm.ES256: " + ex.GetType().ToString() + ", " + ex.Message);
-                }
-                
-            }
+            //}
 
             #endregion
 
