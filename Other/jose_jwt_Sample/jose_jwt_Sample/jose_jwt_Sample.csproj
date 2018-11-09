@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="jose-jwt" Version="2.4.0" />
+    <PackageReference Include="System.Security.Cryptography.OpenSsl" Version="4.5.0" />
     <PackageReference Include="Touryo.Infrastructure.Public" Version="2.3.2" />
   </ItemGroup>
 

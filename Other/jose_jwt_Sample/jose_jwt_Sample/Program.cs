@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
+// https://www.nuget.org/packages/jose-jwt/
 using Jose;
+// https://github.com/dvsekhvalnov/jose-jwt/tree/master/jose-jwt/Security/Cryptography
 using Security.Cryptography;
 
 using Touryo.Infrastructure.Public.Str;
@@ -13,11 +15,10 @@ using Touryo.Infrastructure.Public.Util;
 namespace jose_jwt_Sample
 {
     /// <summary>
-    /// jose-jwt - マイクロソフト系技術情報 Wiki
-    /// https://techinfoofmicrosofttech.osscons.jp/index.php?jose-jwt
-    /// 
-    /// Certificates
-    /// https://github.com/OpenTouryoProject/OpenTouryo/tree/develop/root/files/resource/X509
+    /// - jose-jwt - マイクロソフト系技術情報 Wiki
+    ///   https://techinfoofmicrosofttech.osscons.jp/index.php?jose-jwt
+    /// - Certificates
+    ///   https://github.com/OpenTouryoProject/OpenTouryo/tree/develop/root/files/resource/X509
     /// </summary>
     class Program
     {
@@ -25,7 +26,7 @@ namespace jose_jwt_Sample
         {
             #region Variables
 
-            //OperatingSystem os = Environment.OSVersion;
+            OperatingSystem os = Environment.OSVersion;
             X509KeyStorageFlags x509KS = X509KeyStorageFlags.DefaultKeySet;
 
             string token = "";
@@ -129,27 +130,43 @@ namespace jose_jwt_Sample
             publicX509Key = new X509Certificate2(publicX509Path, "", x509KS);
 
             token = "";
-            token = Jose.JWT.Encode(payload, privateX509Key.PrivateKey, JwsAlgorithm.RS256);
+            token = JWT.Encode(payload, privateX509Key.PrivateKey, JwsAlgorithm.RS256);
             Program.VerifyResult("JwsAlgorithm.RS256: ", token, publicX509Key.PublicKey.Key);
             #endregion
 
             #region ES- * family
             // ES256, ES384, ES512 ECDSA signatures
             // https://github.com/dvsekhvalnov/jose-jwt#es---family
-            //if (os.Platform == PlatformID.Win32NT)
-            //{
-            //    x = new byte[] { 4, 114, 29, 223, 58, 3, 191, 170, 67, 128, 229, 33, 242, 178, 157, 150, 133, 25, 209, 139, 166, 69, 55, 26, 84, 48, 169, 165, 67, 232, 98, 9 };
-            //    y = new byte[] { 131, 116, 8, 14, 22, 150, 18, 75, 24, 181, 159, 78, 90, 51, 71, 159, 214, 186, 250, 47, 207, 246, 142, 127, 54, 183, 72, 72, 253, 21, 88, 53 };
-            //    d = new byte[] { 42, 148, 231, 48, 225, 196, 166, 201, 23, 190, 229, 199, 20, 39, 226, 70, 209, 148, 29, 70, 125, 14, 174, 66, 9, 198, 80, 251, 95, 107, 98, 206 };
 
-            //    privateKeyOfCng = EccKey.New(x, y, d);
-            //    publicKeyOfCng = EccKey.New(x, y);
-            //    token = "";
-            //    token = JWT.Encode(payload, privateKeyOfCng, JwsAlgorithm.ES256);
-            //    Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicKeyOfCng);
-            //}
-            //else // == PlatformID.Unix
-            //{ 
+            x = new byte[] { 4, 114, 29, 223, 58, 3, 191, 170, 67, 128, 229, 33, 242, 178, 157, 150, 133, 25, 209, 139, 166, 69, 55, 26, 84, 48, 169, 165, 67, 232, 98, 9 };
+            y = new byte[] { 131, 116, 8, 14, 22, 150, 18, 75, 24, 181, 159, 78, 90, 51, 71, 159, 214, 186, 250, 47, 207, 246, 142, 127, 54, 183, 72, 72, 253, 21, 88, 53 };
+            d = new byte[] { 42, 148, 231, 48, 225, 196, 166, 201, 23, 190, 229, 199, 20, 39, 226, 70, 209, 148, 29, 70, 125, 14, 174, 66, 9, 198, 80, 251, 95, 107, 98, 206 };
+
+            if (os.Platform == PlatformID.Win32NT)
+            {   
+                // https://github.com/dvsekhvalnov/jose-jwt/blob/master/jose-jwt/Security/Cryptography/EccKey.cs
+                privateKeyOfCng = EccKey.New(x, y, d);
+                publicKeyOfCng = EccKey.New(x, y);
+
+                token = "";
+                token = JWT.Encode(payload, privateKeyOfCng, JwsAlgorithm.ES256);
+                Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicKeyOfCng);
+            }
+            else // == PlatformID.Unix
+            {
+                // (x, y, d)を使用して、ECCurveからECDsaOpenSslを生成できれば...。
+
+                //ECCurve eCCurve = new ECCurve();
+                ////eCCurve.A = x;
+                ////eCCurve.B = y;
+                ////ECDsaOpenSsl ecd = new ECDsaOpenSsl(eCCurve);
+                ////eCCurve = ecd.ExportExplicitParameters(true).Curve;
+
+                //token = "";
+                //token = JWT.Encode(payload, new ECDsaOpenSsl(eCCurve), JwsAlgorithm.ES256);
+                //Program.VerifyResult("JwsAlgorithm.ES256: ", token, new ECDsaOpenSsl(eCCurve));
+            }
+
             privateX509Path = @"SHA256ECDSA.pfx";
             publicX509Path = @"SHA256ECDSA.cer";
             privateX509Key = new X509Certificate2(privateX509Path, "test");
@@ -157,6 +174,13 @@ namespace jose_jwt_Sample
 
             try
             {
+                if (os.Platform == PlatformID.Unix)
+                {
+                    // ECCurveを分析してみる。
+                    ECCurve eCCurve = ((ECDsaOpenSsl)privateX509Key.GetECDsaPrivateKey()).ExportExplicitParameters(true).Curve;
+                    Program.MyWriteLine("Inspect ECCurve: " + ObjectInspector.Inspect(eCCurve));
+                }
+
                 token = "";
                 token = JWT.Encode(payload, privateX509Key.GetECDsaPrivateKey(), JwsAlgorithm.ES256);
                 Program.VerifyResult("JwsAlgorithm.ES256: ", token, publicX509Key.GetECDsaPublicKey());
@@ -165,8 +189,6 @@ namespace jose_jwt_Sample
             {
                 Program.MyWriteLine("JwsAlgorithm.ES256: " + ex.GetType().ToString() + ", " + ex.Message);
             }
-
-            //}
 
             #endregion
 
@@ -177,7 +199,7 @@ namespace jose_jwt_Sample
 
             #region RSA-* key management family of algorithms
             // RSA-OAEP-256, RSA-OAEP and RSA1_5 key
-            https://github.com/dvsekhvalnov/jose-jwt#rsa--key-management-family-of-algorithms
+            // https://github.com/dvsekhvalnov/jose-jwt#rsa--key-management-family-of-algorithms
 
             privateX509Path = @"SHA256RSA.pfx";
             publicX509Path = @"SHA256RSA.cer";
@@ -292,7 +314,7 @@ namespace jose_jwt_Sample
             publicX509Key = new X509Certificate2(publicX509Path, "", x509KS);
 
             token = "";
-            token = Jose.JWT.Encode(payload, privateX509Key.PrivateKey, JwsAlgorithm.RS256, extraHeaders: headers);
+            token = JWT.Encode(payload, privateX509Key.PrivateKey, JwsAlgorithm.RS256, extraHeaders: headers);
             Program.VerifyResult("Adding extra headers to RS256: ", token, privateX509Key.PrivateKey);
             #endregion
 
@@ -305,9 +327,9 @@ namespace jose_jwt_Sample
             #region Two-phase validation
             // https://github.com/dvsekhvalnov/jose-jwt#two-phase-validation
             // ヘッダのkeyidクレームからキーを取り出して復号化する方法。
-            //headers = Jose.JWT.Headers(token);
+            //headers = JWT.Headers(token);
             // ・・・
-            //string hoge = Jose.JWT.Decode(token, "key");
+            //string hoge = JWT.Decode(token, "key");
             #endregion
 
             #region Working with binary payload
