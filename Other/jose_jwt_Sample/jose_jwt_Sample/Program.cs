@@ -11,6 +11,7 @@ using Security.Cryptography;
 
 using Touryo.Infrastructure.Public.Str;
 using Touryo.Infrastructure.Public.Util;
+using Touryo.Infrastructure.Public.Security;
 
 namespace jose_jwt_Sample
 {
@@ -93,6 +94,34 @@ namespace jose_jwt_Sample
             Program.MyWriteLine("publicECDsa: " + (publicECDsa == null ? "is null" : "is not null"));
             #endregion
 
+            #endregion
+
+            #region Test of the OpenTouryo.Public.Security.
+            // 次バージョンから、OpenSslのサポートを追加
+            //if (os.Platform == PlatformID.Unix)
+            //{
+            //    byte[] sign = null;
+
+            //    DigitalSignParam dsP1 = new DigitalSignParam(EnumDigitalSignAlgorithm.RSAOpenSsl_SHA256);
+            //    sign = dsP1.Sign(new byte[] { });
+            //    Program.MyWriteLine("DigitalSignParam.Verify(RS256): " + dsP1.Verify(new byte[] { }, sign).ToString());
+
+            //    DigitalSignXML dsX1 = new DigitalSignXML(EnumDigitalSignAlgorithm.RSAOpenSsl_SHA256);
+            //    sign = dsX1.Sign(new byte[] { });
+            //    Program.MyWriteLine("DigitalSignXML.Verify(RS256): " + dsX1.Verify(new byte[] { }, sign).ToString());
+
+            //    DigitalSignParam dsP2 = new DigitalSignParam(EnumDigitalSignAlgorithm.DSAOpenSsl_SHA1);
+            //    sign = dsP2.Sign(new byte[] { });
+            //    Program.MyWriteLine("DigitalSignParam.Verify(DS1): " + dsP2.Verify(new byte[] { }, sign).ToString());
+
+            //    DigitalSignXML dsX2 = new DigitalSignXML(EnumDigitalSignAlgorithm.DSAOpenSsl_SHA1);
+            //    sign = dsX2.Sign(new byte[] { });
+            //    Program.MyWriteLine("DigitalSignXML.Verify(DS1): " + dsX2.Verify(new byte[] { }, sign).ToString());
+
+            //    DigitalSignX509 ds5 = new DigitalSignX509(@"SHA256RSA.pfx", "test", "SHA256");
+            //    sign = ds5.Sign(new byte[] { });
+            //    Program.MyWriteLine("DigitalSignX509.Verify: " + ds5.Verify(new byte[] { }, sign).ToString());
+            //}
             #endregion
 
             Program.MyWriteLine("----------------------------------------------------------------------------------------------------");
