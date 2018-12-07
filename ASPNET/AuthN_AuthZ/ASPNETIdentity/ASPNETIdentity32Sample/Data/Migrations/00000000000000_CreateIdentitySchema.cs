@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ASPNETIdentity3Sample.Data.Migrations
+namespace ASPNETIdentity32Sample.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

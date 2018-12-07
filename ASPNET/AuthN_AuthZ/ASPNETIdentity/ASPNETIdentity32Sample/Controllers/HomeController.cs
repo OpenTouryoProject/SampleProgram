@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using ASPNETIdentity3Sample.Models;
+using ASPNETIdentity32Sample.Models;
 
-namespace ASPNETIdentity3Sample.Controllers
+namespace ASPNETIdentity32Sample.Controllers
 {
     public class HomeController : Controller
     {

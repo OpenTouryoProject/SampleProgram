@@ -1,6 +1,6 @@
 using System;
 
-namespace ASPNETIdentity3Sample.Models
+namespace ASPNETIdentity32Sample.Models
 {
     public class ErrorViewModel
     {

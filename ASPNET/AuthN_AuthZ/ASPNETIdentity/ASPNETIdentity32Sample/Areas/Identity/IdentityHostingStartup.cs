@@ -1,5 +1,5 @@
 ﻿using System;
-using ASPNETIdentity3Sample.Data;
+using ASPNETIdentity32Sample.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -7,8 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-[assembly: HostingStartup(typeof(ASPNETIdentity3Sample.Areas.Identity.IdentityHostingStartup))]
-namespace ASPNETIdentity3Sample.Areas.Identity
+[assembly: HostingStartup(typeof(ASPNETIdentity32Sample.Areas.Identity.IdentityHostingStartup))]
+namespace ASPNETIdentity32Sample.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

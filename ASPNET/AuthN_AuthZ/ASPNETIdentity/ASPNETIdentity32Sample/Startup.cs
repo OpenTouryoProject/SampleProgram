@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ASPNETIdentity3Sample.Data;
+using ASPNETIdentity32Sample.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ASPNETIdentity3Sample
+namespace ASPNETIdentity32Sample
 {
     public class Startup
     {
