@@ -31,6 +31,8 @@ set BUILD_CONFIG=Debug
 @echo --------------------------------------------------
 set COMMANDLINE=/build %BUILD_CONFIG%
 
+set COMMANDLINE2=/p:Configuration=%BUILD_CONFIG% -v:d
+
 @echo --------------------------------------------------
 @echo Set the proxy settings of Nuget.
 @echo --------------------------------------------------
