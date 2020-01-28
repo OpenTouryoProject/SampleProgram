@@ -1,5 +1,5 @@
-# g‚¢•û
-Node.js‚©‚çnpmƒeƒXƒg—p‚ÌnpmƒpƒbƒP[ƒW‚ğg—p‚·‚éB
+# ä½¿ã„æ–¹
+Node.jsã‹ã‚‰npmãƒ†ã‚¹ãƒˆç”¨ã®npmãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ä½¿ç”¨ã™ã‚‹ã€‚
 
-- npm_i.bat ‚ğ’@‚­I
-- node_test ‚ğ’@‚­I
+- npm_i.bat ã‚’å©ãï¼
+- node_test ã‚’å©ãï¼

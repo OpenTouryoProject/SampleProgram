@@ -1,6 +1,6 @@
 {
   "name": "ossc-test-library1",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "osscons.jp test library1",
   "main": "index.js",
   "scripts": {

@@ -1,6 +1,6 @@
-# g‚¢•û
-ƒuƒ‰ƒEƒU‚©‚çnpmƒeƒXƒg—p‚ÌnpmƒpƒbƒP[ƒW‚ğg—p‚·‚éB
+# ä½¿ã„æ–¹
+ãƒ–ãƒ©ã‚¦ã‚¶ã‹ã‚‰npmãƒ†ã‚¹ãƒˆç”¨ã®npmãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ä½¿ç”¨ã™ã‚‹ã€‚
 
-- npm_i.bat ‚ğ’@‚­I
-- webpack_bundle.bat ‚ğ’@‚­I
-- index.html‚ğƒuƒ‰ƒEƒU‚ÅŠJ‚­iconsoleo—Í‚ğŠm”FjB
+- npm_i.bat ã‚’å©ãï¼
+- webpack_bundle.bat ã‚’å©ãï¼
+- index.htmlã‚’ãƒ–ãƒ©ã‚¦ã‚¶ã§é–‹ãï¼ˆconsoleå‡ºåŠ›ã‚’ç¢ºèªï¼‰ã€‚
