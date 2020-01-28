@@ -1,6 +1,6 @@
 {
   "name": "ossc-test-library1",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "osscons.jp test library1",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/OpenTouryoProject/SampleProgram"
+    "url": "https://github.com/OpenTouryoProject/SampleProgram/tree/master/npm/ossc-test-library1"
   },
   "author": "OSS Consortium .net subcommittee",
   "maintainers": [
