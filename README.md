@@ -1,8 +1,9 @@
 # Overview
 いろいろなサンプル・プログラムが格納されています。  
 
-ただし、本リポジトリに格納されているサンプルは、以下のように技術検証などに重きを置いているため、サンプルの実行手順などのドキュメントは省略しています。
-
+ただし、本リポジトリに格納されているサンプルは、  
+以下のように技術検証などに重きを置いているため、  
+サンプルの実行手順などのドキュメントは省略しています。
 
 ### 技術検証/実現性可否 サンプル・プログラム
 
@@ -25,11 +26,14 @@ Azure関連のサンプル・プログラムを格納します。
 #### [UI Subsystem](https://github.com/OpenTouryoProject/SampleProgram/tree/master/UISubsystem/)
 各種UISubsystemのサンプル・プログラムを格納します。
 
-#### [NuGet](https://github.com/OpenTouryoProject/SampleProgram/tree/master/NuGet/)
-NuGetパッケージ化＆登録のサンプル・プログラムを格納します。
+#### [PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel/)
+各種プロトタイプを格納します。
+
+#### [PkgMgr](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PkgMgr/)
+パッケージマネージャへのパッケージ登録のプロトタイプを格納します。
 
 #### [Nunit](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Nunit/)
 Nunitでのテスト自動化サンプル・プログラムを格納します。
 
 #### [Other](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Other/)
-その他のサンプル・プログラムを格納します。
+その他のサンプル・プログラム、プロトタイプを格納します。
