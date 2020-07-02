@@ -1,0 +1,27 @@
+{
+  "name": "@touryo/test-library1",
+  "version": "0.0.1",
+  "description": "touryo test library1",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "keywords": [
+    "hogehoge"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenTouryoProject/SampleProgram/tree/master/npm/touryo-test-library1"
+  },
+  "author": "OSS Consortium dev-infra subcommittee",
+  "maintainers": [
+    {
+      "name": "daisukenishino77",
+      "email": "daisukenishino77@gmail.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "moji": "^0.5.1"
+  }
+}
