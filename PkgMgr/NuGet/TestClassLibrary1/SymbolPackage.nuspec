@@ -3,11 +3,12 @@
   <metadata>
     <id>OssCons.DotNetSubcommittee.TestClassLibrary1</id>
     <title>OssCons.DotNetSubcommittee.TestClassLibrary1</title>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <authors>OSS Consortium .net subcommittee</authors>
     <owners>daisukenishino77</owners>
-    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.txt</licenseUrl>
+    <license type="expression">Apache-2.0</license>
     <projectUrl>https://github.com/OpenTouryoProject/SampleProgram/blob/master/NuGet</projectUrl>
+    <icon>images\_OpenTouryo.png</icon>
     <iconUrl>https://opentouryo.osscons.jp/OpenTouryo.ico</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <summary>Test of NuGet by the OssCons.DotNetSubcommittee.</summary>
@@ -16,10 +17,20 @@
     <copyright></copyright>
     <tags>OssCons</tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="10.0.3" />
+      <group targetFramework=".NETFramework4.6">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+      </group>
+      <group targetFramework=".NETFramework4.7">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Newtonsoft.Json" version="10.0.3" />
+      </group>
     </dependencies>
   </metadata>
   <files>
+    <file src="_OpenTouryo.png" target="images\" />
+    
     <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.dll" target="lib\net46" />
     <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.pdb" target="lib\net46" />
     <file src="TestClassLibrary1\bin\Debug\net46\OssCons.DotNetSubcommittee.TestClassLibrary1.XML" target="lib\net46" />

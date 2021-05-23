@@ -8,10 +8,6 @@
     <Version>0.1.1</Version>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Git1\SampleProgram\NuGet\TestClassLibrary1\TestClassLibrary1\OssCons.DotNetSubcommittee.TestClassLibrary1.xml</DocumentationFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Properties\AssemblyInfo.cs" />
   </ItemGroup>

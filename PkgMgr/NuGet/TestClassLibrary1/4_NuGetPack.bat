@@ -5,6 +5,6 @@ setlocal
 ..\nuget.exe pack PrimaryPackage.nuspec -OutputDirectory pkg\Primary
 
 @rem SymbolPackageÇÃê∂ê¨
-..\nuget.exe pack SymbolPackage.nuspec -OutputDirectory pkg\Symbol -Symbols
+..\nuget.exe pack SymbolPackage.nuspec -OutputDirectory pkg\Symbol -Symbols -SymbolPackageFormat snupkg
 
 pause
