@@ -7,9 +7,6 @@
 
 ### 技術検証/実現性可否 サンプル・プログラム
 
-#### [PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel/)
-将来的に [OpenTouryo](https://github.com/OpenTouryoProject/OpenTouryo)リポジトリに含める前の技術検証/実現性可否を目的としたプログラムを格納します。
-
 #### [Template](https://github.com/OpenTouryoProject/SampleProgram/tree/master/Template/)
 将来的に [OpenTouryoTemplates](https://github.com/OpenTouryoProject/OpenTouryoTemplates), 他 のリポジトリに含める前の技術検証/実現性可否を目的としたプログラムを格納します。
 
@@ -25,9 +22,6 @@ Azure関連のサンプル・プログラムを格納します。
 
 #### [UI Subsystem](https://github.com/OpenTouryoProject/SampleProgram/tree/master/UISubsystem/)
 各種UISubsystemのサンプル・プログラムを格納します。
-
-#### [PrototypeModel](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PrototypeModel/)
-各種プロトタイプを格納します。
 
 #### [PkgMgr](https://github.com/OpenTouryoProject/SampleProgram/tree/master/PkgMgr/)
 パッケージマネージャへのパッケージ登録のプロトタイプを格納します。
