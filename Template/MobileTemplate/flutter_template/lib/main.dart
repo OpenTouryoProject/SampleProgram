@@ -108,6 +108,46 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text("Item 1"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MyHomePage(title: 'Flutter Demo Home PageA');
+                    },
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MyHomePage(title: 'Flutter Demo Home PageB');
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
