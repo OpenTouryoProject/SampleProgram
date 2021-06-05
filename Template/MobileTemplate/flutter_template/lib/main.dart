@@ -73,23 +73,32 @@ class _MyHomePageState extends State<MyHomePage> {
   String? _refreshToken;
   String? _accessToken;
 
-  final String _clientId = 'interactive.public';
-  final String _redirectUrl = 'io.identityserver.demo:/oauthredirect';
-  final String _issuer = 'https://demo.identityserver.io';
+  // final String _clientId = 'interactive.public';
+  // final String _redirectUrl = 'io.identityserver.demo:/oauthredirect';
+  // final String _issuer = 'https://demo.identityserver.io';
+  // final String _discoveryUrl =
+  //     'https://demo.identityserver.io/.well-known/openid-configuration';
+
+  final String _clientId = '40319c0100f94ff3aab3004c8bdb5e52';
+  final String _redirectUrl = 'com.opentouryo:/oauthredirect';
+  final String _issuer = 'https://ssoauth.opentouryo.com';
   final String _discoveryUrl =
-      'https://demo.identityserver.io/.well-known/openid-configuration';
+      'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/.well-known/openid-configuration';
+
   final List<String> _scopes = <String>[
     'openid',
-    'profile',
-    'email',
-    'offline_access',
-    'api'
+    'email'
   ];
 
+  // final AuthorizationServiceConfiguration _serviceConfiguration =
+  //   const AuthorizationServiceConfiguration(
+  //       'https://demo.identityserver.io/connect/authorize',
+  //       'https://demo.identityserver.io/connect/token');
+
   final AuthorizationServiceConfiguration _serviceConfiguration =
-    const AuthorizationServiceConfiguration(
-        'https://demo.identityserver.io/connect/authorize',
-        'https://demo.identityserver.io/connect/token');
+  const AuthorizationServiceConfiguration(
+      'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/authorize',
+      'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/token');
 
   void _incrementCounter() {
     setState(() {
@@ -194,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _testApi() async {
     final http.Response httpResponse = await http.get(
-        Uri.parse('https://demo.identityserver.io/api/test'),
+        Uri.parse('http://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/userinfo'),
         headers: <String, String>{'Authorization': 'Bearer ' + this._accessToken!});
     setState(() {
       this._display = httpResponse.statusCode == 200 ?

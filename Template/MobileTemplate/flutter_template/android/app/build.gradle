@@ -40,7 +40,8 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         manifestPlaceholders = [
-                'appAuthRedirectScheme': 'io.identityserver.demo'
+                //'appAuthRedirectScheme': 'io.identityserver.demo'
+                'appAuthRedirectScheme': 'com.opentouryo'
         ]
     }
 
