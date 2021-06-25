@@ -21,11 +21,13 @@ namespace mySparkBatchApp
 
             string filePath = args[0];
 
+            // Create Spark session
             SparkSession spark = SparkSession
                 .Builder()
                 .AppName("GitHub and Spark Batch")
                 .GetOrCreate();
 
+            // Create initial DataFrame
             DataFrame projectsDf = spark
                 .Read()
                 .Schema("id INT, url STRING, owner_id INT, " +
@@ -34,6 +36,7 @@ namespace mySparkBatchApp
                 "updated_at STRING")
                 .Csv(filePath);
 
+            // Display results
             projectsDf.Show();
 
             // Drop any rows with NA values
@@ -42,6 +45,8 @@ namespace mySparkBatchApp
 
             // Remove unnecessary columns
             cleanedProjects = cleanedProjects.Drop("id", "url", "owner_id");
+
+            // Display results
             cleanedProjects.Show();
 
             // Average number of times each language has been forked
@@ -49,20 +54,24 @@ namespace mySparkBatchApp
                 .GroupBy("language")
                 .Agg(Avg(cleanedProjects["forked_from"]));
 
-            // Sort by most forked languages first
+            // Sort by most forked languages first & Display results
             groupedDF.OrderBy(Desc("avg(forked_from)")).Show();
 
+            // Defines a UDF that determines if a date is greater than a specified date
             spark.Udf().Register<string, bool>(
                 "MyUDF",
                 (date) => DateTime.TryParse(date, out DateTime convertedDate) &&
                     (convertedDate > referenceDate));
 
+            // Use UDF to add columns to the generated TempView
             cleanedProjects.CreateOrReplaceTempView("dateView");
-
             DataFrame dateDf = spark.Sql(
                 "SELECT *, MyUDF(dateView.updated_at) AS datebefore FROM dateView");
+
+            // Display results
             dateDf.Show();
 
+            // Stop Spark session
             spark.Stop();
         }
     }
