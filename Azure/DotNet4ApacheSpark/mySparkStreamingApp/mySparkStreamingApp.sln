@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mySparkStreamingApp", "mySparkStreamingApp\mySparkStreamingApp.csproj", "{774336F5-C408-40E3-9E45-BE2266E5AA31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{774336F5-C408-40E3-9E45-BE2266E5AA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{774336F5-C408-40E3-9E45-BE2266E5AA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{774336F5-C408-40E3-9E45-BE2266E5AA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{774336F5-C408-40E3-9E45-BE2266E5AA31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13246FAA-A546-4B4B-8E52-F6D65C265691}
+	EndGlobalSection
+EndGlobal
