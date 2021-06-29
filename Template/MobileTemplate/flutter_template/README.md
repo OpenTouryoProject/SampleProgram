@@ -1,16 +1,16 @@
-# flutter_template
+# How to use
+Add the necessary information for push notifications.
 
-A new Flutter project.
+- \lib\token_monitor.dart
+- \android\app\google-services.json
 
-## Getting Started
+If the authentication server uses a self-signed certificate,  
+add the certificate to the following location to allow for self-signed certificates.  
+This file can be exported as a CER in DER from the location bar of the browser.
 
-This project is a starting point for a Flutter application.
+- \android\app\src\debug\res\raw\my_ca.cer"
 
-A few resources to get you started if this is your first Flutter project:
+To change the authentication server to be used,  
+change the URL and parameters in the following file.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- \lib\main.dart"
