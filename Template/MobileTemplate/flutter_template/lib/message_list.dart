@@ -20,11 +20,11 @@ class _MessageList extends State<MessageList> {
     FirebaseMessaging.instance
       .getInitialMessage()
       .then((RemoteMessage? message) {
-      if (message != null) {
-        setState(() {
-          this._messages = [...this._messages, message];
-        });
-      }
+        if (message != null) {
+          setState(() {
+            this._messages = [...this._messages, message];
+          });
+        }
     });
 
     // Android のフォアグラウンドプッシュ通知受信時アクションを設定
