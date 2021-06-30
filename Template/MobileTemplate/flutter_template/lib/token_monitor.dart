@@ -1,5 +1,5 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 /// Manages & returns the users FCM token.
 /// Also monitors token refreshes and updates state.
@@ -20,7 +20,7 @@ class _TokenMonitor extends State<TokenMonitor> {
   void setToken(String? token) {
     print('FCM Token: $token');
     setState(() {
-      _token = token;
+      this._token = token;
     });
   }
 
@@ -32,12 +32,12 @@ class _TokenMonitor extends State<TokenMonitor> {
           vapidKey:
           '<YOUR_PUBLIC_VAPID_KEY_HERE>')
         .then(setToken);
-    _tokenStream = FirebaseMessaging.instance.onTokenRefresh;
-    _tokenStream?.listen(setToken);
+    this._tokenStream = FirebaseMessaging.instance.onTokenRefresh;
+    this._tokenStream?.listen(setToken);
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget._builder(_token ?? "");
+    return widget._builder(this._token ?? "");
   }
 }

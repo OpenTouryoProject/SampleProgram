@@ -1,10 +1,11 @@
+import 'dart:async';
+import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
+
+// パッケージ
 import 'package:english_words/english_words.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'dart:async';
-import 'dart:convert' as convert;
 
 // Platform呼出
 import 'package:flutter/services.dart';
@@ -229,7 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  // this._counterのインクリメント
+  /// this._counterのインクリメント
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -243,7 +244,7 @@ class _MyHomePageState extends State<MyHomePage> {
     this._setCounterValue();
   }
 
-  // this._counterのリセット
+  /// this._counterのリセット
   void _resetCounter() {
     this._removeCounterValue();
     setState(() {
@@ -254,13 +255,6 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       this._counter = 0;
       this._display = this._counter?.toString();
-    });
-  }
-
-  /// english_words
-  void _englishWords() {
-    setState(() {
-      this._display = WordPair.random().asPascalCase;
     });
   }
 
@@ -291,6 +285,13 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       this._counter = 0;
       prefs.remove('counter');
+    });
+  }
+
+  /// english_words
+  void _englishWords() {
+    setState(() {
+      this._display = WordPair.random().asPascalCase;
     });
   }
 
