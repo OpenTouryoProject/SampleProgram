@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   english_words: ^4.0.0
+  shared_preferences: ^2.0.6
   url_launcher: ^6.0.4
   http: ^0.13.3
   flutter_appauth: ^1.0.0

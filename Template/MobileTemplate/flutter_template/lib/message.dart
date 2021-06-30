@@ -33,7 +33,7 @@ class MessageView extends StatelessWidget {
       ModalRoute.of(context)?.settings.arguments as MessageArguments;
 
     RemoteMessage? message = args.message;
-    RemoteNotification? notification = message?.notification;
+    RemoteNotification? notification = message.notification;
 
     return Scaffold(
       appBar: AppBar(
@@ -102,7 +102,7 @@ class MessageView extends StatelessWidget {
                       ),
                       row(
                         'Priority',
-                        notification.android?.priority?.toString() ?? "",
+                        notification.android?.priority.toString() ?? "",
                       ),
                       row(
                         'Small Icon',
@@ -118,7 +118,7 @@ class MessageView extends StatelessWidget {
                       ),
                       row(
                         'Visibility',
-                        notification.android?.visibility?.toString() ?? "",
+                        notification.android?.visibility.toString() ?? "",
                       ),
                     ],
                     if (notification.apple != null) ...[

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'dart:io';
 import 'dart:async';
 import 'dart:convert' as convert;
 
@@ -135,8 +135,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _display = "hoge";
+  int? _counter = 0;
+  String? _display = "hoge";
   String? _token;
 
   // Platform呼出
@@ -147,18 +147,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   String? _codeVerifier;
   String? _authorizationCode;
-  String? _refreshToken;
   String? _accessToken;
 
   // final String _clientId = 'interactive.public';
   // final String _redirectUrl = 'io.identityserver.demo:/oauthredirect';
-  // final String _issuer = 'https://demo.identityserver.io';
   // final String _discoveryUrl =
   //     'https://demo.identityserver.io/.well-known/openid-configuration';
 
   final String _clientId = '40319c0100f94ff3aab3004c8bdb5e52';
   final String _redirectUrl = 'com.opentouryo:/oauthredirect';
-  final String _issuer = 'https://ssoauth.opentouryo.com';
   final String _discoveryUrl =
       'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/.well-known/openid-configuration';
 
@@ -167,19 +164,22 @@ class _MyHomePageState extends State<MyHomePage> {
     'email'
   ];
 
-  // final AuthorizationServiceConfiguration _serviceConfiguration =
-  //   const AuthorizationServiceConfiguration(
-  //       'https://demo.identityserver.io/connect/authorize',
-  //       'https://demo.identityserver.io/connect/token');
+  /*final AuthorizationServiceConfiguration _serviceConfiguration =
+  const AuthorizationServiceConfiguration(
+      'https://demo.identityserver.io/connect/authorize',
+      'https://demo.identityserver.io/connect/token');*/
 
-  final AuthorizationServiceConfiguration _serviceConfiguration =
+  /*final AuthorizationServiceConfiguration _serviceConfiguration =
   const AuthorizationServiceConfiguration(
       'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/authorize',
-      'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/token');
+      'https://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/token');*/
 
   @override
   void initState() {
     super.initState();
+
+    // this._counterの初期化
+    this._getCounterValue();
 
     // ターミネーテッド状態でプッシュ通知からアプリを起動した時のアクションを実装
     FirebaseMessaging.instance
@@ -200,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
       print("ローカル通知で擬似的に通知メッセージを表示");
       RemoteNotification? notification = message?.notification;
       AndroidNotification? android = message?.notification?.android;
-      if (channel != null && flutterLocalNotificationsPlugin != null
+      if (flutterLocalNotificationsPlugin != null
           && notification != null && android != null && !kIsWeb) {
 
         flutterLocalNotificationsPlugin?.show(
@@ -229,6 +229,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // this._counterのインクリメント
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -236,16 +237,64 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      this._display = (this._counter++).toString();
+      this._counter = this._counter! + 1;
+      this._display = this._counter?.toString();
+    });
+    this._setCounterValue();
+  }
+
+  // this._counterのリセット
+  void _resetCounter() {
+    this._removeCounterValue();
+    setState(() {
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      this._counter = 0;
+      this._display = this._counter?.toString();
     });
   }
 
+  /// english_words
   void _englishWords() {
     setState(() {
       this._display = WordPair.random().asPascalCase;
     });
   }
 
+  /// shared_preferences
+  /// this._counterの永続化対応
+  void _getCounterValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      int? temp = prefs.getInt('counter');
+      if(temp == null){
+        this._counter = 0;
+      }
+      else{
+        this._counter = temp;
+      }
+    });
+  }
+  /// shared_preferences
+  /// this._counterの永続化対応
+  void _setCounterValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('counter', this._counter!);
+  }
+  /// shared_preferences
+  /// this._counterの永続化対応
+  void _removeCounterValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      this._counter = 0;
+      prefs.remove('counter');
+    });
+  }
+
+  /// url_launcher
   void _urlLauncher() async {
     const url = "https://www.osscons.jp/jo5v2ne7n-537/";
     if (await canLaunch(url)) {
@@ -255,6 +304,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  /// MethodChannel
   Future<void> _getBatteryLevel() async {
     String batteryLevel;
     try {
@@ -268,6 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  /// WebAPI
   Future<void> _getBooks() async {
     var url =
     Uri.https('www.googleapis.com', '/books/v1/volumes', {'q': '{http}'});
@@ -286,6 +337,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  /// AppAuth1
   Future<void> _signInWithNoCodeExchange() async {
     try {
       final AuthorizationResponse? result
@@ -308,6 +360,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  /// AppAuth2
   Future<void> _exchangeCode() async {
     try {
       final TokenResponse? result = await this._appAuth.token(TokenRequest(
@@ -330,6 +383,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  /// AppAuth3
   Future<void> _testApi() async {
     final http.Response httpResponse = await http.get(
         Uri.parse('http://mpos-opentouryo.ddo.jp/MultiPurposeAuthSite/userinfo'),
@@ -338,26 +392,6 @@ class _MyHomePageState extends State<MyHomePage> {
       this._display = httpResponse.statusCode == 200 ?
         httpResponse.body : httpResponse.statusCode.toString();
     });
-  }
-
-  Future<void> _sendPushMessage() async {
-    if (_token == null) {
-      print('Unable to send FCM message, no token exists.');
-      return;
-    }
-
-    try {
-      await http.post(
-        Uri.parse('https://api.rnfirebase.io/messaging/send'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: constructFCMPayload(_token),
-      );
-      print('FCM request for device sent!');
-    } catch (e) {
-      print(e);
-    }
   }
 
   Future<void> _onActionSelected(String value) async {
@@ -408,7 +442,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
         actions: <Widget>[
           PopupMenuButton(
-            onSelected: _onActionSelected,
+            onSelected: this._onActionSelected,
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem(
@@ -439,7 +473,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'You have pushed the button this many times:',
                 ),
                 Text(
-                 '$_display',
+                  this._display ?? "",
                   style: Theme.of(context).textTheme.headline4,
                 ),
               ],
@@ -448,6 +482,14 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 ElevatedButton(
+                  child: const Text('Reset Button'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.orange,
+                    onPrimary: Colors.white,
+                  ),
+                  onPressed: this._resetCounter,
+                ),
+                ElevatedButton(
                   child: const Text('EnglishWords Button'),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.orange,
@@ -455,6 +497,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: this._englishWords,
                 ),
+              ]
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
                 ElevatedButton(
                   child: const Text('UrlLauncher Button'),
                   style: ElevatedButton.styleFrom(
@@ -463,11 +510,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: this._urlLauncher,
                 ),
-              ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
                 ElevatedButton(
                   child: const Text('BatteryLevel Button'),
                   style: ElevatedButton.styleFrom(
@@ -476,6 +518,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: this._getBatteryLevel,
                 ),
+
+              ]
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
                 ElevatedButton(
                   child: const Text('GetBooks Button'),
                   style: ElevatedButton.styleFrom(
@@ -484,11 +532,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: this._getBooks,
                 ),
-              ]
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
                 ElevatedButton(
                   child: const Text('SignIn Button'),
                   style: ElevatedButton.styleFrom(
@@ -497,20 +540,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   onPressed: this._signInWithNoCodeExchange,
                 ),
-                ElevatedButton(
-                  child: const Text('SendPushMessage Button'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.orange,
-                    onPrimary: Colors.white,
-                  ),
-                  onPressed: this._sendPushMessage,
-                ),
               ]
             ),
             Column(children: [
               MetaCard('Permissions', Permissions()),
               MetaCard('FCM Token', TokenMonitor((token) {
-                _token = token;
+                this._token = token;
                 return token == null
                     ? const CircularProgressIndicator()
                     : Text(token, style: const TextStyle(fontSize: 12));
@@ -521,7 +556,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: this._incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
@@ -568,23 +603,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
-
-// Crude counter to make messages unique
-int _messageCount = 0;
-
-/// The API endpoint here accepts a raw FCM payload for demonstration purposes.
-String constructFCMPayload(String? token) {
-  _messageCount++;
-  return convert.jsonEncode({
-    'token': token,
-    'data': {
-      'via': 'FlutterFire Cloud Messaging!!!',
-      'count': _messageCount.toString(),
-    },
-    'notification': {
-      'title': 'Hello FlutterFire!',
-      'body': 'This notification (#$_messageCount) was created via FCM!',
-    },
-  });
 }
